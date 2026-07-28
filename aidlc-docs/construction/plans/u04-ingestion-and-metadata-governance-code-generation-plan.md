@@ -82,10 +82,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 4 - Domain Values, Errors and Aggregate State Machines
 
-- [ ] Implement typed IDs, provider/legal policies, jobs, attempts, raw envelopes, normalized values, identity candidates, merge values, validation decisions, quarantine, tombstones and publication receipts.
-- [ ] Implement legal job/decision/quarantine/publication transitions and stable error/reason families.
-- [ ] Keep domain values immutable and free from framework, persistence and provider SDK imports.
-- [ ] Add example tests for invalid transitions, version references and decision closure.
+- [x] Implement typed IDs, provider/legal policies, jobs, attempts, raw envelopes, normalized values, identity candidates, merge values, validation decisions, quarantine, tombstones and publication receipts.
+- [x] Implement legal job/decision/quarantine/publication transitions and stable error/reason families.
+- [x] Keep domain values immutable and free from framework, persistence and provider SDK imports.
+- [x] Add example tests for invalid transitions, version references and decision closure.
 
 **Paths**: `backend/src/ott_feed/ingestion/domain/`, `backend/tests/ingestion/unit/test_domain.py`.
 
