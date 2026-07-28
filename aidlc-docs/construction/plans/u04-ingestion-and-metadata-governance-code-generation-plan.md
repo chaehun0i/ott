@@ -118,10 +118,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 8 - Repositories, Unit of Work, Claims and Fencing
 
-- [ ] Implement policy, job/attempt/cursor, raw, normalized, merge, validation, quarantine and publication repositories.
-- [ ] Implement bounded `FOR UPDATE SKIP LOCKED` claims, leases, fencing versions and compare-and-set transitions.
-- [ ] Implement API/worker transaction profiles and translate database errors into typed U04 failures.
-- [ ] Add repository unit tests plus concurrent real-PostgreSQL claim tests.
+- [x] Implement policy, job/attempt/cursor, raw, normalized, merge, validation, quarantine and publication repositories.
+- [x] Implement bounded `FOR UPDATE SKIP LOCKED` claims, leases, fencing versions and compare-and-set transitions.
+- [x] Implement API/worker transaction profiles and translate database errors into typed U04 failures.
+- [x] Add repository unit tests plus concurrent real-PostgreSQL claim tests.
 
 **Paths**: `backend/src/ott_feed/ingestion/adapters/persistence/repositories.py`, `backend/src/ott_feed/ingestion/adapters/persistence/unit_of_work.py`, `backend/tests/ingestion/integration/test_postgresql_ingestion.py`.
 

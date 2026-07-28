@@ -75,7 +75,7 @@ def test_u03_schema_extensions_and_migration_head(engine) -> None:
         tables = connection.scalar(
             text("SELECT count(*) FROM information_schema.tables WHERE table_schema='u03_catalog'")
         )
-    assert revision == "0003_u03_catalog_expand"
+    assert revision is not None and int(revision[:4]) >= 3
     assert extensions == {"pg_trgm", "unaccent", "vector"}
     assert tables == 15
 

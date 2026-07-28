@@ -1363,3 +1363,11 @@
 **Context**: CONSTRUCTION - U04 Code Generation Step 7 of 20 complete
 
 ---
+
+## U04 Code Generation Step 8 Complete
+**Timestamp**: 2026-07-28T04:55:40Z
+**User Input**: ""
+**AI Response**: "Implemented typed U04 policy, job/attempt/cursor, raw, normalized, merge, validation, quarantine and publication repositories plus a statement-bounded SQLAlchemy unit of work. Added FOR UPDATE SKIP LOCKED claims, leases, fencing compare-and-set, retention batching and typed persistence failures. Strict MyPy passed 133 source files; concurrent real-PostgreSQL claim, reclaim, fencing, rollback and U03 compatibility tests passed with zero skips."
+**Context**: CONSTRUCTION - U04 Code Generation Step 8 of 20 complete
+
+---
