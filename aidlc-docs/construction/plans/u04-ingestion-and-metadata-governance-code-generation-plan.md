@@ -172,10 +172,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 14 - Quarantine and Revalidation
 
-- [ ] Open quarantine cases for validation or ambiguity failures without conflating technical delivery failures.
-- [ ] Implement source-change, rule-change and authorized manual retry with stable attempt keys.
-- [ ] Resolve cases only through superseding immutable decisions and retain bounded reason/status facts for U06.
-- [ ] Add duplicate/manual-authorization/rule-change and non-leakage tests.
+- [x] Open quarantine cases for validation or ambiguity failures without conflating technical delivery failures.
+- [x] Implement source-change, rule-change and authorized manual retry with stable attempt keys.
+- [x] Resolve cases only through superseding immutable decisions and retain bounded reason/status facts for U06.
+- [x] Add duplicate/manual-authorization/rule-change and non-leakage tests.
 
 **Paths**: `backend/src/ott_feed/ingestion/application/quarantine.py`, `backend/src/ott_feed/ingestion/application/revalidation.py`, `backend/tests/ingestion/unit/test_quarantine.py`.
 
