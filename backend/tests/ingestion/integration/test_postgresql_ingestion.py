@@ -84,9 +84,11 @@ def test_claim_is_bounded_and_fenced(sessions) -> None:
         with SqlAlchemyIngestionUnitOfWork(sessions) as concurrent:
             assert concurrent.jobs.claim("worker-2", ("u04_incremental",), 30, now=NOW) is None
         first.commit()
-    with SqlAlchemyIngestionUnitOfWork(sessions) as second:
-        with pytest.raises(IngestionError, match="no longer current"):
-            second.jobs.advance_cursor("job-1", 0, "cursor-1", {"succeeded": 1})
+    with (
+        SqlAlchemyIngestionUnitOfWork(sessions) as second,
+        pytest.raises(IngestionError, match="no longer current"),
+    ):
+        second.jobs.advance_cursor("job-1", 0, "cursor-1", {"succeeded": 1})
 
 
 def test_expired_lease_can_be_reclaimed(sessions) -> None:

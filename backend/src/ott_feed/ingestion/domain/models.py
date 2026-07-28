@@ -109,6 +109,7 @@ class IngestionJob:
     succeeded_count: int = 0
     quarantined_count: int = 0
     failed_count: int = 0
+    applied_page_digests: set[str] = field(default_factory=set)
 
     def claim(self, worker_id: str, at: datetime) -> int:
         if self.status not in {JobStatus.SCHEDULED, JobStatus.RETRY_PENDING}:

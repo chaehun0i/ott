@@ -127,10 +127,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 9 - Durable Job Lifecycle and Cursor Reconciliation
 
-- [ ] Implement create/claim/heartbeat/retry/partial-success/fail/cancel/finish transitions with append-only attempts.
-- [ ] Advance a cursor only after every page record has a durable outcome and reconciled counts.
-- [ ] Recover expired leases and replay from the last durable cursor without skipping or duplicating terminal outcomes.
-- [ ] Add crash, duplicate page and count-mismatch tests.
+- [x] Implement create/claim/heartbeat/retry/partial-success/fail/cancel/finish transitions with append-only attempts.
+- [x] Advance a cursor only after every page record has a durable outcome and reconciled counts.
+- [x] Recover expired leases and replay from the last durable cursor without skipping or duplicating terminal outcomes.
+- [x] Add crash, duplicate page and count-mismatch tests.
 
 **Paths**: `backend/src/ott_feed/ingestion/application/jobs.py`, `backend/src/ott_feed/ingestion/application/cursors.py`, `backend/tests/ingestion/unit/test_jobs.py`.
 
