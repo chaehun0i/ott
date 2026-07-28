@@ -14,7 +14,7 @@
 - [x] Exclude frontend generation because U01 owns user-facing presentation.
 - [x] Define 20 sequential generation steps with paths, test gates and traceability.
 - [x] Resolve all planning categories from approved artifacts; no blocking question remains.
-- [ ] Obtain explicit approval for the complete plan and generation sequence.
+- [x] Obtain explicit approval for the complete plan and generation sequence.
 
 ## Unit Context
 
@@ -55,10 +55,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 1 - Baseline and Boundary Guard
 
-- [ ] Run Ruff, strict MyPy, full pytest/coverage and deterministic PBT against the current U07/U02/U03 baseline.
-- [ ] Run the selected real-PostgreSQL integration suite and record skip count, server version and migration head.
-- [ ] Extend architecture tests so U04 domain/application code cannot import FastAPI, SQLAlchemy or concrete HTTPX/persistence adapters.
-- [ ] Record baseline evidence before U04 changes.
+- [x] Run Ruff, strict MyPy, full pytest/coverage and deterministic PBT against the current U07/U02/U03 baseline.
+- [x] Run the selected real-PostgreSQL integration suite and record skip count, server version and migration head.
+- [x] Extend architecture tests so U04 domain/application code cannot import FastAPI, SQLAlchemy or concrete HTTPX/persistence adapters.
+- [x] Record baseline evidence before U04 changes.
 
 **Paths**: `backend/tests/platform/contract/test_boundaries.py`, `aidlc-docs/construction/u04-ingestion-and-metadata-governance/code/baseline.md`.
 

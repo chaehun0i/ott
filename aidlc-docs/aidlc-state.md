@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U04 Ingestion and Metadata Governance - Code Generation plan approval required
+- **Current Stage**: U04 Ingestion and Metadata Governance - Code Generation Part 2 in progress
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -56,7 +56,7 @@
 - **Placeholder**: Operations
 - **Risk Level**: High
 - **Current Unit**: U04 Ingestion and Metadata Governance
-- **Next Stage After Approval**: U04 Ingestion and Metadata Governance - Code Generation Part 2
+- **Next Stage After Approval**: U05 Recommendation and AI Grounding - Functional Design
 
 ## Unit Progress
 
@@ -65,10 +65,10 @@
 | U07 Platform and Delivery | Completed | Completed | Completed | Completed | Completed - PostgreSQL 17.10 gate passed |
 | U02 Identity and Personalization | Completed | Completed | Completed | Completed | Completed - approved 2026-07-27 |
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
-| U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Planning complete - awaiting approval |
+| U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | In progress - Step 2 of 20 |
 | U05 Recommendation and AI Grounding | Pending | Pending | Pending | Pending | Pending |
 | U06 Engagement and Operations | Pending | Pending | Pending | Pending | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Review and approve the complete 20-step U04 Code Generation plan before application code changes begin.
+Execute U04 Code Generation Step 2 of 20 and update its plan checkboxes immediately after validation.
