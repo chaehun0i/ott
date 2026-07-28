@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U05 Recommendation and AI Grounding - Functional Design review required
+- **Current Stage**: U05 Recommendation and AI Grounding - NFR Requirements review required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -56,7 +56,7 @@
 - **Placeholder**: Operations
 - **Risk Level**: High
 - **Current Unit**: U05 Recommendation and AI Grounding
-- **Next Stage After Approval**: U05 Recommendation and AI Grounding - NFR Requirements
+- **Next Stage After Approval**: U05 Recommendation and AI Grounding - NFR Design
 
 ## Unit Progress
 
@@ -66,9 +66,9 @@
 | U02 Identity and Personalization | Completed | Completed | Completed | Completed | Completed - approved 2026-07-27 |
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
-| U05 Recommendation and AI Grounding | Generated - awaiting approval | Pending | Pending | Pending | Pending |
+| U05 Recommendation and AI Grounding | Completed | Generated - awaiting approval | Pending | Pending | Pending |
 | U06 Engagement and Operations | Pending | Pending | Pending | Pending | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Review the U05 Functional Design artifacts. Choose Request Changes or Continue to Next Stage; NFR Requirements cannot begin before explicit approval.
+Review the U05 NFR Requirements artifacts. Choose Request Changes or Continue to Next Stage; NFR Design cannot begin before explicit approval.
