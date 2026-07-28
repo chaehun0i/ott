@@ -109,10 +109,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 7 - SQLAlchemy Models and Alembic Expand Migration
 
-- [ ] Implement U04 SQLAlchemy rows, constraints and indexes in `u04_ingestion`.
-- [ ] Add expand-only migration `0004_u04_ingestion_expand.py` after U03 head.
-- [ ] Add migration-owner, worker-runtime and API-runtime grants while prohibiting direct U03 table writes.
-- [ ] Verify clean installation and U07→U02→U03→U04 upgrade paths; prohibit destructive automatic downgrade.
+- [x] Implement U04 SQLAlchemy rows, constraints and indexes in `u04_ingestion`.
+- [x] Add expand-only migration `0004_u04_ingestion_expand.py` after U03 head.
+- [x] Add migration-owner, worker-runtime and API-runtime grants while prohibiting direct U03 table writes.
+- [x] Verify clean installation and U07→U02→U03→U04 upgrade paths; prohibit destructive automatic downgrade.
 
 **Paths**: `backend/src/ott_feed/ingestion/adapters/persistence/models.py`, `backend/migrations/versions/0004_u04_ingestion_expand.py`, `backend/migrations/role-grants.sql`.
 

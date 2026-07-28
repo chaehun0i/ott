@@ -29,6 +29,15 @@ BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'u03_worker_runtime') THEN
     CREATE ROLE u03_worker_runtime NOLOGIN;
   END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'u04_migration_owner') THEN
+    CREATE ROLE u04_migration_owner NOLOGIN;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'u04_api_runtime') THEN
+    CREATE ROLE u04_api_runtime NOLOGIN;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'u04_worker_runtime') THEN
+    CREATE ROLE u04_worker_runtime NOLOGIN;
+  END IF;
 END
 $$;
 
@@ -47,3 +56,9 @@ GRANT SELECT ON ALL TABLES IN SCHEMA u03_catalog TO u03_api_runtime;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA u03_catalog TO u03_worker_runtime;
 GRANT SELECT, INSERT, UPDATE ON outbox_jobs TO u03_worker_runtime;
 GRANT SELECT ON ALL TABLES IN SCHEMA u03_catalog TO ott_backup_reader;
+
+GRANT USAGE ON SCHEMA u04_ingestion TO u04_api_runtime, u04_worker_runtime;
+GRANT SELECT ON ALL TABLES IN SCHEMA u04_ingestion TO u04_api_runtime;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA u04_ingestion TO u04_worker_runtime;
+GRANT SELECT, INSERT, UPDATE ON outbox_jobs TO u04_worker_runtime;
+GRANT SELECT ON ALL TABLES IN SCHEMA u04_ingestion TO ott_backup_reader;
