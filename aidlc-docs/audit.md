@@ -1475,3 +1475,19 @@
 **Context**: CONSTRUCTION - standardized Code Generation review gate; waiting for explicit approval
 
 ---
+
+## U04 Code Generation Approval and U05 Functional Design Start
+**Timestamp**: 2026-07-28T08:11:09Z
+**User Input**: "다음 진행 바랍니다."
+**AI Response**: "Recorded U04 Code Generation approval, marked U04 complete and started U05 Recommendation and AI Grounding Functional Design. Loaded U05 stories, requirements, dependencies and U02/U03/U04/U07 contract context."
+**Context**: CONSTRUCTION - U04 approved; transition to U05 Functional Design
+
+---
+
+## U05 Functional Design Questions Prompt
+**Timestamp**: 2026-07-28T08:11:09Z
+**User Input**: ""
+**AI Response**: "Created the U05 Functional Design plan with 12 decision questions covering precedence, ambiguity, candidate eligibility, scoring, diversity, consent, session patches, grounding, style, validation fallback, AI degradation and privacy-safe trace scope. Waiting for all [Answer]: fields before artifact generation."
+**Context**: CONSTRUCTION - U05 Functional Design Step 2; question response required
+
+---
