@@ -166,7 +166,7 @@ class NormalizedMetadata:
     localized_titles: tuple[tuple[str, str], ...]
     runtime_minutes: int | None
     genres: tuple[str, ...]
-    source_paths: tuple[tuple[str, str], ...]
+    source_paths: tuple[str, ...]
 
 
 @dataclass(frozen=True, slots=True)

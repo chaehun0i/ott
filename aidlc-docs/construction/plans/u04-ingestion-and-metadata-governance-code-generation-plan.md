@@ -145,10 +145,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 11 - Pure Versioned Normalization
 
-- [ ] Implement provider-to-canonical transformation for identifiers, locales, runtime, dates, genres, people and availability candidates.
-- [ ] Preserve source paths and prevent invented authoritative identifiers.
-- [ ] Make normalization deterministic and idempotent for explicit version/time inputs.
-- [ ] Add bilingual, Unicode, boundary-date and PBT-U04-02/03 tests.
+- [x] Implement provider-to-canonical transformation for identifiers, locales, runtime, dates, genres, people and availability candidates.
+- [x] Preserve source paths and prevent invented authoritative identifiers.
+- [x] Make normalization deterministic and idempotent for explicit version/time inputs.
+- [x] Add bilingual, Unicode, boundary-date and PBT-U04-02/03 tests.
 
 **Paths**: `backend/src/ott_feed/ingestion/application/normalization.py`, `backend/tests/ingestion/unit/test_normalization.py`, `backend/tests/ingestion/pbt/test_ingestion_properties.py`.
 
