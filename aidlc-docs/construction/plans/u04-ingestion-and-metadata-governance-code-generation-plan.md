@@ -100,10 +100,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 6 - Provider Registry and Safe HTTP Adapter
 
-- [ ] Implement provider adapter registration and provider-specific credential resolution.
-- [ ] Implement allowlisted HTTPS origins, redirect rejection, bounded response/record size and privacy-safe error translation.
-- [ ] Implement explicit connect/read/total deadlines, retry-after, bounded jittered retries, bulkhead and circuit behavior.
-- [ ] Add deterministic HTTPX fake-transport tests for timeout, rate limit, malformed data, redirect, size and provider isolation.
+- [x] Implement provider adapter registration and provider-specific credential resolution.
+- [x] Implement allowlisted HTTPS origins, redirect rejection, bounded response/record size and privacy-safe error translation.
+- [x] Implement explicit connect/read/total deadlines, retry-after, bounded jittered retries, bulkhead and circuit behavior.
+- [x] Add deterministic HTTPX fake-transport tests for timeout, rate limit, malformed data, redirect, size and provider isolation.
 
 **Paths**: `backend/src/ott_feed/ingestion/adapters/providers/`, `backend/src/ott_feed/ingestion/application/resilience.py`, `backend/tests/ingestion/unit/test_provider_adapter.py`.
 
