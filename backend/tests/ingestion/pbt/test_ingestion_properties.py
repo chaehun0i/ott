@@ -7,7 +7,20 @@ from ott_feed.ingestion.application.identity import IdentityResolver
 from ott_feed.ingestion.application.merge import MergeEngine, should_withdraw
 from ott_feed.ingestion.application.normalization import MetadataNormalizer, normalize_text
 from ott_feed.ingestion.application.raw import RawEnvelopeCodec
-from ott_feed.ingestion.domain.models import IdentityDecision, NormalizedMetadata
+from ott_feed.ingestion.application.validation import ValidationEngine
+from ott_feed.ingestion.contracts import ApprovedCatalogCommandMapper
+from ott_feed.ingestion.domain.errors import ValidationClosureError
+from ott_feed.ingestion.domain.models import (
+    DecisionState,
+    IdentityDecision,
+    MergedMetadata,
+    NormalizedMetadata,
+    RuleOutcome,
+    RuleResult,
+    SourceFieldCandidate,
+    ValidationDecision,
+    ValidationRuleVersion,
+)
 from ott_feed.ingestion.ports import ProviderRecordEnvelope
 
 
@@ -131,3 +144,57 @@ def test_p_u04_11_tombstone_never_removes_another_valid_source(
     active: set[str], removed: str
 ) -> None:
     assert should_withdraw(removed, frozenset(active)) is (not (active - {removed}))
+
+
+@given(outcomes=st.lists(st.sampled_from(list(RuleOutcome)), min_size=1, max_size=8))
+def test_p_u04_07_validation_passes_iff_every_mandatory_rule_passes(
+    outcomes: list[RuleOutcome],
+) -> None:
+    rule_ids = tuple(f"rule-{i}" for i in range(len(outcomes)))
+    rules = {
+        rule_id: (lambda _value, _at, result=result, rule_id=rule_id: RuleResult(rule_id, result))
+        for rule_id, result in zip(rule_ids, outcomes, strict=True)
+    }
+    merged = MergedMetadata(
+        "m",
+        "c",
+        "v",
+        ("n",),
+        (SourceFieldCandidate("title.en", "t", "p", "n", datetime(2026, 1, 1, tzinfo=UTC), 1),),
+        (),
+        datetime(2026, 1, 1, tzinfo=UTC),
+    )
+    version = ValidationRuleVersion(
+        "rules", rule_ids, "u03", "u05", datetime(2026, 1, 1, tzinfo=UTC)
+    )
+    _, decision = ValidationEngine(rules).evaluate(
+        merged,
+        version,
+        run_id="run",
+        decision_id="decision",
+        evaluated_at=datetime(2026, 1, 1, tzinfo=UTC),
+    )
+    assert (decision.state is DecisionState.PASSED_PENDING_PUBLICATION) is all(
+        result is RuleOutcome.PASSED for result in outcomes
+    )
+
+
+@given(
+    state=st.sampled_from(list(DecisionState)).filter(
+        lambda item: item is not DecisionState.PASSED_PENDING_PUBLICATION
+    )
+)
+def test_p_u04_08_non_passed_decision_cannot_map_to_u03(state: DecisionState) -> None:
+    decision = ValidationDecision(
+        "d",
+        "r",
+        "m",
+        "rules",
+        state,
+        reason_codes=("failed",) if state is DecisionState.QUARANTINED else (),
+    )
+    try:
+        ApprovedCatalogCommandMapper().map(decision)
+    except ValidationClosureError:
+        return
+    raise AssertionError("non-passed decision escaped the publication boundary")

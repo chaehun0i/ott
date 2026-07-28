@@ -163,10 +163,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 13 - Versioned Validation Engine and U05 Rule Contract
 
-- [ ] Implement immutable rules for schema, provenance, license, freshness, identity and availability.
-- [ ] Produce a complete rule-result matrix and fail closed for failed, missing, error or unknown mandatory results.
-- [ ] Publish a minimal versioned pure `ValidationRuleContract` for U05 without raw/provider/quarantine internals.
-- [ ] Add every failure-family example, consumer contract tests and PBT-U04-07/08 with 100% safety-branch coverage.
+- [x] Implement immutable rules for schema, provenance, license, freshness, identity and availability.
+- [x] Produce a complete rule-result matrix and fail closed for failed, missing, error or unknown mandatory results.
+- [x] Publish a minimal versioned pure `ValidationRuleContract` for U05 without raw/provider/quarantine internals.
+- [x] Add every failure-family example, consumer contract tests and PBT-U04-07/08 with 100% safety-branch coverage.
 
 **Paths**: `backend/src/ott_feed/ingestion/application/validation.py`, `backend/src/ott_feed/ingestion/contracts.py`, `backend/tests/ingestion/contract/`, `backend/tests/ingestion/pbt/test_ingestion_properties.py`.
 
