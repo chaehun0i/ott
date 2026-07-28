@@ -1,0 +1,62 @@
+name: ci
+on:
+  pull_request:
+  push: {branches: [main]}
+permissions: {contents: read}
+jobs:
+  quality:
+    runs-on: ubuntu-24.04
+    defaults: {run: {working-directory: backend}}
+    services:
+      postgres:
+        image: postgres:17-bookworm
+        env: {POSTGRES_PASSWORD: test, POSTGRES_DB: ott_feed_test}
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://postgres:test@localhost:5432/ott_feed_test
+      HYPOTHESIS_PROFILE: ci
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {version: "0.11.32", enable-cache: true}
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12.13"}
+      - run: uv sync --frozen
+      - run: uv run ruff format --check .
+      - run: uv run ruff check .
+      - run: uv run mypy
+      - run: uv run alembic upgrade head
+        env: {DATABASE_URL: "${{ env.TEST_DATABASE_URL }}"}
+      - name: Non-PostgreSQL quality suite
+        run: uv run pytest -m "not integration" --hypothesis-seed=${{ github.run_id }} --cov --cov-branch --cov-report=xml --junitxml=test-results.xml
+      - name: Required PostgreSQL integration gate
+        run: |
+          test -n "$TEST_DATABASE_URL"
+          uv run pytest -m integration --junitxml=postgresql-integration-results.xml
+      - run: uv run python -c "from pathlib import Path; from ott_feed.main import app; from ott_feed.api.openapi import export_openapi; export_openapi(app, Path('openapi-v1.json'))"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: u07-quality-evidence-${{ github.sha }}
+          path: |
+            backend/coverage.xml
+            backend/test-results.xml
+            backend/postgresql-integration-results.xml
+            backend/openapi-v1.json
+            backend/.hypothesis
+  security:
+    runs-on: ubuntu-24.04
+    defaults: {run: {working-directory: backend}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gitleaks/gitleaks-action@v2
+      - uses: astral-sh/setup-uv@v6
+        with: {version: "0.11.32"}
+      - run: uvx pip-audit --locked .
+      - run: docker build -t ott-api:ci .
+      - uses: aquasecurity/trivy-action@0.32.0
+        with: {image-ref: "ott-api:ci", severity: "CRITICAL,HIGH", exit-code: "1"}

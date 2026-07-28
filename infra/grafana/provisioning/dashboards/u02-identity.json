@@ -1,0 +1,46 @@
+{
+  "annotations": {"list": []},
+  "editable": false,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Identity request outcomes",
+      "type": "timeseries",
+      "targets": [
+        {"expr": "sum by (operation, result) (rate(ott_identity_request_total[5m]))", "refId": "A"}
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Worker oldest job by lane",
+      "type": "timeseries",
+      "targets": [
+        {"expr": "max by (lane) (ott_identity_job_oldest_seconds)", "refId": "A"}
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Deletion oldest age",
+      "type": "stat",
+      "targets": [
+        {"expr": "max(ott_identity_deletion_oldest_seconds)", "refId": "A"}
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Key-version row count",
+      "type": "timeseries",
+      "targets": [
+        {"expr": "sum by (key_version) (ott_identity_key_version_rows)", "refId": "A"}
+      ]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["u02", "identity", "privacy"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timezone": "browser",
+  "title": "U02 Identity and Personalization",
+  "uid": "u02-identity",
+  "version": 1
+}

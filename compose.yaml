@@ -1,0 +1,127 @@
+name: ott-feed
+services:
+  caddy:
+    image: ${CADDY_IMAGE:-caddy:2-alpine}
+    ports: ["80:80", "443:443"]
+    environment: ["APP_DOMAIN=${APP_DOMAIN:-localhost}"]
+    volumes:
+      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    networks: [public_net, observability_net]
+    restart: unless-stopped
+  api:
+    build: {context: ./backend}
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      APP_DOMAIN: ${APP_DOMAIN:-localhost}
+      DATABASE_URL: postgresql+psycopg://ott_api@postgres/ott_feed
+      API_SECRET_FILE: /run/secrets/api_secret
+      IDENTITY_KEK_FILE: /run/secrets/identity_kek
+      IDENTITY_BLIND_INDEX_KEY_FILE: /run/secrets/identity_blind_index_key
+      IDENTITY_SESSION_PEPPER_FILE: /run/secrets/identity_session_pepper
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET_FILE: /run/secrets/google_client_secret
+      GOOGLE_REDIRECT_URI: ${GOOGLE_REDIRECT_URI:-}
+      IDENTITY_EXPORT_BUCKET: /var/lib/ott-feed/exports
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-true}
+      SESSION_COOKIE_SAMESITE: lax
+      CATALOG_DEFAULT_LOCALE: ${CATALOG_DEFAULT_LOCALE:-ko-KR}
+      CATALOG_FRESHNESS_HOURS: ${CATALOG_FRESHNESS_HOURS:-24}
+      EMBEDDING_URL: ${EMBEDDING_URL:-http://embedding:8080/v1/embeddings}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-multilingual-v1}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-768}
+      SEARCH_CURSOR_KEY_FILE: /run/secrets/search_cursor_key
+      SEARCH_CURSOR_PREVIOUS_KEY_FILE: /run/secrets/search_cursor_previous_key
+    secrets: [api_secret, identity_kek, identity_blind_index_key, identity_session_pepper, google_client_secret, search_cursor_key, search_cursor_previous_key]
+    volumes: [identity_exports:/var/lib/ott-feed/exports]
+    networks: [public_net, private_net, observability_net]
+    depends_on:
+      postgres: {condition: service_healthy}
+    mem_limit: 1g
+  worker:
+    build: {context: ./backend}
+    command: ["python", "-m", "ott_feed.worker"]
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      DATABASE_URL: postgresql+psycopg://ott_worker@postgres/ott_feed
+      IDENTITY_KEK_FILE: /run/secrets/identity_kek
+      IDENTITY_BLIND_INDEX_KEY_FILE: /run/secrets/identity_blind_index_key
+      IDENTITY_SESSION_PEPPER_FILE: /run/secrets/identity_session_pepper
+      IDENTITY_EXPORT_KEY_FILE: /run/secrets/identity_export_key
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET_FILE: /run/secrets/google_client_secret
+      EMAIL_HOST: ${EMAIL_HOST:-mail-sink}
+      EMAIL_PORT: ${EMAIL_PORT:-1025}
+      EMAIL_USERNAME: ${EMAIL_USERNAME:-local}
+      EMAIL_PASSWORD_FILE: /run/secrets/email_password
+      EMAIL_SENDER: ${EMAIL_SENDER:-no-reply@localhost}
+      IDENTITY_EXPORT_BUCKET: /var/lib/ott-feed/exports
+      IDENTITY_WORKER_HIGH_LIMIT: ${IDENTITY_WORKER_HIGH_LIMIT:-2}
+      IDENTITY_WORKER_NORMAL_LIMIT: ${IDENTITY_WORKER_NORMAL_LIMIT:-2}
+      IDENTITY_WORKER_LOW_LIMIT: ${IDENTITY_WORKER_LOW_LIMIT:-1}
+      EMBEDDING_URL: ${EMBEDDING_URL:-http://embedding:8080/v1/embeddings}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-multilingual-v1}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-768}
+      U03_INCREMENTAL_WORKERS: ${U03_INCREMENTAL_WORKERS:-2}
+      U03_EMBEDDING_WORKERS: ${U03_EMBEDDING_WORKERS:-4}
+      U03_REBUILD_WORKERS: ${U03_REBUILD_WORKERS:-1}
+      SEARCH_CURSOR_KEY_FILE: /run/secrets/search_cursor_key
+    secrets: [identity_kek, identity_blind_index_key, identity_session_pepper, identity_export_key, google_client_secret, email_password, search_cursor_key]
+    volumes: [identity_exports:/var/lib/ott-feed/exports]
+    networks: [private_net, observability_net]
+    depends_on:
+      postgres: {condition: service_healthy}
+    mem_limit: 1g
+  postgres:
+    image: ${POSTGRES_IMAGE:-pgvector/pgvector:0.8.2-pg17-bookworm@sha256:feb68f4f15446397d8cac7f4fe48fe4586de83160d1fc48b46283312d1a33966}
+    environment:
+      POSTGRES_DB: ott_feed
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    secrets: [postgres_password]
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    networks: [private_net]
+    healthcheck: {test: ["CMD-SHELL", "pg_isready -U postgres -d ott_feed"], interval: 10s, timeout: 5s, retries: 5}
+    mem_limit: 2500m
+  otel-collector:
+    image: ${OTEL_IMAGE:-otel/opentelemetry-collector-contrib:latest}
+    command: ["--config=/etc/otel/config.yaml"]
+    volumes: ["./infra/otel/collector.yaml:/etc/otel/config.yaml:ro", "otel_buffer:/var/lib/otel"]
+    networks: [observability_net]
+  prometheus:
+    image: ${PROMETHEUS_IMAGE:-prom/prometheus:latest}
+    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "prometheus_data:/prometheus"]
+    networks: [observability_net]
+  loki:
+    image: ${LOKI_IMAGE:-grafana/loki:latest}
+    command: ["-config.file=/etc/loki/config.yaml"]
+    volumes: ["./infra/loki/loki.yaml:/etc/loki/config.yaml:ro", "loki_data:/loki"]
+    networks: [observability_net]
+  grafana:
+    image: ${GRAFANA_IMAGE:-grafana/grafana:latest}
+    volumes: ["./infra/grafana/provisioning:/etc/grafana/provisioning:ro", "grafana_data:/var/lib/grafana"]
+    networks: [observability_net]
+
+networks:
+  public_net: {}
+  private_net: {internal: true}
+  observability_net: {internal: true}
+volumes:
+  postgres_data: {}
+  caddy_data: {}
+  prometheus_data: {}
+  loki_data: {}
+  grafana_data: {}
+  otel_buffer: {}
+  identity_exports: {}
+secrets:
+  api_secret: {file: ./secrets/api_secret.txt}
+  postgres_password: {file: ./secrets/postgres_password.txt}
+  identity_kek: {file: ./secrets/identity_kek.txt}
+  identity_blind_index_key: {file: ./secrets/identity_blind_index_key.txt}
+  identity_session_pepper: {file: ./secrets/identity_session_pepper.txt}
+  identity_export_key: {file: ./secrets/identity_export_key.txt}
+  google_client_secret: {file: ./secrets/google_client_secret.txt}
+  email_password: {file: ./secrets/email_password.txt}
+  search_cursor_key: {file: ./secrets/search_cursor_key.txt}
+  search_cursor_previous_key: {file: ./secrets/search_cursor_previous_key.txt}

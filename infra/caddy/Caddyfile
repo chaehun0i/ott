@@ -1,0 +1,15 @@
+{$APP_DOMAIN} {
+    encode zstd gzip
+    request_body { max_size 2MB }
+    reverse_proxy /api/* api:8000 {
+        health_uri /api/v1/health/ready
+        health_interval 15s
+        transport http { dial_timeout 2s response_header_timeout 15s }
+    }
+    header {
+        -Server
+        X-Content-Type-Options nosniff
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+}
+

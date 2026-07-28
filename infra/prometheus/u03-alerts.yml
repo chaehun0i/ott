@@ -1,0 +1,18 @@
+groups:
+  - name: u03-catalog-discovery
+    rules:
+      - alert: U03ProjectionGap
+        expr: increase(catalog_projection_gap_total[5m]) > 0
+        for: 1m
+        labels: {severity: critical}
+        annotations: {summary: "U03 projection version gap detected"}
+      - alert: U03SemanticFallbackHigh
+        expr: rate(search_fallback_total[10m]) > 0.2
+        for: 10m
+        labels: {severity: warning}
+        annotations: {summary: "U03 semantic fallback rate is elevated"}
+      - alert: U03CatalogStale
+        expr: rate(catalog_stale_total[30m]) > 0.1
+        for: 15m
+        labels: {severity: warning}
+        annotations: {summary: "U03 catalog freshness is degraded"}

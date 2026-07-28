@@ -1,0 +1,25 @@
+receivers:
+  otlp:
+    protocols: {grpc: {}, http: {}}
+processors:
+  memory_limiter: {check_interval: 1s, limit_mib: 256}
+  transform/privacy:
+    error_mode: ignore
+    log_statements:
+      - context: log
+        statements:
+          - delete_key(attributes, "email")
+          - delete_key(attributes, "userId")
+          - delete_key(attributes, "oauth_subject")
+          - delete_key(attributes, "session_id")
+          - delete_key(attributes, "session_token")
+          - delete_key(attributes, "payload")
+          - delete_key(attributes, "object_reference")
+  batch: {}
+exporters:
+  otlphttp/loki: {endpoint: http://loki:3100/otlp}
+  debug: {verbosity: basic}
+service:
+  pipelines:
+    logs: {receivers: [otlp], processors: [memory_limiter, transform/privacy, batch], exporters: [otlphttp/loki]}
+    traces: {receivers: [otlp], processors: [memory_limiter, batch], exporters: [debug]}

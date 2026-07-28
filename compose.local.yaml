@@ -1,0 +1,8 @@
+services:
+  api:
+    environment:
+      APP_ENV: local
+      SESSION_COOKIE_SECURE: "false"
+    ports: ["8000:8000"]
+  postgres:
+    ports: ["5432:5432"]
