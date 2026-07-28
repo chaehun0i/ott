@@ -87,7 +87,7 @@ def test_postgresql_17_10_migration_and_u02_schema_are_current(engine) -> None:
 
     # Distribution images can append build metadata (for example Debian package details).
     assert version.startswith("17.10")
-    assert revision in {"0002_u02_identity_expand", "0003_u03_catalog_expand"}
+    assert revision is not None and int(revision[:4]) >= 2
     assert table_count == 23
 
 

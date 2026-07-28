@@ -217,10 +217,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 19 - Real PostgreSQL, Failure, Capacity and Recovery Gates
 
-- [ ] Run clean/upgrade migrations, constraints, concurrent claims, cursor replay, retention and publication receipts on real PostgreSQL 17.
-- [ ] Inject worker crash, provider timeout/rate limit, U03 unknown outcome, rule change during backlog, payload expiry and restore inconsistency.
-- [ ] Verify 20 providers, 100,000 content records and 1,000,000 lineage/decision-row plans plus the four-hour full-sync budget.
-- [ ] Run selected `pytest -m integration` with zero skips and retain server/migration/query-plan/recovery evidence.
+- [x] Run clean/upgrade migrations, constraints, concurrent claims, cursor replay, retention and publication receipts on real PostgreSQL 17.
+- [x] Inject worker crash, provider timeout/rate limit, U03 unknown outcome, rule change during backlog, payload expiry and restore inconsistency.
+- [x] Verify 20 providers, 100,000 content records and 1,000,000 lineage/decision-row plans plus the four-hour full-sync budget.
+- [x] Run selected `pytest -m integration` with zero skips and retain server/migration/query-plan/recovery evidence.
 
 **Paths**: `backend/tests/ingestion/integration/`, `backend/tests/ingestion/quality/`, `scripts/restore.sh`, U04 test artifacts under `backend/`.
 

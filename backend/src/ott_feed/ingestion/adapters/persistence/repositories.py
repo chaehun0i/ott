@@ -69,8 +69,8 @@ class JobRepository(RowRepository[IngestionJobRow]):
                 (IngestionJobRow.lease_until.is_(None) | (IngestionJobRow.lease_until < at)),
             )
             .order_by(
-                IngestionJobRow.priority,
                 IngestionJobRow.available_at,
+                IngestionJobRow.priority,
                 IngestionJobRow.job_id,
             )
             .limit(1)
