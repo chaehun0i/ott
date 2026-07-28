@@ -1435,3 +1435,11 @@
 **Context**: CONSTRUCTION - U04 Code Generation Step 16 of 20 complete
 
 ---
+
+## U04 Code Generation Step 17 Complete
+**Timestamp**: 2026-07-28T04:55:49Z
+**User Input**: ""
+**AI Response**: "Added versioned rule-contract, operator-only job status and quarantine retry APIs; registered six budgeted U04 worker job types with reserved withdrawal/publication capacity; added readiness/deep health and telemetry attribute allowlisting; wired U04 into the existing FastAPI and worker factories. Ruff and strict MyPy passed 152 source files; 10 API/OpenAPI/authorization/worker/health/privacy tests passed."
+**Context**: CONSTRUCTION - U04 Code Generation Step 17 of 20 complete
+
+---

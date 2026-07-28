@@ -3,6 +3,11 @@
 from ott_feed.catalog.worker import CatalogWorkerHandlers, U03LaneBudgets, register_catalog_handlers
 from ott_feed.identity.config import IdentitySettings
 from ott_feed.identity.worker import IdentityWorkerHandlers, LaneBudgets, register_identity_handlers
+from ott_feed.ingestion.worker import (
+    IngestionWorkerHandlers,
+    U04LaneBudgets,
+    register_ingestion_handlers,
+)
 from ott_feed.platform.application.outbox import HandlerRegistry
 from ott_feed.platform.config import Settings
 from ott_feed.search.worker import SearchWorkerHandlers, register_search_handlers
@@ -15,6 +20,8 @@ def build_worker_registry(
     catalog_handlers: CatalogWorkerHandlers | None = None,
     search_handlers: SearchWorkerHandlers | None = None,
     u03_budgets: U03LaneBudgets | None = None,
+    ingestion_handlers: IngestionWorkerHandlers | None = None,
+    u04_budgets: U04LaneBudgets | None = None,
 ) -> HandlerRegistry:
     platform_settings = settings or Settings.from_environment()
     registry = HandlerRegistry()
@@ -37,4 +44,6 @@ def build_worker_registry(
             register_catalog_handlers(registry, catalog_handlers, resolved_budgets)
         if search_handlers is not None:
             register_search_handlers(registry, search_handlers, resolved_budgets)
+    if ingestion_handlers is not None:
+        register_ingestion_handlers(registry, ingestion_handlers, u04_budgets or U04LaneBudgets())
     return registry

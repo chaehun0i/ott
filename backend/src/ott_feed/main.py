@@ -20,6 +20,13 @@ from ott_feed.identity.api.messages import localize
 from ott_feed.identity.api.router import create_identity_router
 from ott_feed.identity.config import IdentitySettings
 from ott_feed.identity.domain.errors import IdentityError
+from ott_feed.ingestion.api.router import (
+    IngestionFacade,
+    UnavailableIngestionFacade,
+    create_ingestion_router,
+)
+from ott_feed.ingestion.domain.errors import IngestionError
+from ott_feed.ingestion.health import IngestionHealthContributor
 from ott_feed.platform.application.rate_limit import InMemoryRateLimiter, RatePolicy
 from ott_feed.platform.config import Settings
 from ott_feed.platform.health import HealthRegistry
@@ -46,6 +53,8 @@ def create_app(
     cursor_signer: CursorSigner | None = None,
     catalog_health: CatalogHealthContributor | None = None,
     search_health: SearchHealthContributor | None = None,
+    ingestion_facade: IngestionFacade | None = None,
+    ingestion_health: IngestionHealthContributor | None = None,
 ) -> FastAPI:
     settings = settings or Settings.from_environment()
     health = health or HealthRegistry()
@@ -54,6 +63,8 @@ def create_app(
         catalog_health.register(health)
     if search_health is not None:
         search_health.register(health)
+    if ingestion_health is not None:
+        ingestion_health.register(health)
     docs_url, redoc_url = docs_paths(settings.environment)
     app = FastAPI(
         title="OTT Feed API",
@@ -114,8 +125,9 @@ def create_app(
 
     @app.exception_handler(CatalogError)
     @app.exception_handler(SearchError)
+    @app.exception_handler(IngestionError)
     async def discovery_error_handler(
-        request: Request, exc: CatalogError | SearchError
+        request: Request, exc: CatalogError | SearchError | IngestionError
     ) -> JSONResponse:
         context = current_request.get()
         return JSONResponse(
@@ -176,6 +188,9 @@ def create_app(
             search_facade or UnavailableSearchFacade(),
             SearchRateLimitAdapter(resolved_rate_limiter),
         )
+    )
+    app.include_router(
+        create_ingestion_router(ingestion_facade or UnavailableIngestionFacade(), require_operator)
     )
     return app
 

@@ -199,10 +199,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 17 - Operator API, Worker, Health, Telemetry and Composition
 
-- [ ] Add authorized bounded status/retry endpoints and versioned validation-contract responses.
-- [ ] Register six U04 worker lanes with reserved withdrawal/publication capacity and configured budgets.
-- [ ] Add liveness/readiness/deep-health contributions and payload-free metrics/log attributes/alerts.
-- [ ] Wire U04 into existing application and worker factories without exposing provider secrets or raw payloads.
+- [x] Add authorized bounded status/retry endpoints and versioned validation-contract responses.
+- [x] Register six U04 worker lanes with reserved withdrawal/publication capacity and configured budgets.
+- [x] Add liveness/readiness/deep-health contributions and payload-free metrics/log attributes/alerts.
+- [x] Wire U04 into existing application and worker factories without exposing provider secrets or raw payloads.
 
 **Paths**: `backend/src/ott_feed/ingestion/api/`, `backend/src/ott_feed/ingestion/worker.py`, `backend/src/ott_feed/ingestion/health.py`, `backend/src/ott_feed/ingestion/telemetry.py`, `backend/src/ott_feed/main.py`, `backend/src/ott_feed/worker.py`.
 
