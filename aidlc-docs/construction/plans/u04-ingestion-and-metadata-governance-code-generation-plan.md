@@ -154,10 +154,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 12 - Canonical Identity, Merge, Provenance and Tombstones
 
-- [ ] Implement ordered identifier/crosswalk/title identity tiers with new, matched and ambiguous outcomes.
-- [ ] Implement deterministic field-level authority/freshness merge retaining selected and alternative provenance.
-- [ ] Implement source-aware tombstones that cannot withdraw content while another valid authoritative source remains.
-- [ ] Add reference-oracle and PBT-U04-04/05/06/11 tests.
+- [x] Implement ordered identifier/crosswalk/title identity tiers with new, matched and ambiguous outcomes.
+- [x] Implement deterministic field-level authority/freshness merge retaining selected and alternative provenance.
+- [x] Implement source-aware tombstones that cannot withdraw content while another valid authoritative source remains.
+- [x] Add reference-oracle and PBT-U04-04/05/06/11 tests.
 
 **Paths**: `backend/src/ott_feed/ingestion/application/identity.py`, `backend/src/ott_feed/ingestion/application/merge.py`, `backend/tests/ingestion/pbt/test_ingestion_properties.py`.
 

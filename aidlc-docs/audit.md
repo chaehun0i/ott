@@ -1395,3 +1395,11 @@
 **Context**: CONSTRUCTION - U04 Code Generation Step 11 of 20 complete
 
 ---
+
+## U04 Code Generation Step 12 Complete
+**Timestamp**: 2026-07-28T04:55:44Z
+**User Input**: ""
+**AI Response**: "Implemented deterministic tiered canonical identity resolution with explicit new/matched/ambiguous outcomes, authority-then-freshness field merge retaining every selected and alternative source candidate, and source-aware tombstone closure. Ruff and strict MyPy passed 140 source files; PBT-U04-04/05/06/11 and focused examples passed."
+**Context**: CONSTRUCTION - U04 Code Generation Step 12 of 20 complete
+
+---
