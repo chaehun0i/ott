@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U04 Ingestion and Metadata Governance - NFR Design review required
+- **Current Stage**: U04 Ingestion and Metadata Governance - Infrastructure Design review required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -19,6 +19,11 @@
 - **Application Code**: Workspace root (NEVER in `aidlc-docs/`)
 - **Documentation**: `aidlc-docs/` only
 - **Structure Patterns**: See `construction/code-generation.md` critical rules
+
+## Delivery Automation Status
+- **Automatic GitHub Actions Triggers**: Paused
+- **Manual Verification**: Available through `workflow_dispatch`
+- **Reactivation Gate**: Restore each automatic trigger only after all four workflows pass controlled manual runs
 
 ## Extension Configuration
 | Extension | Enabled | Mode | Decided At |
@@ -51,7 +56,7 @@
 - **Placeholder**: Operations
 - **Risk Level**: High
 - **Current Unit**: U04 Ingestion and Metadata Governance
-- **Next Stage After Approval**: U04 Ingestion and Metadata Governance - Infrastructure Design
+- **Next Stage After Approval**: U04 Ingestion and Metadata Governance - Code Generation
 
 ## Unit Progress
 
@@ -60,10 +65,10 @@
 | U07 Platform and Delivery | Completed | Completed | Completed | Completed | Completed - PostgreSQL 17.10 gate passed |
 | U02 Identity and Personalization | Completed | Completed | Completed | Completed | Completed - approved 2026-07-27 |
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
-| U04 Ingestion and Metadata Governance | Completed | Completed | Generated - awaiting approval | Pending | Pending |
+| U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Generated - awaiting approval | Pending |
 | U05 Recommendation and AI Grounding | Pending | Pending | Pending | Pending | Pending |
 | U06 Engagement and Operations | Pending | Pending | Pending | Pending | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Review U04 NFR Design artifacts. Choose Request Changes or Continue to Next Stage (U04 Infrastructure Design).
+Review U04 Infrastructure Design artifacts. Choose Request Changes or Continue to Next Stage (U04 Code Generation).

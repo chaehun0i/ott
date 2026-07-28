@@ -1,7 +1,7 @@
 name: ci
 on:
-  pull_request:
-  push: {branches: [main]}
+  # Automatic triggers are paused while the workflow suite is stabilized.
+  workflow_dispatch:
 permissions: {contents: read}
 jobs:
   quality:

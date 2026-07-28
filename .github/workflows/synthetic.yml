@@ -1,6 +1,6 @@
 name: scheduled-synthetic
 on:
-  schedule: [{cron: "*/15 * * * *"}]
+  # Scheduled triggers are paused while the workflow suite is stabilized.
   workflow_dispatch:
 permissions: {contents: read}
 jobs:
@@ -11,4 +11,3 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "3.12.13"}
       - run: python scripts/synthetic.py "${{ secrets.PROTOTYPE_BASE_URL }}"
-

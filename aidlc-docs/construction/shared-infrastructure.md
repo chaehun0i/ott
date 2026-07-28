@@ -130,6 +130,19 @@ Business Data Volume과 Observability Volume은 분리한다. Disk 80% Alert는 
 - Caddy는 discovery API route만 public으로 제공한다. PostgreSQL, worker, metric과 deep health는 private/observability network에 유지하고 embedding egress는 configured endpoint로 제한한다.
 - U03 배포는 extension preflight, real-PostgreSQL migration/integration/PBT/failure-injection, pre-deploy backup, candidate quality/closure validation과 atomic generation swap을 통과한 digest만 허용한다.
 
+## U04 Shared Resource Contract
+
+- 동일 Backend Image에서 전용 `worker-ingestion` Service를 실행하고 Public Port를 게시하지 않는다.
+- `u04_ingestion` Schema와 `u04_migration_owner`, `u04_worker_runtime`, `u04_api_runtime` Role을 추가한다. U04는 U03 Table에 직접 Write하지 않는다.
+- 공유 PostgreSQL Pool에서 U04 Worker 5, API 기여 2 Connection으로 시작하며 전체 Headroom을 침해할 수 없다.
+- U04는 withdrawal, publication, incremental, revalidation, full-sync, retention Job Lane과 Provider별 공정 Claim·Fencing을 사용한다.
+- U04 Table·Index Soft Budget은 10 GB이며 70% Warning, 80% Critical Alert와 1,000,000-row Query-plan Gate를 적용한다.
+- `worker-ingestion`은 `private_net`, `observability_net`, outbound-only `provider_egress_net`만 사용한다. Provider Origin은 Scheme·Host·Port Allowlist를 적용한다.
+- Provider Credential은 `u04_provider_<id>` 별도 Read-only Secret으로 주입하며 공유 Environment File, Image, Database, Backup과 Telemetry에 포함하지 않는다.
+- Backup은 허용된 Raw State, Policy, Cursor, Validation, Quarantine, Pending Publication과 Receipt를 포함한다. Provider Retention으로 만료된 Body는 복원 후 노출하지 않는다.
+- Shared Observability는 Cursor·Publication Age, Freshness, Quarantine, Retry·Circuit, Retention, Disk·Pool과 Invariant Alert를 제공한다.
+- Local/CI는 Docker 여부와 무관하게 실제 PostgreSQL 17, Migration, U03/U05 Contract, PBT-U04-01~12와 Integration `skip=0`을 통과해야 한다.
+
 ## Shared Failure Impact
 
 | Shared Failure | Affected Units | Mitigation |

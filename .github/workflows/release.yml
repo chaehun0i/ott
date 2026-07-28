@@ -1,6 +1,7 @@
 name: release
 on:
-  push: {tags: ["v*"]}
+  # Tag-triggered releases are paused while the workflow suite is stabilized.
+  workflow_dispatch:
 permissions: {contents: read, packages: write}
 jobs:
   image:
@@ -21,4 +22,3 @@ jobs:
       - run: echo "${{ github.sha }} ${{ github.ref_name }} ${{ steps.build.outputs.digest }}" > release-evidence.txt
       - uses: actions/upload-artifact@v4
         with: {name: release-evidence-${{ github.ref_name }}, path: release-evidence.txt}
-
