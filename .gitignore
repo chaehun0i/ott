@@ -15,6 +15,38 @@ __pycache__/
 coverage.xml
 htmlcov/
 .env
+.env.*
+!.env.example
 *.secret
+*.pem
+*.key
+*.p12
+*.pfx
 backups/
 restore-data/
+
+# Local editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Build, test and runtime artifacts
+.cache/
+build/
+dist/
+*.egg-info/
+test-results/
+coverage*.json
+logs/
+*.log
+tmp/
+temp/
+
+# Local database and frontend dependency volumes
+pgdata/
+postgres-data/
+node_modules/
+frontend/.next/
+frontend/dist/

@@ -1203,3 +1203,35 @@
 **Context**: GitHub publication - direct main push completed safely
 
 ---
+
+## U04 NFR Requirements Generation Start
+**Timestamp**: 2026-07-28T04:24:27Z
+**User Input**: "다음 작업 계속 진행해줘"
+**AI Response**: "Resumed U04 NFR Requirements using the approved Functional Design, project NFRs, U03 consumer constraints, U07 platform baseline and actual pyproject.toml dependency versions. Determined that prior explicit decisions cover all NFR categories, so no redundant question file was required."
+**Context**: CONSTRUCTION - U04 NFR Requirements
+
+---
+
+## Workspace Cleanup and Ignore Policy
+**Timestamp**: 2026-07-28T04:24:27Z
+**User Input**: "쓸모 없는 파일들 다 삭제 하면서 진행 하고 깃허브에 올라가면 안될건 .gitignore 여기에 추가해주고 "
+**AI Response**: "Inspected generated and local-only paths before deletion. Preserved required `.venv`, `.tools`, `.postgresql` and `.git-publish` directories, removed 50 verified regenerable targets under the workspace (coverage data, Hypothesis/mypy caches and project source/test/migration `__pycache__` directories), and expanded Git/Docker ignore policies for local tooling, database volumes, secrets, credentials, IDE/OS files, caches, build output, logs, test reports and frontend dependencies. No path outside the workspace or inside the virtual environment was deleted."
+**Context**: Workspace hygiene and GitHub publication safety
+
+---
+
+## U04 NFR Requirements Completed
+**Timestamp**: 2026-07-28T04:24:27Z
+**User Input**: ""
+**AI Response**: "Generated U04 NFR requirements and actual-lockfile-based tech stack decisions. Defined 60 numbered NFRs, quantitative capacity/latency/freshness/recovery gates, core security and licensed-data controls, observability thresholds, real PostgreSQL zero-skip testing, PBT-09 compliance and full Resiliency assessment. All 12 plan checkboxes are complete and no blocking extension finding remains."
+**Context**: CONSTRUCTION - U04 NFR Requirements generated and validated
+
+---
+
+## U04 NFR Requirements Completion Approval Prompt
+**Timestamp**: 2026-07-28T04:24:27Z
+**User Input**: ""
+**AI Response**: "NFR Requirements Complete - U04 Ingestion and Metadata Governance. Review artifacts under aidlc-docs/construction/u04-ingestion-and-metadata-governance/nfr-requirements/. Choose Request Changes or Continue to Next Stage (U04 NFR Design)."
+**Context**: CONSTRUCTION - Awaiting explicit U04 NFR Requirements approval
+
+---
