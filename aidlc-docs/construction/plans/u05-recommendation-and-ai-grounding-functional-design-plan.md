@@ -28,36 +28,36 @@
 
 - [x] Identify unresolved business decisions that materially affect recommendation behavior.
 - [x] Create Questions 1~12 with mutually exclusive choices and an `X) Other` option.
-- [ ] Collect every `[Answer]:` value and validate it against the offered choices.
-- [ ] Check all answers for contradiction or ambiguity; create a clarification file if needed.
+- [x] Collect every `[Answer]:` value and validate it against the offered choices.
+- [x] Check all answers for contradiction or ambiguity; create a clarification file if needed. All answers are A and mutually consistent; no clarification is required.
 
 ### Step 3 - Business Logic Model
 
-- [ ] Design intent extraction, ambiguity confirmation and bilingual semantic-equivalence behavior.
-- [ ] Design candidate retrieval, hard filtering, personalization, diversity and deterministic final ranking.
-- [ ] Design grounded text drafting, atomic claim evidence and fail-closed output validation.
-- [ ] Design conversational patch/reset, AI failure fallback and partial-result replacement.
-- [ ] Generate `business-logic-model.md` with story and requirement traceability.
+- [x] Design intent extraction, ambiguity confirmation and bilingual semantic-equivalence behavior.
+- [x] Design candidate retrieval, hard filtering, personalization, diversity and deterministic final ranking.
+- [x] Design grounded text drafting, atomic claim evidence and fail-closed output validation.
+- [x] Design conversational patch/reset, AI failure fallback and partial-result replacement.
+- [x] Generate `business-logic-model.md` with story and requirement traceability.
 
 ### Step 4 - Domain Entities
 
-- [ ] Define session, request, intent, constraint patch, candidate, score, rank, draft, claim, evidence, validation and trace entities.
-- [ ] Define identifiers, immutable versions, relationships, lifecycle states and ownership boundaries.
-- [ ] Generate `domain-entities.md`.
+- [x] Define session, request, intent, constraint patch, candidate, score, rank, draft, claim, evidence, validation and trace entities.
+- [x] Define identifiers, immutable versions, relationships, lifecycle states and ownership boundaries.
+- [x] Generate `domain-entities.md`.
 
 ### Step 5 - Business Rules and Testable Properties
 
-- [ ] Define hard/soft constraint precedence, consent behavior, score/diversity rules and fallback closure.
-- [ ] Define claim/evidence validation, non-leakage, trace minimization and session transition rules.
-- [ ] Apply PBT-01 to round-trip, invariant, idempotence, oracle, stateful and easy-verification candidates.
-- [ ] Generate `business-rules.md`.
+- [x] Define hard/soft constraint precedence, consent behavior, score/diversity rules and fallback closure.
+- [x] Define claim/evidence validation, non-leakage, trace minimization and session transition rules.
+- [x] Apply PBT-01 to round-trip, invariant, idempotence, oracle, stateful and easy-verification candidates.
+- [x] Generate `business-rules.md`.
 
 ### Step 6 - Validation and Completion
 
-- [ ] Verify story/FR/DR/AC traceability and U02/U03/U04/U07 contract alignment.
-- [ ] Evaluate RESILIENCY-01~15 and PBT-01 compliance, including applicable/N/A rationale.
-- [ ] Validate Markdown syntax and parsing compatibility before final file creation.
-- [ ] Update this plan, `aidlc-state.md` and `audit.md`, then request standardized Functional Design approval.
+- [x] Verify story/FR/DR/AC traceability and U02/U03/U04/U07 contract alignment.
+- [x] Evaluate RESILIENCY-01~15 and PBT-01 compliance, including applicable/N/A rationale.
+- [x] Validate Markdown syntax and parsing compatibility before final file creation.
+- [x] Update this plan, `aidlc-state.md` and `audit.md`, then request standardized Functional Design approval.
 
 ## Functional Design Questions
 
@@ -74,7 +74,7 @@ C) Combine all conditions with equal weight and let ranking resolve conflicts
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 What should happen when an intent value is ambiguous, low-confidence or conflicts with another hard condition?
@@ -87,7 +87,7 @@ C) Ignore the ambiguous condition and continue without showing a confirmation st
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 How should Recommendation Engine candidate generation and eligibility work?
@@ -100,7 +100,7 @@ C) Allow the AI provider to propose candidates and use U03 only to enrich the fi
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 How should the initial personalized score be composed?
@@ -113,7 +113,7 @@ C) Ask the AI provider to assign one overall relevance score without component v
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 How should diversity and repetition control affect final ranking?
@@ -126,7 +126,7 @@ C) Reserve an equal number of positions for every genre regardless of request fi
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 How should personalization behave when consent is absent, withdrawn or no usable history exists?
@@ -139,7 +139,7 @@ C) Refuse recommendation and require personalization consent
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 What are the session semantics for follow-up requests such as “brighter” or “another genre”?
@@ -152,7 +152,7 @@ C) Append every condition permanently until the session expires; only reset can 
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 How should AI-generated summaries and recommendation reasons be grounded?
@@ -165,7 +165,7 @@ C) Generate free text from titles and rely on a disclaimer instead of claim-leve
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 What content style policy should apply to recommendation reasons and summaries?
@@ -178,7 +178,7 @@ C) Use metadata templates only and do not generate localized AI text
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 How should item-level output validation failures be handled?
@@ -191,7 +191,7 @@ C) Return the item with a warning that validation was incomplete
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 11
 What should happen when the AI provider times out or is unavailable?
@@ -204,7 +204,7 @@ C) Return no recommendations and ask the user to retry later
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 12
 What should a privacy-safe recommendation trace retain?
@@ -217,7 +217,7 @@ C) Retain only the final content IDs and timestamp
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 

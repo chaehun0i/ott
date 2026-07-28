@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U05 Recommendation and AI Grounding - Functional Design questions awaiting answers
+- **Current Stage**: U05 Recommendation and AI Grounding - Functional Design review required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -66,9 +66,9 @@
 | U02 Identity and Personalization | Completed | Completed | Completed | Completed | Completed - approved 2026-07-27 |
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
-| U05 Recommendation and AI Grounding | In progress - questions awaiting answers | Pending | Pending | Pending | Pending |
+| U05 Recommendation and AI Grounding | Generated - awaiting approval | Pending | Pending | Pending | Pending |
 | U06 Engagement and Operations | Pending | Pending | Pending | Pending | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Complete all 12 `[Answer]:` fields in the U05 Functional Design plan, then confirm completion for answer validation and artifact generation.
+Review the U05 Functional Design artifacts. Choose Request Changes or Continue to Next Stage; NFR Requirements cannot begin before explicit approval.
