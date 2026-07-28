@@ -1235,3 +1235,27 @@
 **Context**: CONSTRUCTION - Awaiting explicit U04 NFR Requirements approval
 
 ---
+
+## Root Git Consolidation and U04 NFR Approval
+**Timestamp**: 2026-07-28T04:31:31Z
+**User Input**: "`.git-publish`는 별도 복사 저장소로 유지하지 말고 제거해줘. 실제 프로젝트 루트 하나만 Git 기준으로 사용하고, `.gitignore`를 정리해서 `.venv`, `.tools`, `.postgresql`, 캐시, coverage, 로그, IDE 파일, 로컬 DB 데이터, secret/env, 생성 테스트 artifact 등 GitHub에 필요 없는 항목이 추적되지 않도록 정리해줘.\n\n단, 현재 Git이 이미 추적 중인 파일은 먼저 확인하고 필요한 항목만 `git rm --cached`로 제거해줘. Application Code, migrations, infra/config, docs, aidlc-docs 등 프로젝트 재현에 필요한 파일은 삭제하지 마 추가로 검토 끝났어 진행해도 좋아 "
+**AI Response**: "Recorded U04 NFR Requirements approval. Verified ignored-but-tracked files before mutation: none were present, so no `git rm --cached` was needed; `.env.example` was retained as a value-free reproducibility template. Moved `.git-publish/.git` to the workspace root, verified Git history and origin/main, then removed the duplicate `.git-publish` worktree. Preserved application code, six migrations, infrastructure/configuration, docs and aidlc-docs. Added explicit LF normalization and expanded ignore rules for environments, tools, PostgreSQL data, caches, coverage, logs, IDE/OS files, local databases, secrets/env, dumps, build and generated test artifacts."
+**Context**: Repository consolidation, tracking hygiene and U04 NFR Requirements approval
+
+---
+
+## U04 NFR Design Completed
+**Timestamp**: 2026-07-28T04:31:31Z
+**User Input**: ""
+**AI Response**: "Generated the U04 NFR Design plan, design patterns and logical components without redundant questions because all mandatory categories were resolved by approved decisions. Designed fenced bounded claims, provider bulkheads, timeout/retry/circuit policies, transactional pending publication, idempotent replay, fail-closed validation, backpressure/fair scheduling, licensed retention, layered health, invariant alarms and restore re-entry. All 12 plan checkboxes are complete and no blocking enabled-extension finding remains."
+**Context**: CONSTRUCTION - U04 NFR Design generated and validated
+
+---
+
+## U04 NFR Design Completion Approval Prompt
+**Timestamp**: 2026-07-28T04:31:31Z
+**User Input**: ""
+**AI Response**: "NFR Design Complete - U04 Ingestion and Metadata Governance. Review artifacts under aidlc-docs/construction/u04-ingestion-and-metadata-governance/nfr-design/. Choose Request Changes or Continue to Next Stage (U04 Infrastructure Design)."
+**Context**: CONSTRUCTION - Awaiting explicit U04 NFR Design approval
+
+---

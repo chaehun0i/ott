@@ -9,10 +9,15 @@ __pycache__/
 .hypothesis/
 .mypy_cache/
 .ruff_cache/
+.tox/
+.nox/
+.benchmarks/
 .coverage
 .coverage-*
+.coverage.*
 *.xml
 coverage.xml
+coverage.lcov
 htmlcov/
 .env
 .env.*
@@ -39,6 +44,8 @@ dist/
 *.egg-info/
 test-results/
 coverage*.json
+pytestdebug.log
+*.prof
 logs/
 *.log
 tmp/
@@ -47,6 +54,12 @@ temp/
 # Local database and frontend dependency volumes
 pgdata/
 postgres-data/
+local-data/
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.backup
 node_modules/
 frontend/.next/
 frontend/dist/
