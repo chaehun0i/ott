@@ -6,6 +6,7 @@ from hypothesis import strategies as st
 from ott_feed.ingestion.application.identity import IdentityResolver
 from ott_feed.ingestion.application.merge import MergeEngine, should_withdraw
 from ott_feed.ingestion.application.normalization import MetadataNormalizer, normalize_text
+from ott_feed.ingestion.application.publication import PublicationDispatcher
 from ott_feed.ingestion.application.raw import RawEnvelopeCodec
 from ott_feed.ingestion.application.validation import ValidationEngine
 from ott_feed.ingestion.contracts import ApprovedCatalogCommandMapper
@@ -15,6 +16,7 @@ from ott_feed.ingestion.domain.models import (
     IdentityDecision,
     MergedMetadata,
     NormalizedMetadata,
+    PublicationReceipt,
     RuleOutcome,
     RuleResult,
     SourceFieldCandidate,
@@ -198,3 +200,40 @@ def test_p_u04_08_non_passed_decision_cannot_map_to_u03(state: DecisionState) ->
     except ValidationClosureError:
         return
     raise AssertionError("non-passed decision escaped the publication boundary")
+
+
+@given(replays=st.integers(min_value=1, max_value=20))
+def test_p_u04_09_publication_replay_has_one_observable_receipt(replays: int) -> None:
+    class Port:
+        calls = 0
+
+        def execute(self, _command):  # type: ignore[no-untyped-def]
+            self.calls += 1
+            return 5
+
+        def reconcile(self, _decision_id: str) -> int | None:
+            return None
+
+    class Stores:
+        def __init__(self) -> None:
+            self.values: dict[str, PublicationReceipt] = {}
+
+        def get(self, key: str) -> PublicationReceipt | None:
+            return self.values.get(key)
+
+        def save(self, receipt: PublicationReceipt) -> None:
+            self.values.setdefault(receipt.publication_key, receipt)
+
+        def acknowledge(self, _decision_id: str, _version: int, _at: datetime) -> None:
+            return None
+
+    port = Port()
+    stores = Stores()
+    dispatcher = PublicationDispatcher(port, stores, stores)
+    decision = ValidationDecision(
+        "d", "r", "m", "rules", DecisionState.PASSED_PENDING_PUBLICATION, publication_key="key"
+    )
+    for _ in range(replays):
+        dispatcher.dispatch(decision, datetime(2026, 1, 1, tzinfo=UTC))
+    assert len(stores.values) == 1
+    assert port.calls == 1

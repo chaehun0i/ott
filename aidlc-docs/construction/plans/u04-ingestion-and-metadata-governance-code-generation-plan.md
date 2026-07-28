@@ -190,10 +190,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 16 - Idempotent U03 Publication and Reconciliation
 
-- [ ] Map only immutable passed/withdrawal decisions to U03 commands with a stable publication key.
-- [ ] Store the returned CatalogVersion/receipt uniquely and treat timeout as an unknown outcome.
-- [ ] Reconcile or retry the same command without creating replacement decisions or direct U03 writes.
-- [ ] Add U03 contract tests, timeout-before/after-commit examples and PBT-U04-09.
+- [x] Map only immutable passed/withdrawal decisions to U03 commands with a stable publication key.
+- [x] Store the returned CatalogVersion/receipt uniquely and treat timeout as an unknown outcome.
+- [x] Reconcile or retry the same command without creating replacement decisions or direct U03 writes.
+- [x] Add U03 contract tests, timeout-before/after-commit examples and PBT-U04-09.
 
 **Paths**: `backend/src/ott_feed/ingestion/application/publication.py`, `backend/tests/ingestion/contract/test_u03_publication.py`, `backend/tests/ingestion/pbt/test_ingestion_properties.py`.
 
