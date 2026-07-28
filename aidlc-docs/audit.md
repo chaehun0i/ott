@@ -1147,3 +1147,51 @@
 **Context**: CONSTRUCTION - Awaiting explicit U03 Code Generation approval
 
 ---
+
+## GitHub Branch Publication
+**Timestamp**: 2026-07-28T04:00:11Z
+**User Input**: ""
+**AI Response**: "Published the completed U03 workspace to https://github.com/chaehun0i/ott.git on branch agent/u03-catalog-discovery. Verified remote commit eb3d6b6c455d8072b4d288efb6ee11ba879fab49. GitHub CLI is unavailable, so a pull request was not created automatically; the GitHub compare URL is provided for review and PR creation."
+**Context**: CONSTRUCTION - U03 Code Generation GitHub publication
+
+---
+
+## U03 Code Generation Approval and U04 Functional Design Start
+**Timestamp**: 2026-07-28T04:04:10Z
+**User Input**: "다음 진행 바랍니다"
+**AI Response**: "Recorded explicit approval of U03 Code Generation and advanced to U04 Ingestion and Metadata Governance Functional Design. Loaded the unit scope, story and requirement traceability, U03 and U07 dependency contracts, Functional Design rules, and enabled Resiliency and Property-Based Testing rules. Created the U04 Functional Design plan with nine required decision questions and paused for answer completion. Security Baseline is disabled and was skipped while core security and privacy requirements remain applicable."
+**Context**: CONSTRUCTION - U03 Code Generation approved; U04 Functional Design planning and questions
+
+---
+
+## U04 Functional Design Answers and Generation
+**Timestamp**: 2026-07-28T04:10:17Z
+**User Input**: "답변 완료 했습니다."
+**AI Response**: "Validated all nine answers as complete, valid A selections with no contradictions or ambiguities. Generated the U04 business logic model, business rules and domain entities; documented twelve PBT-01 properties, requirement traceability and functional Resiliency compliance. All plan checkboxes were completed and no blocking extension finding remains."
+**Context**: CONSTRUCTION - U04 Functional Design generation and validation
+
+---
+
+## U04 Functional Design Completion Approval Prompt
+**Timestamp**: 2026-07-28T04:10:17Z
+**User Input**: ""
+**AI Response**: "Functional Design Complete - U04 Ingestion and Metadata Governance. Review artifacts under aidlc-docs/construction/u04-ingestion-and-metadata-governance/functional-design/. Choose Request Changes or Continue to Next Stage (U04 NFR Requirements)."
+**Context**: CONSTRUCTION - Awaiting explicit U04 Functional Design approval
+
+---
+
+## U04 Functional Design Approval and Continuous GitHub Publication Request
+**Timestamp**: 2026-07-28T04:13:45Z
+**User Input**: "다음 진행 해줘 추가로 지금까지 답변을 토대로 앞으로 나에게 물어보지 않고 진행하면서 지속적으로 브런치, 커밋, 푸시 해주면 좋겠어"
+**AI Response**: "Recorded explicit U04 Functional Design approval and the request to proceed using prior decisions while continuously branching, committing and pushing. Applied the GitHub publication skill, checked its prerequisites and found that GitHub CLI (`gh`) is not installed. Stopped the publication workflow as required before staging, committing or pushing new changes. AI-DLC mandatory artifact-review approval gates remain required even when routine clarification is minimized."
+**Context**: CONSTRUCTION - U04 NFR Requirements transition; GitHub publication prerequisite blocked
+
+---
+
+## Direct Main Publication Authorization
+**Timestamp**: 2026-07-28T04:16:43Z
+**User Input**: "cli 없이 git add . / git commit -m \"\" / git push 만 해줘 그럼 브런치는 main으로 계속 업데이트 해줘"
+**AI Response**: "Accepted the explicit override to use plain Git without GitHub CLI or pull requests. Verified that origin/main remains at the initial commit and the completed U03 branch is a direct descendant. Prepared to fast-forward local main, stage the full confirmed project scope with `git add .`, commit the U04 documentation/state increment and push directly to origin/main."
+**Context**: GitHub publication - explicit direct-main add/commit/push authorization
+
+---
