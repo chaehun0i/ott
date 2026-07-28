@@ -9,6 +9,8 @@ NOW = datetime(2026, 7, 28, tzinfo=UTC)
 
 
 class JobReferenceMachine(RuleBasedStateMachine):
+    """PBT-U04-10 stateful job model including PBT-U04-12 replay behavior."""
+
     def __init__(self) -> None:
         super().__init__()
         self.job = IngestionJob("job", "provider", "policy", "start")

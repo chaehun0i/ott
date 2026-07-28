@@ -24,6 +24,7 @@ from ott_feed.ingestion.domain.models import (
     ValidationRuleVersion,
 )
 from ott_feed.ingestion.ports import ProviderRecordEnvelope
+from tests.strategies.ingestion import identifier_maps, record_pages
 
 
 @given(
@@ -52,13 +53,7 @@ def test_p_u04_02_normalization_is_idempotent(value: str) -> None:
     assert normalize_text(normalize_text(value)) == normalize_text(value)
 
 
-@given(
-    identifiers=st.dictionaries(
-        st.text(min_size=1, max_size=20),
-        st.text(min_size=1, max_size=40).filter(str.strip),
-        max_size=8,
-    )
-)
+@given(identifiers=identifier_maps)
 def test_p_u04_03_normalization_preserves_identifier_sources(
     identifiers: dict[str, str],
 ) -> None:
@@ -237,3 +232,24 @@ def test_p_u04_09_publication_replay_has_one_observable_receipt(replays: int) ->
         dispatcher.dispatch(decision, datetime(2026, 1, 1, tzinfo=UTC))
     assert len(stores.values) == 1
     assert port.calls == 1
+
+
+@given(records=record_pages)
+def test_p_u04_12_cursor_page_replay_is_idempotent(records: list[str]) -> None:
+    from ott_feed.ingestion.application.jobs import JobLifecycle, PageOutcome
+    from ott_feed.ingestion.domain.models import IngestionJob
+
+    lifecycle = JobLifecycle()
+    job = IngestionJob("job", "provider", "policy", None)
+    job.claim("worker", datetime(2026, 1, 1, tzinfo=UTC))
+    token = lifecycle.token(job)
+    for index, record_id in enumerate(records):
+        outcome = PageOutcome(str(index + 1), frozenset({record_id}), frozenset(), frozenset())
+        assert lifecycle.apply_page(job, token, f"page-{index}", frozenset({record_id}), outcome)
+    terminal = (job.succeeded_count, job.durable_cursor, set(job.applied_page_digests))
+    for index, record_id in enumerate(records):
+        outcome = PageOutcome(str(index + 1), frozenset({record_id}), frozenset(), frozenset())
+        assert not lifecycle.apply_page(
+            job, token, f"page-{index}", frozenset({record_id}), outcome
+        )
+    assert (job.succeeded_count, job.durable_cursor, job.applied_page_digests) == terminal

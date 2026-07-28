@@ -208,10 +208,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 18 - Example, Contract, Architecture and Property Tests
 
-- [ ] Complete US-020 examples and every critical provider/validation/quarantine/publication/retention failure family.
-- [ ] Complete API/OpenAPI, U03/U05 consumer, authorization, architecture, egress and telemetry privacy contracts.
-- [ ] Implement PBT-U04-01~12 with reusable strategies, shrinking, seed reporting and regression promotion.
-- [ ] Verify no failed/ambiguous/quarantined value can reach the U03 publication mapper.
+- [x] Complete US-020 examples and every critical provider/validation/quarantine/publication/retention failure family.
+- [x] Complete API/OpenAPI, U03/U05 consumer, authorization, architecture, egress and telemetry privacy contracts.
+- [x] Implement PBT-U04-01~12 with reusable strategies, shrinking, seed reporting and regression promotion.
+- [x] Verify no failed/ambiguous/quarantined value can reach the U03 publication mapper.
 
 **Paths**: `backend/tests/ingestion/unit/`, `backend/tests/ingestion/contract/`, `backend/tests/ingestion/pbt/`, `backend/tests/strategies/ingestion.py`, `docs/api-contract.md`.
 
