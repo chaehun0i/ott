@@ -1,0 +1,10 @@
+.git
+.venv
+.tools
+aidlc-docs
+**/__pycache__
+**/.pytest_cache
+**/.hypothesis
+.env
+*.secret
+

@@ -1,0 +1,27 @@
+services:
+  caddy:
+    image: ${CADDY_IMAGE:?set immutable Caddy image digest}
+  api:
+    image: ${API_IMAGE:?set immutable API image digest}
+    build: null
+    environment:
+      APP_ENV: remote
+      APP_DOMAIN: ${APP_DOMAIN:?set public domain}
+      API_SECRET_FILE: /run/secrets/api_secret
+      SESSION_COOKIE_SECURE: "true"
+      GOOGLE_REDIRECT_URI: https://${APP_DOMAIN:?set public domain}/api/v1/identity/oauth/google/callback
+  worker:
+    image: ${API_IMAGE:?set immutable API image digest}
+    build: null
+    environment:
+      APP_ENV: remote
+  postgres:
+    image: ${POSTGRES_IMAGE:?set immutable PostgreSQL image digest}
+  otel-collector:
+    image: ${OTEL_IMAGE:?set immutable OTel image digest}
+  prometheus:
+    image: ${PROMETHEUS_IMAGE:?set immutable Prometheus image digest}
+  loki:
+    image: ${LOKI_IMAGE:?set immutable Loki image digest}
+  grafana:
+    image: ${GRAFANA_IMAGE:?set immutable Grafana image digest}

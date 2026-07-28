@@ -1,0 +1,11 @@
+{
+  "title": "U03 Catalog and Discovery",
+  "uid": "u03-catalog-discovery",
+  "schemaVersion": 39,
+  "version": 1,
+  "panels": [
+    {"type": "timeseries", "title": "Projection gaps", "targets": [{"expr": "rate(catalog_projection_gap_total[5m])"}]},
+    {"type": "timeseries", "title": "Semantic fallback", "targets": [{"expr": "rate(search_fallback_total[5m])"}]},
+    {"type": "timeseries", "title": "Stale catalog ratio", "targets": [{"expr": "rate(catalog_stale_total[15m])"}]}
+  ]
+}

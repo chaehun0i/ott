@@ -1,0 +1,22 @@
+groups:
+  - name: ott-identity
+    rules:
+      - alert: IdentityConsentFailClosedSpike
+        expr: sum(rate(ott_identity_consent_fail_closed_total[5m])) > 1
+        for: 10m
+        labels: {severity: warning}
+        annotations: {summary: "Identity consent validation is failing closed"}
+      - alert: IdentityDeletionSlaRisk
+        expr: max(ott_identity_deletion_oldest_seconds) > 259200
+        for: 15m
+        labels: {severity: critical}
+        annotations: {summary: "An identity deletion is approaching or exceeding 72 hours"}
+      - alert: IdentityWorkerBacklog
+        expr: max by (lane) (ott_identity_job_oldest_seconds) > 900
+        for: 10m
+        labels: {severity: warning}
+        annotations: {summary: "Identity worker backlog exceeds 15 minutes"}
+      - alert: IdentityKeyRotationFailure
+        expr: increase(ott_identity_key_rotation_failure_total[15m]) > 0
+        labels: {severity: critical}
+        annotations: {summary: "Identity key rotation reported a failed row"}

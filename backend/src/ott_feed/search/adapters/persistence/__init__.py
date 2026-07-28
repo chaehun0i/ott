@@ -1,0 +1,1 @@
+"""Search SQLAlchemy persistence."""
