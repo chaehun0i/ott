@@ -1379,3 +1379,11 @@
 **Context**: CONSTRUCTION - U04 Code Generation Step 9 of 20 complete
 
 ---
+
+## U04 Code Generation Step 10 Complete
+**Timestamp**: 2026-07-28T04:55:42Z
+**User Input**: ""
+**AI Response**: "Implemented a versioned raw-envelope codec, stable payload digest, bounded observation factory, tombstone parsing and restartable licensed raw-body expiry that preserves digest, policy and lineage evidence. Ruff and strict MyPy passed 137 source files; deterministic PBT-U04-01 raw round-trip plus retention/tamper examples passed."
+**Context**: CONSTRUCTION - U04 Code Generation Step 10 of 20 complete
+
+---

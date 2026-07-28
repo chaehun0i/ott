@@ -136,10 +136,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 10 - Raw Observation, Codec and Governed Retention
 
-- [ ] Persist each bounded provider observation and page membership before transformation.
-- [ ] Implement stable digest/idempotency, tombstone parsing, attribution and policy-version lineage.
-- [ ] Implement raw-envelope codec and bounded restartable body expiry that preserves permitted digest/provenance/decision facts.
-- [ ] Add PBT-U04-01 and retention/replay examples.
+- [x] Persist each bounded provider observation and page membership before transformation.
+- [x] Implement stable digest/idempotency, tombstone parsing, attribution and policy-version lineage.
+- [x] Implement raw-envelope codec and bounded restartable body expiry that preserves permitted digest/provenance/decision facts.
+- [x] Add PBT-U04-01 and retention/replay examples.
 
 **Paths**: `backend/src/ott_feed/ingestion/application/raw.py`, `backend/src/ott_feed/ingestion/application/retention.py`, `backend/tests/ingestion/pbt/test_ingestion_properties.py`.
 
