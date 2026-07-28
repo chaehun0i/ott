@@ -62,3 +62,12 @@ sh scripts/rollback.sh
 4. Atomically activate the candidate generation only after all gates pass. Retain the previous generation for immediate pointer rollback.
 5. On projection gap, stop activation, replay from the first missing CatalogVersion and keep serving the previous generation.
 6. On rollback, restore the prior application image and active-generation pointers. Do not run a destructive database downgrade.
+
+## U04 Ingestion and Metadata Governance
+
+1. Supply separate secret files for `database_u04_api`, `database_u04_worker` and `u04_provider_credentials`; never place their values in Compose or `.env`.
+2. Apply `0004_u04_ingestion_expand` and `backend/migrations/role-grants.sql` through the migration identity before starting `worker-ingestion`.
+3. Confirm the API role is read-only in `u04_ingestion`, the worker role owns U04 mutations and neither U04 role has a direct grant on `u03_catalog`.
+4. Start publication/reconciliation capacity before provider collection lanes, then verify U04 deep-health checks and the ingestion dashboard.
+5. Permit provider outbound traffic only from `provider_egress_net`; API and general workers remain on internal networks.
+6. On rollback, stop new provider claims, reconcile unknown U03 outcomes and restore the prior application image. Do not downgrade the schema or delete immutable decisions.

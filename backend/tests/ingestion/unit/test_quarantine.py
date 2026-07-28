@@ -48,6 +48,10 @@ def test_quarantine_resolves_only_through_superseding_pass() -> None:
     service.supersede(quarantine, passed(), NOW + timedelta(seconds=1))
     assert quarantine.resolved_at == NOW + timedelta(seconds=1)
 
+    invalid = failed()
+    with pytest.raises(ValidationClosureError):
+        service.supersede(service.open(failed(), "q-2", NOW), invalid, NOW)
+
 
 def test_revalidation_attempt_key_is_stable_and_version_sensitive() -> None:
     service = RevalidationService()

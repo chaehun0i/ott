@@ -6,7 +6,6 @@ import hashlib
 from collections.abc import Callable, Mapping
 from datetime import datetime
 
-from ott_feed.ingestion.domain.errors import ValidationClosureError
 from ott_feed.ingestion.domain.models import (
     DecisionState,
     MergedMetadata,
@@ -45,8 +44,6 @@ class ValidationEngine:
             if result.rule_id != rule_id:
                 result = RuleResult(rule_id, RuleOutcome.ERROR, "VAL_RULE_ID_MISMATCH")
             results.append(result)
-        if len(results) != len(rule_version.mandatory_rule_ids):
-            raise ValidationClosureError("mandatory validation matrix is incomplete")
         failures = tuple(
             sorted(
                 {

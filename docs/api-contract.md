@@ -70,3 +70,10 @@ UI는 색상만으로 상태를 구분하지 않고 `status`, `code`, `messageKe
 - `GET /api/v1/contents/{contentId}` returns only currently approved, licensed, region-available detail.
 - `POST /api/v1/search` accepts a Korean or English natural-language query and returns text/vector hybrid results. `degradedReason=semantic_unavailable` identifies approved text fallback.
 - Feed, detail and search responses use `Cache-Control: no-store` and expose no raw embedding or internal provider payload.
+
+## U04 Ingestion and Metadata Governance
+
+- `GET /api/v1/ingestion/rules/current` exposes only the versioned validation predicate contract needed by U05.
+- `GET /api/v1/ingestion/jobs/{jobId}` requires `x-operator-role: operator` and returns bounded status/count facts.
+- `POST /api/v1/ingestion/quarantine/{quarantineId}/retry` requires the operator role and a pseudonymous `x-actor-reference`.
+- U04 responses never include raw provider payloads, provider credentials, quarantine evidence bodies or concrete U03 persistence details.

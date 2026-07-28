@@ -24,7 +24,12 @@ class Settings:
     @classmethod
     def from_environment(cls) -> "Settings":
         environment = os.getenv("APP_ENV", "local")
-        database_url = os.getenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
+        database_secret = read_secret(os.getenv("DATABASE_URL_FILE"))
+        database_url = (
+            database_secret
+            if database_secret is not None
+            else os.environ.get("DATABASE_URL", "sqlite+pysqlite:///:memory:")
+        )
         domain = os.getenv("APP_DOMAIN", "localhost")
         secret = read_secret(os.getenv("API_SECRET_FILE")) or os.getenv(
             "API_SECRET", "local-only-secret-change-me"

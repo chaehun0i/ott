@@ -1,0 +1,12 @@
+{
+  "title": "U04 Ingestion and Metadata Governance",
+  "uid": "u04-ingestion-governance",
+  "schemaVersion": 39,
+  "version": 1,
+  "panels": [
+    {"type": "timeseries", "title": "Provider collection outcomes", "targets": [{"expr": "sum by (provider_id, outcome) (rate(ingestion_records_total[5m]))"}]},
+    {"type": "timeseries", "title": "Pending publication age", "targets": [{"expr": "max(ingestion_pending_publication_age_seconds)"}]},
+    {"type": "timeseries", "title": "Open quarantine cases", "targets": [{"expr": "sum by (reason_family) (ingestion_quarantine_open)"}]},
+    {"type": "timeseries", "title": "Provider circuit state", "targets": [{"expr": "max by (provider_id) (ingestion_provider_circuit_open)"}]}
+  ]
+}

@@ -226,11 +226,11 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 20 - Deployment Artifacts, Final Quality Gate and Handoff
 
-- [ ] Add dedicated `worker-ingestion`, provider egress, purpose-separated secret references, U04 database roles, monitoring dashboard/alerts and recovery procedures.
-- [ ] Run Ruff format/check, strict MyPy, full pytest/branch coverage, deterministic Hypothesis, OpenAPI, migration, lock and secret/telemetry scans.
-- [ ] Require overall coverage at least 80%, validation/quarantine/publication safety branches 100%, PBT-U04-01~12 and PostgreSQL integration skip=0.
-- [ ] Verify no direct U03 writes, no raw/provider-secret telemetry, no application code under `aidlc-docs/` and Docker/native PostgreSQL parity.
-- [ ] Create implementation, test, PBT, dependency and traceability summaries; update every plan/story/state checkbox and request standardized Code Generation approval.
+- [x] Add dedicated `worker-ingestion`, provider egress, purpose-separated secret references, U04 database roles, monitoring dashboard/alerts and recovery procedures.
+- [x] Run Ruff format/check, strict MyPy, full pytest/branch coverage, deterministic Hypothesis, OpenAPI, migration, lock and secret/telemetry scans.
+- [x] Require overall coverage at least 80%, validation/quarantine/publication safety branches 100%, PBT-U04-01~12 and PostgreSQL integration skip=0.
+- [x] Verify no direct U03 writes, no raw/provider-secret telemetry, no application code under `aidlc-docs/` and Docker/native PostgreSQL parity.
+- [x] Create implementation, test, PBT, dependency and traceability summaries; update every plan/story/state checkbox and request standardized Code Generation approval.
 
 **Paths**: `compose.yaml`, `backend/migrations/role-grants.sql`, `infra/`, `scripts/`, `docs/`, `aidlc-docs/construction/u04-ingestion-and-metadata-governance/code/`.
 

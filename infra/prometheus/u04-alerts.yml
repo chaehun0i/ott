@@ -1,0 +1,23 @@
+groups:
+  - name: u04-ingestion-governance
+    rules:
+      - alert: U04PublicationStalled
+        expr: max(ingestion_pending_publication_age_seconds) > 300
+        for: 5m
+        labels: {severity: critical}
+        annotations: {summary: "U04 publication reconciliation is stalled"}
+      - alert: U04ProviderCircuitOpen
+        expr: max by (provider_id) (ingestion_provider_circuit_open) > 0
+        for: 5m
+        labels: {severity: warning}
+        annotations: {summary: "A U04 provider circuit remains open"}
+      - alert: U04QuarantineBacklogHigh
+        expr: sum(ingestion_quarantine_open) > 1000
+        for: 15m
+        labels: {severity: warning}
+        annotations: {summary: "U04 quarantine backlog exceeds the operating threshold"}
+      - alert: U04LeaseRecoveryActive
+        expr: increase(ingestion_expired_lease_recovery_total[10m]) > 0
+        for: 1m
+        labels: {severity: warning}
+        annotations: {summary: "U04 recovered one or more expired worker leases"}

@@ -14,7 +14,7 @@ services:
     environment:
       APP_ENV: ${APP_ENV:-local}
       APP_DOMAIN: ${APP_DOMAIN:-localhost}
-      DATABASE_URL: postgresql+psycopg://ott_api@postgres/ott_feed
+      DATABASE_URL_FILE: /run/secrets/database_u04_api
       API_SECRET_FILE: /run/secrets/api_secret
       IDENTITY_KEK_FILE: /run/secrets/identity_kek
       IDENTITY_BLIND_INDEX_KEY_FILE: /run/secrets/identity_blind_index_key
@@ -32,7 +32,7 @@ services:
       EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-768}
       SEARCH_CURSOR_KEY_FILE: /run/secrets/search_cursor_key
       SEARCH_CURSOR_PREVIOUS_KEY_FILE: /run/secrets/search_cursor_previous_key
-    secrets: [api_secret, identity_kek, identity_blind_index_key, identity_session_pepper, google_client_secret, search_cursor_key, search_cursor_previous_key]
+    secrets: [api_secret, database_u04_api, identity_kek, identity_blind_index_key, identity_session_pepper, google_client_secret, search_cursor_key, search_cursor_previous_key]
     volumes: [identity_exports:/var/lib/ott-feed/exports]
     networks: [public_net, private_net, observability_net]
     depends_on:
@@ -43,7 +43,7 @@ services:
     command: ["python", "-m", "ott_feed.worker"]
     environment:
       APP_ENV: ${APP_ENV:-local}
-      DATABASE_URL: postgresql+psycopg://ott_worker@postgres/ott_feed
+      DATABASE_URL_FILE: /run/secrets/database_worker
       IDENTITY_KEK_FILE: /run/secrets/identity_kek
       IDENTITY_BLIND_INDEX_KEY_FILE: /run/secrets/identity_blind_index_key
       IDENTITY_SESSION_PEPPER_FILE: /run/secrets/identity_session_pepper
@@ -66,11 +66,36 @@ services:
       U03_EMBEDDING_WORKERS: ${U03_EMBEDDING_WORKERS:-4}
       U03_REBUILD_WORKERS: ${U03_REBUILD_WORKERS:-1}
       SEARCH_CURSOR_KEY_FILE: /run/secrets/search_cursor_key
-    secrets: [identity_kek, identity_blind_index_key, identity_session_pepper, identity_export_key, google_client_secret, email_password, search_cursor_key]
+    secrets: [database_worker, identity_kek, identity_blind_index_key, identity_session_pepper, identity_export_key, google_client_secret, email_password, search_cursor_key]
     volumes: [identity_exports:/var/lib/ott-feed/exports]
     networks: [private_net, observability_net]
     depends_on:
       postgres: {condition: service_healthy}
+    mem_limit: 1g
+  worker-ingestion:
+    build: {context: ./backend}
+    command: ["python", "-m", "ott_feed.worker"]
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      DATABASE_URL_FILE: /run/secrets/database_u04_worker
+      U04_PROVIDER_CREDENTIAL_FILE: /run/secrets/u04_provider_credentials
+      U04_WORKER_POOL_SIZE: ${U04_WORKER_POOL_SIZE:-5}
+      U04_CLAIM_BATCH_SIZE: ${U04_CLAIM_BATCH_SIZE:-100}
+      U04_PROVIDER_CONCURRENCY: ${U04_PROVIDER_CONCURRENCY:-4}
+      U04_PER_PROVIDER_CONCURRENCY: ${U04_PER_PROVIDER_CONCURRENCY:-1}
+      U04_PUBLICATION_CONCURRENCY: ${U04_PUBLICATION_CONCURRENCY:-1}
+      U04_RETENTION_CONCURRENCY: ${U04_RETENTION_CONCURRENCY:-1}
+      U04_CONNECT_TIMEOUT_SECONDS: ${U04_CONNECT_TIMEOUT_SECONDS:-0.3}
+      U04_READ_TIMEOUT_SECONDS: ${U04_READ_TIMEOUT_SECONDS:-4.0}
+      U04_TOTAL_TIMEOUT_SECONDS: ${U04_TOTAL_TIMEOUT_SECONDS:-5.0}
+      U04_MAX_RESPONSE_BYTES: ${U04_MAX_RESPONSE_BYTES:-5242880}
+      U04_MAX_RECORDS_PER_PAGE: ${U04_MAX_RECORDS_PER_PAGE:-1000}
+      U04_PENDING_PUBLICATION_MAX_SECONDS: ${U04_PENDING_PUBLICATION_MAX_SECONDS:-300}
+    secrets: [database_u04_worker, u04_provider_credentials]
+    networks: [private_net, provider_egress_net, observability_net]
+    depends_on:
+      postgres: {condition: service_healthy}
+    restart: unless-stopped
     mem_limit: 1g
   postgres:
     image: ${POSTGRES_IMAGE:-pgvector/pgvector:0.8.2-pg17-bookworm@sha256:feb68f4f15446397d8cac7f4fe48fe4586de83160d1fc48b46283312d1a33966}
@@ -90,7 +115,7 @@ services:
     networks: [observability_net]
   prometheus:
     image: ${PROMETHEUS_IMAGE:-prom/prometheus:latest}
-    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "prometheus_data:/prometheus"]
+    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "./infra/prometheus/u04-alerts.yml:/etc/prometheus/u04-alerts.yml:ro", "prometheus_data:/prometheus"]
     networks: [observability_net]
   loki:
     image: ${LOKI_IMAGE:-grafana/loki:latest}
@@ -105,6 +130,7 @@ services:
 networks:
   public_net: {}
   private_net: {internal: true}
+  provider_egress_net: {}
   observability_net: {internal: true}
 volumes:
   postgres_data: {}
@@ -116,6 +142,10 @@ volumes:
   identity_exports: {}
 secrets:
   api_secret: {file: ./secrets/api_secret.txt}
+  database_worker: {file: ./secrets/database_worker.txt}
+  database_u04_api: {file: ./secrets/database_u04_api.txt}
+  database_u04_worker: {file: ./secrets/database_u04_worker.txt}
+  u04_provider_credentials: {file: ./secrets/u04_provider_credentials.json}
   postgres_password: {file: ./secrets/postgres_password.txt}
   identity_kek: {file: ./secrets/identity_kek.txt}
   identity_blind_index_key: {file: ./secrets/identity_blind_index_key.txt}

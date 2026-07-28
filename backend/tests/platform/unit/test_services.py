@@ -133,11 +133,16 @@ def test_telemetry_json_metrics_and_bounded_buffer() -> None:
 
 def test_settings_load_file_secret_and_reject_remote_default(tmp_path, monkeypatch) -> None:
     secret_file = tmp_path / "secret"
+    database_file = tmp_path / "database-url"
     secret_file.write_text("0123456789abcdef", encoding="utf-8")
+    database_file.write_text("postgresql+psycopg://u04_api@db/ott_feed", encoding="utf-8")
     assert read_secret(str(secret_file)) == "0123456789abcdef"
     monkeypatch.setenv("API_SECRET_FILE", str(secret_file))
+    monkeypatch.setenv("DATABASE_URL_FILE", str(database_file))
     monkeypatch.setenv("APP_ENV", "remote")
-    assert Settings.from_environment().cursor_secret == b"0123456789abcdef"
+    settings = Settings.from_environment()
+    assert settings.cursor_secret == b"0123456789abcdef"
+    assert settings.database_url == "postgresql+psycopg://u04_api@db/ott_feed"
 
     monkeypatch.delenv("API_SECRET_FILE")
     monkeypatch.delenv("API_SECRET", raising=False)

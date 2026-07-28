@@ -50,3 +50,7 @@ Restore 후 트래픽을 열기 전에 다음을 수행합니다.
 ## U03 Rebuildable Data
 
 Back up approved catalog revisions, current approval state, sources, verified availability, active-generation pointers, projection receipts/gaps and search quality evidence. Feed/text/vector projection rows and embeddings are rebuildable and may be excluded when recovery-time objectives permit. After restore, replay from the last contiguous CatalogVersion, rebuild immutable candidates, rerun the quality gate and atomically activate them.
+
+## U04 Restore Re-entry
+
+Keep provider claims disabled after restore. Verify that every job references an existing provider-policy version, every decision references an immutable rule version, cursors never regress, publication receipts remain unique and quarantined records cannot appear in publication work. Reconcile every pending publication key with U03 before enabling provider claims. Expired raw bodies may remain expired, but their permitted digest, provenance and decision lineage must still be present. Enable publication first; enable provider claims only after reconciliation reports zero unknown outcomes.

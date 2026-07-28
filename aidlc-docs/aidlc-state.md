@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U04 Ingestion and Metadata Governance - Code Generation Part 2 in progress
+- **Current Stage**: U04 Ingestion and Metadata Governance - Code Generation review required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -65,10 +65,10 @@
 | U07 Platform and Delivery | Completed | Completed | Completed | Completed | Completed - PostgreSQL 17.10 gate passed |
 | U02 Identity and Personalization | Completed | Completed | Completed | Completed | Completed - approved 2026-07-27 |
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
-| U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | In progress - Step 20 of 20 |
+| U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Generated - awaiting approval |
 | U05 Recommendation and AI Grounding | Pending | Pending | Pending | Pending | Pending |
 | U06 Engagement and Operations | Pending | Pending | Pending | Pending | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Execute U04 Code Generation Step 20 of 20 and update its plan checkboxes immediately after validation.
+Review U04 generated code and evidence. Choose Request Changes or Continue to Next Stage; U05 Functional Design cannot begin before explicit approval.

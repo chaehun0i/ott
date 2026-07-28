@@ -9,7 +9,7 @@
 
 ## Integration Gate
 
-`pytest -m integration -ra` completed with 27 passed, 195 deselected and zero
+`pytest -m integration -ra` completed with 27 passed, 196 deselected and zero
 skipped tests. The selected set includes U07, U02, U03 and U04 PostgreSQL
 contracts. An initial failure exposed stale U02/U03 assumptions that the global
 Alembic head could never advance; those assertions now verify that their own
