@@ -181,10 +181,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 15 - Pipeline Orchestration and Transactional Decision Closure
 
-- [ ] Orchestrate persist-raw→normalize→identify→merge→validate with record-level isolation.
-- [ ] Commit passed decisions and publication work atomically; commit failed decisions and quarantine atomically.
-- [ ] Keep provider and U03 network calls outside U04 database transactions.
-- [ ] Add malformed sibling, partial-success, restart and PBT-U04-10/12 state-machine tests.
+- [x] Orchestrate persist-raw→normalize→identify→merge→validate with record-level isolation.
+- [x] Commit passed decisions and publication work atomically; commit failed decisions and quarantine atomically.
+- [x] Keep provider and U03 network calls outside U04 database transactions.
+- [x] Add malformed sibling, partial-success, restart and PBT-U04-10/12 state-machine tests.
 
 **Paths**: `backend/src/ott_feed/ingestion/application/pipeline.py`, `backend/tests/ingestion/unit/test_pipeline.py`, `backend/tests/ingestion/pbt/test_ingestion_state_machine.py`.
 

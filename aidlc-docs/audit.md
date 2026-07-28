@@ -1419,3 +1419,11 @@
 **Context**: CONSTRUCTION - U04 Code Generation Step 14 of 20 complete
 
 ---
+
+## U04 Code Generation Step 15 Complete
+**Timestamp**: 2026-07-28T04:55:47Z
+**User Input**: ""
+**AI Response**: "Implemented record-isolated transaction closure that persists raw evidence then atomically closes as exactly one of passed-plus-publication or failed-plus-quarantine. Provider and U03 calls remain outside this transaction boundary; malformed sibling records do not stop page progress. Ruff and strict MyPy passed 145 source files; closure examples and stateful PBT-U04-10/12 passed."
+**Context**: CONSTRUCTION - U04 Code Generation Step 15 of 20 complete
+
+---
