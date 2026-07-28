@@ -91,10 +91,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 5 - Provider Policy, Scheduling and Fairness
 
-- [ ] Implement immutable policy activation, effective windows, regions, allowed use, attribution, refresh and retention checks.
-- [ ] Implement incremental/full/revalidation scheduling with withdrawal and publication priority reservations.
-- [ ] Implement provider-fair selection, per-provider concurrency and backpressure decisions using explicit time.
-- [ ] Add deterministic scheduling and policy boundary tests.
+- [x] Implement immutable policy activation, effective windows, regions, allowed use, attribution, refresh and retention checks.
+- [x] Implement incremental/full/revalidation scheduling with withdrawal and publication priority reservations.
+- [x] Implement provider-fair selection, per-provider concurrency and backpressure decisions using explicit time.
+- [x] Add deterministic scheduling and policy boundary tests.
 
 **Paths**: `backend/src/ott_feed/ingestion/domain/policies.py`, `backend/src/ott_feed/ingestion/application/scheduling.py`, `backend/tests/ingestion/unit/test_scheduling.py`.
 
