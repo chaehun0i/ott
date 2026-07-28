@@ -64,10 +64,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 2 - Dependency, Lock and Contract Verification
 
-- [ ] Verify the existing Python 3.12.13, HTTPX, SQLAlchemy, psycopg, Alembic, PostgreSQL 17 and Hypothesis pins against `pyproject.toml` and `uv.lock`.
-- [ ] Confirm U04 requires no provider SDK, retry library, broker or cache dependency.
-- [ ] Verify the U03 write-port and U07 job/runtime contracts before implementation.
-- [ ] Record dependency and consumer-contract evidence without manually editing the lockfile.
+- [x] Verify the existing Python 3.12.13, HTTPX, SQLAlchemy, psycopg, Alembic, PostgreSQL 17 and Hypothesis pins against `pyproject.toml` and `uv.lock`.
+- [x] Confirm U04 requires no provider SDK, retry library, broker or cache dependency.
+- [x] Verify the U03 write-port and U07 job/runtime contracts before implementation.
+- [x] Record dependency and consumer-contract evidence without manually editing the lockfile.
 
 **Paths**: `backend/pyproject.toml`, `backend/uv.lock`, `backend/src/ott_feed/catalog/ports.py`, `backend/src/ott_feed/platform/ports.py`, `aidlc-docs/construction/u04-ingestion-and-metadata-governance/code/dependency-validation.md`.
 
