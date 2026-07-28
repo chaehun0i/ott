@@ -73,10 +73,10 @@ U04 owns the `u04_ingestion` schema: provider policies, ingestion jobs/attempts/
 
 ## Step 3 - Package Skeleton, Configuration and Ports
 
-- [ ] Create domain, application, adapter, persistence and API package boundaries.
-- [ ] Define provider, clock, ID, transaction, repository, U03 publication, telemetry and validation-contract protocols.
-- [ ] Add fail-fast typed settings for provider concurrency, claims, pools, timeouts, retry/circuit, retention, payload limits and backpressure.
-- [ ] Add package/configuration unit tests without network or database dependencies.
+- [x] Create domain, application, adapter, persistence and API package boundaries.
+- [x] Define provider, clock, ID, transaction, repository, U03 publication, telemetry and validation-contract protocols.
+- [x] Add fail-fast typed settings for provider concurrency, claims, pools, timeouts, retry/circuit, retention, payload limits and backpressure.
+- [x] Add package/configuration unit tests without network or database dependencies.
 
 **Paths**: `backend/src/ott_feed/ingestion/`, `backend/src/ott_feed/ingestion/ports.py`, `backend/src/ott_feed/ingestion/config.py`, `backend/tests/ingestion/unit/`.
 
