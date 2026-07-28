@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U04 Ingestion and Metadata Governance - Infrastructure Design review required
+- **Current Stage**: U04 Ingestion and Metadata Governance - Code Generation plan approval required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -56,7 +56,7 @@
 - **Placeholder**: Operations
 - **Risk Level**: High
 - **Current Unit**: U04 Ingestion and Metadata Governance
-- **Next Stage After Approval**: U04 Ingestion and Metadata Governance - Code Generation
+- **Next Stage After Approval**: U04 Ingestion and Metadata Governance - Code Generation Part 2
 
 ## Unit Progress
 
@@ -65,10 +65,10 @@
 | U07 Platform and Delivery | Completed | Completed | Completed | Completed | Completed - PostgreSQL 17.10 gate passed |
 | U02 Identity and Personalization | Completed | Completed | Completed | Completed | Completed - approved 2026-07-27 |
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
-| U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Generated - awaiting approval | Pending |
+| U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Planning complete - awaiting approval |
 | U05 Recommendation and AI Grounding | Pending | Pending | Pending | Pending | Pending |
 | U06 Engagement and Operations | Pending | Pending | Pending | Pending | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Review U04 Infrastructure Design artifacts. Choose Request Changes or Continue to Next Stage (U04 Code Generation).
+Review and approve the complete 20-step U04 Code Generation plan before application code changes begin.
