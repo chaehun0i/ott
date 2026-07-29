@@ -13,7 +13,7 @@
 - [x] Exclude frontend generation because U01 owns user-facing presentation.
 - [x] Define 20 sequential generation steps with exact paths, story mapping and blocking gates.
 - [x] Resolve all planning categories from approved artifacts; no blocking question remains.
-- [ ] Obtain explicit approval for the complete plan and generation sequence.
+- [x] Obtain explicit approval for the complete plan and generation sequence.
 
 ## Unit Context
 
@@ -60,100 +60,100 @@ Raw prompts, provider response bodies, failed drafts, direct user identity and c
 
 ## Step 1 - Baseline and Boundary Guard
 
-- [ ] Run Ruff, strict MyPy, full pytest/coverage and deterministic PBT against the current U07/U02/U03/U04 baseline.
-- [ ] Run the selected real-PostgreSQL integration suite and record skip count, server version and migration head.
-- [ ] Extend architecture tests so U05 domain/application code cannot import FastAPI, SQLAlchemy or concrete HTTPX/persistence adapters.
-- [ ] Record baseline evidence before U05 changes.
+- [x] Run Ruff, strict MyPy, full pytest/coverage and deterministic PBT against the current U07/U02/U03/U04 baseline.
+- [x] Run the selected real-PostgreSQL integration suite and record skip count, server version and migration head.
+- [x] Extend architecture tests so U05 domain/application code cannot import FastAPI, SQLAlchemy or concrete HTTPX/persistence adapters.
+- [x] Record baseline evidence before U05 changes.
 
 **Paths**: `backend/tests/platform/contract/test_boundaries.py`, `aidlc-docs/construction/u05-recommendation-and-ai-grounding/code/baseline.md`.
 
 ## Step 2 - Dependency, Lock and Consumer Contract Verification
 
-- [ ] Reverify actual `pyproject.toml` and `uv.lock` pins for Python 3.12, FastAPI, Pydantic, HTTPX, SQLAlchemy, psycopg, Alembic, pytest and Hypothesis.
-- [ ] Confirm U05 adds no provider SDK, ML framework, Redis, broker, retry library or duplicate vector-store dependency.
-- [ ] Add contract tests for the existing U02 Feature Snapshot, U03 Approved Catalog and U04 Validation Predicate boundaries before implementing U05.
-- [ ] Record version and consumer-contract evidence without manually editing the lockfile.
+- [x] Reverify actual `pyproject.toml` and `uv.lock` pins for Python 3.12, FastAPI, Pydantic, HTTPX, SQLAlchemy, psycopg, Alembic, pytest and Hypothesis.
+- [x] Confirm U05 adds no provider SDK, ML framework, Redis, broker, retry library or duplicate vector-store dependency.
+- [x] Add contract tests for the existing U02 Feature Snapshot, U03 Approved Catalog and U04 Validation Predicate boundaries before implementing U05.
+- [x] Record version and consumer-contract evidence without manually editing the lockfile.
 
 **Paths**: `backend/pyproject.toml`, `backend/uv.lock`, `backend/tests/recommendation/contract/test_dependency_contracts.py`, `aidlc-docs/construction/u05-recommendation-and-ai-grounding/code/dependency-validation.md`.
 
 ## Step 3 - Package Skeleton, Configuration and Ports
 
-- [ ] Create domain, application, adapter, persistence and API package boundaries.
-- [ ] Define clock, ID, consent feature, approved catalog, validation predicate, AI provider, repository, telemetry and trace protocols.
-- [ ] Add fail-fast typed settings for deadline allocation, candidates, claims, pool, response size, AI concurrency, retry, circuit and usage caps.
-- [ ] Add configuration and protocol unit tests without network or database dependencies.
+- [x] Create domain, application, adapter, persistence and API package boundaries.
+- [x] Define clock, ID, consent feature, approved catalog, validation predicate, AI provider, repository, telemetry and trace protocols.
+- [x] Add fail-fast typed settings for deadline allocation, candidates, claims, pool, response size, AI concurrency, retry, circuit and usage caps.
+- [x] Add configuration and protocol unit tests without network or database dependencies.
 
 **Paths**: `backend/src/ott_feed/recommendation/`, `backend/src/ott_feed/recommendation/ports.py`, `backend/src/ott_feed/recommendation/config.py`, `backend/tests/recommendation/unit/test_config_and_ports.py`.
 
 ## Step 4 - Domain Values, Intent and Error Families
 
-- [ ] Implement typed IDs, locale, conditions, conflicts, intent versions, degradation reasons, evidence references, atomic claims and stable error codes.
-- [ ] Enforce 4 KiB request text, 32 conditions and canonical Korean/English values at construction boundaries.
-- [ ] Keep all values immutable and framework-free.
-- [ ] Add examples for invalid bounds, unknown states, conflict precedence and localization-neutral equality.
+- [x] Implement typed IDs, locale, conditions, conflicts, intent versions, degradation reasons, evidence references, atomic claims and stable error codes.
+- [x] Enforce 4 KiB request text, 32 conditions and canonical Korean/English values at construction boundaries.
+- [x] Keep all values immutable and framework-free.
+- [x] Add examples for invalid bounds, unknown states, conflict precedence and localization-neutral equality.
 
 **Paths**: `backend/src/ott_feed/recommendation/domain/models.py`, `backend/src/ott_feed/recommendation/domain/errors.py`, `backend/src/ott_feed/recommendation/domain/policies.py`, `backend/tests/recommendation/unit/test_domain.py`.
 
 ## Step 5 - Intent Resolution and Conversational State Machine
 
-- [ ] Implement deterministic explicit-term fallback, structured AI intent merge, ambiguity confirmation and conflict reporting.
-- [ ] Implement patch/reset precedence, immutable epochs, optimistic versions and idempotent replay semantics.
-- [ ] Prohibit fallback guesses for unresolved mood, companion or implicit hard conditions.
-- [ ] Add Korean/English examples and P-U05-01 through P-U05-03 plus P-U05-11 stateful properties.
+- [x] Implement deterministic explicit-term fallback, structured AI intent merge, ambiguity confirmation and conflict reporting.
+- [x] Implement patch/reset precedence, immutable epochs, optimistic versions and idempotent replay semantics.
+- [x] Prohibit fallback guesses for unresolved mood, companion or implicit hard conditions.
+- [x] Add Korean/English examples and P-U05-01 through P-U05-03 plus P-U05-11 stateful properties.
 
 **Paths**: `backend/src/ott_feed/recommendation/application/intent.py`, `backend/src/ott_feed/recommendation/application/sessions.py`, `backend/tests/recommendation/unit/test_intent_and_sessions.py`, `backend/tests/recommendation/pbt/test_session_state_machine.py`.
 
 ## Step 6 - Approved Candidate Snapshot and Hard Eligibility
 
-- [ ] Adapt U03 approved candidates into detached U05 snapshot values without direct table access.
-- [ ] Apply region, OTT, runtime, release, age and mandatory metadata conditions before scoring.
-- [ ] Require compatible U04 predicate version and complete candidate validation state.
-- [ ] Add P-U05-04, filter-order and catalog-closure tests.
+- [x] Adapt U03 approved candidates into detached U05 snapshot values without direct table access.
+- [x] Apply region, OTT, runtime, release, age and mandatory metadata conditions before scoring.
+- [x] Require compatible U04 predicate version and complete candidate validation state.
+- [x] Add P-U05-04, filter-order and catalog-closure tests.
 
 **Paths**: `backend/src/ott_feed/recommendation/adapters/catalog.py`, `backend/src/ott_feed/recommendation/application/eligibility.py`, `backend/tests/recommendation/unit/test_eligibility.py`.
 
 ## Step 7 - Deterministic Scoring and Personalization
 
-- [ ] Implement versioned non-negative normalized weights for request fit, consented affinity, freshness, popularity and novelty.
-- [ ] Exclude personalization entirely when consent/features are missing, expired or withdrawn.
-- [ ] Implement stable tie-breaking and component score proofs.
-- [ ] Add reference-oracle, monotonicity, determinism and consent-exclusion properties P-U05-05 through P-U05-07.
+- [x] Implement versioned non-negative normalized weights for request fit, consented affinity, freshness, popularity and novelty.
+- [x] Exclude personalization entirely when consent/features are missing, expired or withdrawn.
+- [x] Implement stable tie-breaking and component score proofs.
+- [x] Add reference-oracle, monotonicity, determinism and consent-exclusion properties P-U05-05 through P-U05-07.
 
 **Paths**: `backend/src/ott_feed/recommendation/domain/ranking.py`, `backend/src/ott_feed/recommendation/application/ranking.py`, `backend/tests/recommendation/unit/test_ranking.py`, `backend/tests/recommendation/pbt/test_ranking_properties.py`.
 
 ## Step 8 - Diversity and Reserve Selection
 
-- [ ] Implement versioned provider, genre and franchise repetition caps without adding filtered candidates.
-- [ ] Preserve deterministic order for equal diversity decisions and maintain a bounded reserve list.
-- [ ] Revalidate reserve candidates before exposure and return fewer items after exhaustion.
-- [ ] Add P-U05-08 permutation, duplicate and cap-boundary properties.
+- [x] Implement versioned provider, genre and franchise repetition caps without adding filtered candidates.
+- [x] Preserve deterministic order for equal diversity decisions and maintain a bounded reserve list.
+- [x] Revalidate reserve candidates before exposure and return fewer items after exhaustion.
+- [x] Add P-U05-08 permutation, duplicate and cap-boundary properties.
 
 **Paths**: `backend/src/ott_feed/recommendation/application/diversity.py`, `backend/tests/recommendation/unit/test_diversity.py`, `backend/tests/recommendation/pbt/test_diversity_properties.py`.
 
 ## Step 9 - Evidence Bundles and Candidate Validation Matrix
 
-- [ ] Build candidate-local allowlisted evidence bundles from approved metadata only.
-- [ ] Implement complete candidate predicate matrices with passed/failed/unknown/missing/error states.
-- [ ] Fail closed on unknown rule version, mismatched content/version or incomplete mandatory predicate closure.
-- [ ] Add P-U05-09 and P-U05-10 evidence isolation and completeness properties.
+- [x] Build candidate-local allowlisted evidence bundles from approved metadata only.
+- [x] Implement complete candidate predicate matrices with passed/failed/unknown/missing/error states.
+- [x] Fail closed on unknown rule version, mismatched content/version or incomplete mandatory predicate closure.
+- [x] Add P-U05-09 and P-U05-10 evidence isolation and completeness properties.
 
 **Paths**: `backend/src/ott_feed/recommendation/application/evidence.py`, `backend/src/ott_feed/recommendation/application/validation.py`, `backend/tests/recommendation/unit/test_evidence_and_validation.py`, `backend/tests/recommendation/pbt/test_grounding_properties.py`.
 
 ## Step 10 - Provider-Neutral AI Adapter and Resilience
 
-- [ ] Implement strict Pydantic request/response schemas for intent and grounded claim drafts.
-- [ ] Implement allowlisted HTTPS, redirect rejection, 256 KiB response limit and privacy-safe error translation.
-- [ ] Implement stage deadlines, at most one remaining-budget-safe retry, jitter injection, semaphore, 20-call/50% circuit and usage caps.
-- [ ] Add deterministic HTTPX fake-transport tests for timeout, rate, malformed/oversized schema, redirect, circuit and recovery behavior including P-U05-12.
+- [x] Implement strict Pydantic request/response schemas for intent and grounded claim drafts.
+- [x] Implement allowlisted HTTPS, redirect rejection, 256 KiB response limit and privacy-safe error translation.
+- [x] Implement stage deadlines, at most one remaining-budget-safe retry, jitter injection, semaphore, 20-call/50% circuit and usage caps.
+- [x] Add deterministic HTTPX fake-transport tests for timeout, rate, malformed/oversized schema, redirect, circuit and recovery behavior including P-U05-12.
 
 **Paths**: `backend/src/ott_feed/recommendation/adapters/ai.py`, `backend/src/ott_feed/recommendation/application/resilience.py`, `backend/tests/recommendation/unit/test_ai_adapter.py`.
 
 ## Step 11 - Claim Validation and Safe Response Assembly
 
-- [ ] Validate each atomic claim against the same candidate ID, metadata version, field path and source reference.
-- [ ] Discard failed or unclosed draft text and replace it with localized evidence-derived templates.
-- [ ] Ensure AI output can neither add candidates nor change ranking and that raw provider DTOs cannot reach serialization.
-- [ ] Add zero-leakage tests for every failure branch and validated reserve substitution.
+- [x] Validate each atomic claim against the same candidate ID, metadata version, field path and source reference.
+- [x] Discard failed or unclosed draft text and replace it with localized evidence-derived templates.
+- [x] Ensure AI output can neither add candidates nor change ranking and that raw provider DTOs cannot reach serialization.
+- [x] Add zero-leakage tests for every failure branch and validated reserve substitution.
 
 **Paths**: `backend/src/ott_feed/recommendation/application/grounding.py`, `backend/src/ott_feed/recommendation/application/responses.py`, `backend/tests/recommendation/unit/test_grounding_and_responses.py`.
 

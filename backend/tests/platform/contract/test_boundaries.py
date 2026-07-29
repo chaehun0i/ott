@@ -70,3 +70,21 @@ def test_u04_core_does_not_import_framework_or_adapter_packages() -> None:
                 elif isinstance(node, ast.ImportFrom) and node.module:
                     imported_roots.add(node.module.split(".", 1)[0])
     assert imported_roots.isdisjoint(forbidden)
+
+
+def test_u05_core_does_not_import_framework_or_adapter_packages() -> None:
+    root = Path(__file__).parents[3] / "src" / "ott_feed" / "recommendation"
+    core_directories = (root / "domain", root / "application")
+    forbidden = {"fastapi", "sqlalchemy", "httpx", "psycopg", "pydantic"}
+    imported_roots: set[str] = set()
+    for directory in core_directories:
+        if not directory.exists():
+            continue
+        for path in directory.rglob("*.py"):
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Import):
+                    imported_roots.update(alias.name.split(".", 1)[0] for alias in node.names)
+                elif isinstance(node, ast.ImportFrom) and node.module:
+                    imported_roots.add(node.module.split(".", 1)[0])
+    assert imported_roots.isdisjoint(forbidden)
