@@ -47,6 +47,7 @@ source = [
   "src/ott_feed/catalog",
   "src/ott_feed/search",
   "src/ott_feed/ingestion",
+  "src/ott_feed/recommendation",
 ]
 
 [tool.coverage.report]

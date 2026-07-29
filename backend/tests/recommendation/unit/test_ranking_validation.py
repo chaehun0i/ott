@@ -54,6 +54,16 @@ def test_ranking_is_stable_and_consent_is_optional() -> None:
     assert ranked == rank_candidates(values, intent, FeatureContext(), ScorePolicy())
 
 
+def test_consented_affinity_is_used_only_for_matching_genre() -> None:
+    ranked = rank_candidates(
+        (candidate("a"),),
+        RecommendationIntent(Locale.EN, ()),
+        FeatureContext({"genre:comedy": 0.75}, True, "features-1"),
+        ScorePolicy(),
+    )
+    assert ranked[0].proof.affinity == 0.75 * ScorePolicy().affinity
+
+
 def test_diversity_never_invents_candidate() -> None:
     ranked = rank_candidates(
         tuple(candidate(str(i)) for i in range(5)),

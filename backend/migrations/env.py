@@ -7,6 +7,9 @@ from ott_feed.catalog.adapters.persistence import models as catalog_models  # no
 from ott_feed.identity.adapters.persistence import models as identity_models  # noqa: F401
 from ott_feed.ingestion.adapters.persistence import models as ingestion_models  # noqa: F401
 from ott_feed.platform.adapters.database import Base
+from ott_feed.recommendation.adapters.persistence import (
+    models as recommendation_models,  # noqa: F401
+)
 from ott_feed.search.adapters.persistence import models as search_models  # noqa: F401
 
 config = context.config

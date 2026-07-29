@@ -159,82 +159,93 @@ Raw prompts, provider response bodies, failed drafts, direct user identity and c
 
 ## Step 12 - SQLAlchemy Models and Alembic Expand Migration
 
-- [ ] Implement U05 SQLAlchemy rows, constraints and indexes in `u05_recommendation`.
-- [ ] Add expand-only migration `0005_u05_recommendation_expand.py` after U04 head.
-- [ ] Add migration-owner, API-runtime and maintenance-runtime grants while prohibiting cross-unit writes.
-- [ ] Verify clean installation and U07 through U05 upgrade paths; prohibit destructive automatic downgrade.
+- [x] Implement U05 SQLAlchemy rows, constraints and indexes in `u05_recommendation`.
+- [x] Add expand-only migration `0005_u05_recommendation_expand.py` after U04 head.
+- [x] Add migration-owner, API-runtime and maintenance-runtime grants while prohibiting cross-unit writes.
+- [x] Verify clean installation and U07 through U05 upgrade paths; prohibit destructive automatic downgrade.
 
 **Paths**: `backend/src/ott_feed/recommendation/adapters/persistence/models.py`, `backend/migrations/versions/0005_u05_recommendation_expand.py`, `backend/migrations/role-grants.sql`.
 
 ## Step 13 - Repositories, Unit of Work and Decision Closure
 
-- [ ] Implement session, request, policy, ranking, validation, trace, usage and retention repositories.
-- [ ] Implement compare-and-set session mutation, unique idempotency and immutable policy/decision records.
-- [ ] Commit decision closure only after external calls and full candidate/claim validation complete.
-- [ ] Add repository unit tests and concurrent real-PostgreSQL session/idempotency tests.
+- [x] Implement session, request, policy, ranking, validation, trace, usage and retention repositories.
+- [x] Implement compare-and-set session mutation, unique idempotency and immutable policy/decision records.
+- [x] Commit decision closure only after external calls and full candidate/claim validation complete.
+- [x] Add repository unit tests and concurrent real-PostgreSQL session/idempotency tests.
 
 **Paths**: `backend/src/ott_feed/recommendation/adapters/persistence/repositories.py`, `backend/src/ott_feed/recommendation/adapters/persistence/unit_of_work.py`, `backend/tests/recommendation/integration/test_postgresql_recommendation.py`.
 
 ## Step 14 - Recommendation Orchestrator and Deadline Pipeline
 
-- [ ] Implement the 10-second monotonic pipeline with approved 0.5/2.75/1.5/4.25/0.5/0.5-second stage budgets.
-- [ ] Keep U02/U03/U04 reads and AI calls outside U05 write transactions.
-- [ ] Route U02 failure to non-personalized operation, AI failure to deterministic fallback and U03/U04 failure to fail-closed output.
-- [ ] Add end-to-end application examples for all eight U05 primary stories.
+- [x] Implement the 10-second monotonic pipeline with approved 0.5/2.75/1.5/4.25/0.5/0.5-second stage budgets.
+- [x] Keep U02/U03/U04 reads and AI calls outside U05 write transactions.
+- [x] Route U02 failure to non-personalized operation, AI failure to deterministic fallback and U03/U04 failure to fail-closed output.
+- [x] Add end-to-end application examples for all eight U05 primary stories.
 
 **Paths**: `backend/src/ott_feed/recommendation/application/orchestrator.py`, `backend/tests/recommendation/unit/test_orchestrator.py`, `backend/tests/recommendation/unit/test_story_examples.py`.
 
 ## Step 15 - API Contracts, Routes and Composition
 
-- [ ] Define bounded localized recommend, refine, reset, confirmation, degraded-state and safe-item Pydantic contracts.
-- [ ] Add authenticated ownership/idempotency/version-aware routes under `/api/v1/recommendations`.
-- [ ] Register facade, router, typed exception handling and recommendation rate-limit behavior in `create_app`.
-- [ ] Add OpenAPI and previous-supported consumer contract tests with non-enumerating errors.
+- [x] Define bounded localized recommend, refine, reset, confirmation, degraded-state and safe-item Pydantic contracts.
+- [x] Add authenticated ownership/idempotency/version-aware routes under `/api/v1/recommendations`.
+- [x] Register facade, router, typed exception handling and recommendation rate-limit behavior in `create_app`.
+- [x] Add OpenAPI and previous-supported consumer contract tests with non-enumerating errors.
 
 **Paths**: `backend/src/ott_feed/recommendation/api/contracts.py`, `backend/src/ott_feed/recommendation/api/router.py`, `backend/src/ott_feed/main.py`, `backend/tests/recommendation/contract/test_recommendation_api.py`.
 
 ## Step 16 - Telemetry, Health and Cost Accounting
 
-- [ ] Implement bounded recommendation metrics, structured events and separate required/degradable health contributors.
-- [ ] Record token/provider-equivalent usage and estimated cost without prompt or response content.
-- [ ] Add U05 Prometheus alerts and Grafana dashboard provisioning for latency, fallback, circuit, validation, pool, retention and cost thresholds.
-- [ ] Add telemetry prohibited-field and bounded-label tests.
+- [x] Implement bounded recommendation metrics, structured events and separate required/degradable health contributors.
+- [x] Record token/provider-equivalent usage and estimated cost without prompt or response content.
+- [x] Add U05 Prometheus alerts and Grafana dashboard provisioning for latency, fallback, circuit, validation, pool, retention and cost thresholds.
+- [x] Add telemetry prohibited-field and bounded-label tests.
 
 **Paths**: `backend/src/ott_feed/recommendation/telemetry.py`, `backend/src/ott_feed/recommendation/health.py`, `infra/prometheus/u05-alerts.yml`, `infra/grafana/provisioning/dashboards/u05-recommendation.json`, `backend/tests/recommendation/unit/test_health_telemetry.py`.
 
 ## Step 17 - Retention, Recovery and Maintenance Command
 
-- [ ] Implement bounded 500-record retention claims and monotonic checkpoints.
-- [ ] Implement restore closure checks for session, policy, ranking, validation, trace privacy and U02/U03/U04 compatibility.
-- [ ] Add AI-disabled deterministic re-entry and explicit AI activation preflight.
-- [ ] Register one-shot maintenance handlers/command and add retention/recovery tests.
+- [x] Implement bounded 500-record retention claims and monotonic checkpoints.
+- [x] Implement restore closure checks for session, policy, ranking, validation, trace privacy and U02/U03/U04 compatibility.
+- [x] Add AI-disabled deterministic re-entry and explicit AI activation preflight.
+- [x] Register one-shot maintenance handlers/command and add retention/recovery tests.
 
 **Paths**: `backend/src/ott_feed/recommendation/application/retention.py`, `backend/src/ott_feed/recommendation/application/recovery.py`, `backend/src/ott_feed/recommendation/maintenance.py`, `backend/tests/recommendation/quality/test_recovery_gate.py`.
 
 ## Step 18 - Reusable Strategies, PBT and Quality Evaluation
 
-- [ ] Add reusable strategies for bilingual intents, conflicts, consent snapshots, approved catalogs, scoring policies, evidence graphs, validation matrices and session commands.
-- [ ] Complete P-U05-01 through P-U05-12 with deterministic seed/replay and shrinking evidence.
-- [ ] Add curated synthetic Korean/English relevance, hard-condition, diversity and grounding evaluation fixtures.
-- [ ] Implement version comparison and block activation on safety regression or below-threshold quality.
+- [x] Add reusable strategies for bilingual intents, conflicts, consent snapshots, approved catalogs, scoring policies, evidence graphs, validation matrices and session commands.
+- [x] Complete P-U05-01 through P-U05-12 with deterministic seed/replay and shrinking evidence.
+- [x] Add curated synthetic Korean/English relevance, hard-condition, diversity and grounding evaluation fixtures.
+- [x] Implement version comparison and block activation on safety regression or below-threshold quality.
 
 **Paths**: `backend/tests/strategies/recommendation.py`, `backend/tests/recommendation/pbt/`, `backend/tests/recommendation/quality/test_recommendation_quality_gate.py`, `backend/tests/recommendation/fixtures/`.
 
 ## Step 19 - PostgreSQL, Failure, Privacy and Capacity Gates
 
-- [ ] Run U05 real-PostgreSQL migration/repository/concurrency tests with selected integration skip=0.
-- [ ] Run AI/U02/U03/U04 failure injection and recovery tests across every degraded branch.
-- [ ] Run secret, egress, persistence, telemetry and raw-draft non-leakage scans.
-- [ ] Run fewer-than-10-user, 5 sustained/15 burst RPS and 100,000-content bounded capacity/latency evidence.
+- [x] Run U05 real-PostgreSQL migration/repository/concurrency tests with selected integration skip=0.
+- [x] Run AI/U02/U03/U04 failure injection and recovery tests across every degraded branch.
+- [x] Run secret, egress, persistence, telemetry and raw-draft non-leakage scans.
+- [x] Run fewer-than-10-user, 5 sustained/15 burst RPS and 100,000-content bounded capacity/latency evidence.
 
 **Paths**: `backend/tests/recommendation/integration/`, `backend/tests/recommendation/quality/test_capacity_and_privacy_gate.py`, `aidlc-docs/construction/u05-recommendation-and-ai-grounding/code/verification-evidence.md`.
 
 ## Step 20 - Deployment Artifacts, Full Regression and Handoff
 
-- [ ] Update Compose, `.env.example`, secret references, AI egress network, maintenance profile, Prometheus and Grafana wiring without committing secret values.
-- [ ] Run Ruff format/check, strict MyPy, full pytest with branch coverage, PBT seed, all real-PostgreSQL integration with skip=0 and Compose validation.
-- [ ] Verify overall coverage at least 80% and hard-filter, consent, claim and failed-draft safety branches at 100%.
-- [ ] Generate code summary, API/operations notes, traceability, validation results and extension compliance; mark all plan/story checkboxes complete.
+- [x] Update Compose, `.env.example`, secret references, AI egress network, maintenance profile, Prometheus and Grafana wiring without committing secret values.
+- [x] Run Ruff format/check, strict MyPy, full pytest with branch coverage, PBT seed, all real-PostgreSQL integration with skip=0 and Compose validation.
+- [x] Verify overall coverage at least 80% and hard-filter, consent, claim and failed-draft safety branches at 100%.
+- [x] Generate code summary, API/operations notes, traceability, validation results and extension compliance; mark all plan/story checkboxes complete.
+
+## Story Completion
+
+- [x] US-008 Korean situation-based recommendation.
+- [x] US-009 English situation-based recommendation.
+- [x] US-010 hard-condition-first personalization and diversity.
+- [x] US-011 metadata-grounded reasons and summaries.
+- [x] US-012 conversational refinement and reset.
+- [x] US-013 ambiguity and conflict confirmation.
+- [x] US-022 metadata validation and safe replacement.
+- [x] US-024 degraded operation under dependency failure.
 
 **Paths**: `compose.yaml`, `.env.example`, `infra/`, `backend/README.md`, `aidlc-docs/construction/u05-recommendation-and-ai-grounding/code/`.
 
@@ -250,6 +261,6 @@ Commands use the existing `.venv` and real PostgreSQL configuration established 
 - Alembic clean-install and U04-to-U05 upgrade verification.
 - Docker Compose configuration validation.
 
-## Planning Decision
+## Completion Decision
 
-The plan is ready for explicit approval. No U05 application, migration, test or infrastructure implementation may begin until the complete 20-step sequence is approved.
+All 20 generation steps and eight primary stories are complete. Generated code is awaiting explicit review approval.

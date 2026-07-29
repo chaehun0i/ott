@@ -32,9 +32,17 @@ services:
       EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-768}
       SEARCH_CURSOR_KEY_FILE: /run/secrets/search_cursor_key
       SEARCH_CURSOR_PREVIOUS_KEY_FILE: /run/secrets/search_cursor_previous_key
-    secrets: [api_secret, database_u04_api, identity_kek, identity_blind_index_key, identity_session_pepper, google_client_secret, search_cursor_key, search_cursor_previous_key]
+      U05_DATABASE_URL_FILE: /run/secrets/database_u05_api
+      AI_PROVIDER_CREDENTIAL_FILE: /run/secrets/ai_provider
+      AI_PROVIDER_ENDPOINT: ${AI_PROVIDER_ENDPOINT:-}
+      U05_TOTAL_TIMEOUT_MS: ${U05_TOTAL_TIMEOUT_MS:-10000}
+      U05_INTENT_TIMEOUT_MS: ${U05_INTENT_TIMEOUT_MS:-2750}
+      U05_DRAFT_TIMEOUT_MS: ${U05_DRAFT_TIMEOUT_MS:-4250}
+      U05_AI_CONCURRENCY: ${U05_AI_CONCURRENCY:-4}
+      U05_DAILY_AI_UNITS: ${U05_DAILY_AI_UNITS:-100000}
+    secrets: [api_secret, database_u04_api, database_u05_api, ai_provider, identity_kek, identity_blind_index_key, identity_session_pepper, google_client_secret, search_cursor_key, search_cursor_previous_key]
     volumes: [identity_exports:/var/lib/ott-feed/exports]
-    networks: [public_net, private_net, observability_net]
+    networks: [public_net, private_net, observability_net, ai_egress_net]
     depends_on:
       postgres: {condition: service_healthy}
     mem_limit: 1g
@@ -97,6 +105,18 @@ services:
       postgres: {condition: service_healthy}
     restart: unless-stopped
     mem_limit: 1g
+  recommendation-maintenance:
+    build: {context: ./backend}
+    command: ["python", "-m", "ott_feed.recommendation.maintenance", "verify"]
+    profiles: ["maintenance"]
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      U05_DATABASE_URL_FILE: /run/secrets/database_u05_maintenance
+    secrets: [database_u05_maintenance]
+    networks: [private_net, observability_net]
+    depends_on:
+      postgres: {condition: service_healthy}
+    mem_limit: 512m
   postgres:
     image: ${POSTGRES_IMAGE:-pgvector/pgvector:0.8.2-pg17-bookworm@sha256:feb68f4f15446397d8cac7f4fe48fe4586de83160d1fc48b46283312d1a33966}
     environment:
@@ -115,7 +135,7 @@ services:
     networks: [observability_net]
   prometheus:
     image: ${PROMETHEUS_IMAGE:-prom/prometheus:latest}
-    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "./infra/prometheus/u04-alerts.yml:/etc/prometheus/u04-alerts.yml:ro", "prometheus_data:/prometheus"]
+    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "./infra/prometheus/u04-alerts.yml:/etc/prometheus/u04-alerts.yml:ro", "./infra/prometheus/u05-alerts.yml:/etc/prometheus/u05-alerts.yml:ro", "prometheus_data:/prometheus"]
     networks: [observability_net]
   loki:
     image: ${LOKI_IMAGE:-grafana/loki:latest}
@@ -131,6 +151,7 @@ networks:
   public_net: {}
   private_net: {internal: true}
   provider_egress_net: {}
+  ai_egress_net: {}
   observability_net: {internal: true}
 volumes:
   postgres_data: {}
@@ -145,6 +166,9 @@ secrets:
   database_worker: {file: ./secrets/database_worker.txt}
   database_u04_api: {file: ./secrets/database_u04_api.txt}
   database_u04_worker: {file: ./secrets/database_u04_worker.txt}
+  database_u05_api: {file: ./secrets/database_u05_api.txt}
+  database_u05_maintenance: {file: ./secrets/database_u05_maintenance.txt}
+  ai_provider: {file: ./secrets/ai_provider.txt}
   u04_provider_credentials: {file: ./secrets/u04_provider_credentials.json}
   postgres_password: {file: ./secrets/postgres_password.txt}
   identity_kek: {file: ./secrets/identity_kek.txt}

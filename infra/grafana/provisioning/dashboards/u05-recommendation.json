@@ -1,0 +1,12 @@
+{
+  "title": "U05 Recommendation and AI Grounding",
+  "uid": "u05-recommendation",
+  "schemaVersion": 39,
+  "version": 1,
+  "panels": [
+    {"type": "timeseries", "title": "Recommendation latency", "targets": [{"expr": "histogram_quantile(0.95, sum by (le) (rate(recommendation_duration_seconds_bucket[5m])))"}]},
+    {"type": "timeseries", "title": "Fallback outcomes", "targets": [{"expr": "sum by (fallback_mode) (rate(recommendation_fallback_total[5m]))"}]},
+    {"type": "timeseries", "title": "Validation replacement", "targets": [{"expr": "sum by (reason_code) (rate(recommendation_validation_replacement_total[5m]))"}]},
+    {"type": "timeseries", "title": "AI usage budget", "targets": [{"expr": "max(recommendation_ai_daily_budget_ratio)"}]}
+  ]
+}

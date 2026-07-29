@@ -72,7 +72,7 @@ def test_u04_schema_and_migration_head(engine) -> None:
                 "SELECT count(*) FROM information_schema.tables WHERE table_schema='u04_ingestion'"
             )
         )
-    assert revision == "0004_u04_ingestion_expand"
+    assert revision is not None and int(revision[:4]) >= 4
     assert tables == 13
 
 

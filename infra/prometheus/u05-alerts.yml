@@ -1,0 +1,23 @@
+groups:
+  - name: u05-recommendation-grounding
+    rules:
+      - alert: U05RecommendationLatencyHigh
+        expr: histogram_quantile(0.95, sum by (le) (rate(recommendation_duration_seconds_bucket[5m]))) > 10
+        for: 5m
+        labels: {severity: warning}
+        annotations: {summary: "U05 recommendation p95 exceeds 10 seconds"}
+      - alert: U05GroundingLeakage
+        expr: increase(recommendation_grounding_leak_total[5m]) > 0
+        for: 0m
+        labels: {severity: critical}
+        annotations: {summary: "U05 detected an ungrounded output exposure"}
+      - alert: U05AICircuitOpen
+        expr: max(recommendation_ai_circuit_open) > 0
+        for: 5m
+        labels: {severity: warning}
+        annotations: {summary: "U05 AI circuit remains open"}
+      - alert: U05DailyBudgetApproaching
+        expr: max(recommendation_ai_daily_budget_ratio) > 0.8
+        for: 10m
+        labels: {severity: warning}
+        annotations: {summary: "U05 AI daily budget exceeds 80 percent"}

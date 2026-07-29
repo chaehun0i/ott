@@ -30,6 +30,12 @@ from ott_feed.ingestion.health import IngestionHealthContributor
 from ott_feed.platform.application.rate_limit import InMemoryRateLimiter, RatePolicy
 from ott_feed.platform.config import Settings
 from ott_feed.platform.health import HealthRegistry
+from ott_feed.recommendation.api.router import (
+    RecommendationFacade,
+    UnavailableRecommendationFacade,
+    create_recommendation_router,
+)
+from ott_feed.recommendation.domain.errors import RecommendationError
 from ott_feed.search.adapters.security import CursorSigner
 from ott_feed.search.api.dependencies import SearchRateLimitAdapter
 from ott_feed.search.api.router import SearchFacade, UnavailableSearchFacade, create_search_router
@@ -55,6 +61,7 @@ def create_app(
     search_health: SearchHealthContributor | None = None,
     ingestion_facade: IngestionFacade | None = None,
     ingestion_health: IngestionHealthContributor | None = None,
+    recommendation_facade: RecommendationFacade | None = None,
 ) -> FastAPI:
     settings = settings or Settings.from_environment()
     health = health or HealthRegistry()
@@ -142,6 +149,24 @@ def create_app(
             },
         )
 
+    @app.exception_handler(RecommendationError)
+    async def recommendation_error_handler(
+        request: Request, exc: RecommendationError
+    ) -> JSONResponse:
+        del request
+        context = current_request.get()
+        return JSONResponse(
+            status_code=503 if exc.retryable else 409 if "conflict" in exc.code else 400,
+            content={
+                "error": {
+                    "code": exc.code,
+                    "message": str(exc),
+                    "correlationId": context.correlation_id if context else "unavailable",
+                    "retryable": exc.retryable,
+                }
+            },
+        )
+
     @router.get("/health/live", tags=["health"])
     def live() -> dict[str, str]:
         return {"status": "alive"}
@@ -191,6 +216,9 @@ def create_app(
     )
     app.include_router(
         create_ingestion_router(ingestion_facade or UnavailableIngestionFacade(), require_operator)
+    )
+    app.include_router(
+        create_recommendation_router(recommendation_facade or UnavailableRecommendationFacade())
     )
     return app
 
