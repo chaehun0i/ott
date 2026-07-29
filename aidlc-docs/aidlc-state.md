@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U05 Recommendation and AI Grounding - Infrastructure Design review required
+- **Current Stage**: U05 Recommendation and AI Grounding - Code Generation plan review required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -56,7 +56,7 @@
 - **Placeholder**: Operations
 - **Risk Level**: High
 - **Current Unit**: U05 Recommendation and AI Grounding
-- **Next Stage After Approval**: U05 Recommendation and AI Grounding - Code Generation planning
+- **Next Stage After Approval**: U05 Recommendation and AI Grounding - Code Generation Step 1
 
 ## Unit Progress
 
@@ -66,9 +66,9 @@
 | U02 Identity and Personalization | Completed | Completed | Completed | Completed | Completed - approved 2026-07-27 |
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
-| U05 Recommendation and AI Grounding | Completed | Completed | Completed | Generated - awaiting approval | Pending |
+| U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Planning generated - awaiting approval |
 | U06 Engagement and Operations | Pending | Pending | Pending | Pending | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Review the U05 Infrastructure Design artifacts. Choose Request Changes or Continue to Next Stage; Code Generation planning cannot begin before explicit approval.
+Review the complete U05 Code Generation plan. Choose Request Changes or Approve Plan; application code cannot change before explicit approval.
