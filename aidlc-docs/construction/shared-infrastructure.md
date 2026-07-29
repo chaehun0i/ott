@@ -143,6 +143,19 @@ Business Data Volume과 Observability Volume은 분리한다. Disk 80% Alert는 
 - Shared Observability는 Cursor·Publication Age, Freshness, Quarantine, Retry·Circuit, Retention, Disk·Pool과 Invariant Alert를 제공한다.
 - Local/CI는 Docker 여부와 무관하게 실제 PostgreSQL 17, Migration, U03/U05 Contract, PBT-U04-01~12와 Integration `skip=0`을 통과해야 한다.
 
+## U05 Shared Resource Contract
+
+- U05 online recommendation executes inside the existing API process; no public recommendation service, Redis, broker or duplicate vector store is added.
+- `u05_recommendation` is owned by U05 with separate `u05_migration_owner`, `u05_api_runtime` and `u05_maintenance_runtime` roles.
+- U05 contributes at most two PostgreSQL connections per API process, uses 5-second maximum statements and never holds a transaction across an AI or cross-unit call.
+- U05 receives U02 consented features, U03 approved candidates/evidence and U04 validation rules through versioned ports; it has no cross-unit table write grant.
+- The API receives purpose-separated `database_u05_api` and `ai_provider` secret files. Backup, monitoring and other workers never receive the AI credential.
+- AI calls use a dedicated outbound path, application scheme/host/port allowlisting, redirect rejection and host firewall or proxy enforcement for production-like deployment.
+- The U05 PostgreSQL soft budget is 5 GB with 70% warning and 80% critical thresholds. Raw prompts/responses, failed drafts and chain-of-thought are excluded from persistence and backup.
+- Shared observability adds U05 latency, fallback, circuit, validation, session, token/cost and retention signals with bounded privacy-safe labels.
+- Backup and restore include durable U05 closure state. Re-entry validates U02/U03/U04 contracts and deterministic recommendation before AI is enabled.
+- Local and CI require real PostgreSQL 17, migration, contract, P-U05-01 through P-U05-12 and integration `skip=0` gates; fake AI transports are the deterministic release baseline.
+
 ## Shared Failure Impact
 
 | Shared Failure | Affected Units | Mitigation |
