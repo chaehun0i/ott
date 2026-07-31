@@ -18,31 +18,31 @@
 - [x] U06 Functional Design, NFR Requirements and NFR Design artifacts를 분석한다.
 - [x] 배포 환경, 컴퓨트, 저장소, 메시징, 네트워크, 모니터링과 공유 인프라의 미결정 항목을 식별한다.
 - [x] 상호 배타적인 선택지와 마지막 `X) Other`를 포함한 Question 1~12를 작성한다.
-- [ ] 모든 `[Answer]:` 값을 수집하고 선택지 유효성, 모호성 및 결정 충돌을 검증한다.
-- [ ] 필요한 경우 별도 clarification 질문을 생성하고 해소한다.
+- [x] 모든 `[Answer]:` 값을 수집하고 선택지 유효성, 모호성 및 결정 충돌을 검증한다. Question 1~12는 모두 유효한 `A`이며 충돌이 없다.
+- [x] 필요한 경우 별도 clarification 질문을 생성하고 해소한다. 추가 clarification이 필요하지 않다.
 
 ### Step 2 - Runtime and Data Infrastructure
 
-- [ ] API, notification worker와 maintenance 실행 단위, 자원 한도 및 재시작 정책을 매핑한다.
-- [ ] U06 PostgreSQL schema, runtime role, migration role, connection budget와 백업 범위를 매핑한다.
-- [ ] Transactional Outbox claim/lease 처리와 확장 시 broker 진입 경계를 매핑한다.
-- [ ] 이메일 provider 자격 증명, audit HMAC key ring과 secret mount/rotation 경계를 정의한다.
+- [x] API, notification worker와 maintenance 실행 단위, 자원 한도 및 재시작 정책을 매핑한다.
+- [x] U06 PostgreSQL schema, runtime role, migration role, connection budget와 백업 범위를 매핑한다.
+- [x] Transactional Outbox claim/lease 처리와 확장 시 broker 진입 경계를 매핑한다.
+- [x] 이메일 provider 자격 증명, audit HMAC key ring과 secret mount/rotation 경계를 정의한다.
 
 ### Step 3 - Network and Observability Infrastructure
 
-- [ ] 외부 노출 endpoint, 내부 network, PostgreSQL 접근과 email egress 경계를 정의한다.
-- [ ] shallow/deep health, Prometheus scrape, Grafana dashboard와 alert routing을 배치에 연결한다.
-- [ ] 구조화 로그의 중앙 수집 방식과 개인정보 금지 필드를 정의한다.
-- [ ] 백업, 복원, dependency failure test와 운영 증적 보관 위치를 정의한다.
+- [x] 외부 노출 endpoint, 내부 network, PostgreSQL 접근과 email egress 경계를 정의한다.
+- [x] shallow/deep health, Prometheus scrape, Grafana dashboard와 alert routing을 배치에 연결한다.
+- [x] 구조화 로그의 중앙 수집 방식과 개인정보 금지 필드를 정의한다.
+- [x] 백업, 복원, dependency failure test와 운영 증적 보관 위치를 정의한다.
 
 ### Step 4 - Artifacts and Validation
 
-- [ ] `infrastructure-design.md`를 생성한다.
-- [ ] `deployment-architecture.md`를 생성하고 배포 흐름의 텍스트 대안을 포함한다.
-- [ ] 공유 인프라 변경 필요성을 판정하고 필요한 경우 `shared-infrastructure.md`를 갱신한다.
-- [ ] RESILIENCY-01~15 적용 여부와 U06-NFR/ADR traceability를 검증한다.
-- [ ] Markdown, diagram syntax와 special-character escaping을 검증한다.
-- [ ] 계획, 상태와 감사 기록을 갱신하고 표준 Infrastructure Design 승인 지점을 제시한다.
+- [x] `infrastructure-design.md`를 생성한다.
+- [x] `deployment-architecture.md`를 생성하고 배포 흐름의 텍스트 대안을 포함한다.
+- [x] 공유 인프라 변경 필요성을 판정하고 필요한 경우 `shared-infrastructure.md`를 갱신한다. 기존 공유 자원 경계를 재사용하므로 갱신이 필요하지 않다.
+- [x] RESILIENCY-01~15 적용 여부와 U06-NFR/ADR traceability를 검증한다.
+- [x] Markdown, diagram syntax와 special-character escaping을 검증한다. Mermaid/ASCII diagram은 사용하지 않았다.
+- [x] 계획, 상태와 감사 기록을 갱신하고 표준 Infrastructure Design 승인 지점을 제시한다.
 
 ## Infrastructure Design Questions
 
@@ -59,7 +59,7 @@ C) 온프레미스 다중 서버 container cluster와 별도 PostgreSQL 서버�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 U06 compute process를 어떻게 분리합니까?
@@ -72,7 +72,7 @@ C) in-app worker, email worker와 maintenance worker를 각각 독립 상시 ser
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 초기 compute sizing과 재시작 정책을 어떻게 적용합니까?
@@ -85,7 +85,7 @@ C) 초기부터 queue age와 CPU 기반 다중 worker 자동 확장을 구성한
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 U06 PostgreSQL 저장소와 접근 격리를 어떻게 구성합니까?
@@ -98,7 +98,7 @@ C) U06 전용 PostgreSQL instance를 별도로 배포한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 U06 데이터 lifecycle과 복구 인프라는 어떻게 구성합니까?
@@ -111,7 +111,7 @@ C) U06 전용 실시간 replica와 별도 장기 보관 저장소를 추가한�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 비동기 notification messaging 인프라는 무엇을 사용합니까?
@@ -124,7 +124,7 @@ C) 초기부터 Kafka 또는 cloud-managed message broker를 추가한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 외부·내부 network topology를 어떻게 구성합니까?
@@ -137,7 +137,7 @@ C) 별도 API Gateway, service mesh와 private subnet 계층을 추가한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 U06 secret과 audit HMAC key ring을 어떻게 제공합니까?
@@ -150,7 +150,7 @@ C) cloud-managed secret manager와 자동 rotation을 도입한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 U06 metrics, health와 dashboard를 어디에 연결합니까?
@@ -163,7 +163,7 @@ C) 새로운 외부 SaaS observability platform으로 전환한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 구조화 로그를 어떻게 중앙 수집합니까?
@@ -176,7 +176,7 @@ C) 즉시 별도 Loki/ELK service를 Compose에 추가한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 11
 U06와 기존 단위 사이의 공유 인프라 원칙은 무엇입니까?
@@ -189,7 +189,7 @@ C) U06의 database, monitoring, network와 backup을 모두 전용 instance로 �
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 12
 프로토타입 인프라의 availability·deployment 예외를 어떻게 유지합니까?
@@ -202,7 +202,7 @@ C) availability, recovery와 deployment gate를 별도로 두지 않는다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 
@@ -217,7 +217,7 @@ X) Other (please describe after the `[Answer]:` tag)
 - Questions 1~3 and 12 decide the approved prototype topology, capacity limits and RESILIENCY-08~09 exception/evolution gates.
 - Questions 5, 9 and 10 decide RESILIENCY-05~07 and RESILIENCY-11~14 infrastructure evidence.
 - Questions 6~7 decide RESILIENCY-06 and RESILIENCY-10 dependency isolation and failure containment.
-- Final compliance remains blocked until all answers are validated and both infrastructure artifacts are generated.
+- All answers and both artifacts are validated; no blocking enabled-extension finding remains.
 
 ### Property-Based Testing
 
