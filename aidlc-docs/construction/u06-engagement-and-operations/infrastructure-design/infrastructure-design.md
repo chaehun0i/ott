@@ -29,10 +29,12 @@ The prototype target remains 99.0% monthly availability, RTO four hours and RPO 
 | Service/profile | Placement and command responsibility | Initial resource contract | Failure behavior |
 |---|---|---|---|
 | `api` | Existing backend image and FastAPI process; exposes U06 HTTP routes through Caddy only | Existing 1 GiB memory ceiling; U06 database pool maximum 4 with zero overflow | Bounded dependency response; no notification delivery work in request process |
-| `u06-worker` | Same immutable backend image; runs U06 notification scheduler and delivery adapters | 1 GiB memory ceiling; database pool 2; in-app concurrency 2; email concurrency 2 | `unless-stopped`; lane failure cannot consume another lane's slots |
-| `u06-maintenance` | Same image under `maintenance` profile; retention, audit verification and recovery checks | 512 MiB memory ceiling; database pool 1; concurrency 1 | Bounded batch/checkpoint and non-zero exit on incomplete verification |
+| `u06-worker` | Same immutable backend image; runs U06 notification scheduler and delivery adapters | 1.0 CPU and 1 GiB memory ceiling; database pool 2; in-app concurrency 2; email concurrency 2 | `unless-stopped` restarts only after process exit; unhealthy-with-running-process alerts require operator recreation |
+| `u06-maintenance` | Same image under `maintenance` profile; retention, audit verification and recovery checks | 0.5 CPU and 512 MiB memory ceiling; database pool 1; concurrency 1 | Bounded batch/checkpoint and non-zero exit on incomplete verification |
 
-CPU limits must be explicit in remote Compose after measurement on the approved 4-vCPU/8-GiB host. Code Generation starts with conservative CPU shares and verifies that total service reservations fit the host before enabling U06. There is no automatic scaling in the prototype.
+The API limit is fixed at 1.0 CPU and its existing 1 GiB memory ceiling. Together with the 1.0 CPU worker and 0.5 CPU maintenance limit, these are blocking Code Generation inputs: Compose must render these exact limits and a capacity check must prove the concurrently active API, worker and shared services fit the approved 4-vCPU/8-GiB host. Maintenance is not enabled by default and must not overlap a capacity test unless that overlap is explicitly verified. Changing any CPU value requires Infrastructure Design re-approval. There is no automatic scaling in the prototype.
+
+`restart: unless-stopped` is retained only for process exit, host restart and daemon restart. Docker Compose does not restart a running container merely because its health status is `unhealthy`; no health restart controller is selected. An unhealthy alert pages the operator, who follows the runbook to capture diagnostics, stop claims or routing, and recreate the affected service. Documentation and tests must not describe this as health-based automatic restart.
 
 ## PostgreSQL Infrastructure
 
@@ -87,21 +89,36 @@ The following Git-ignored files are mounted read-only under `/run/secrets`: U06 
 
 The audit key ring contains one current signing key and bounded previous verification keys identified by key ID. Rotation changes only the current signing pointer; historical records remain verifiable during the overlap. No key, notification body, direct identity, provider payload or free-form reason may enter metrics, logs, traces or build artifacts.
 
+Because PostgreSQL backups exclude key material, the audit HMAC key ring has an independent encrypted backup. The backup runner creates a versioned encrypted archive containing the current and required historical verification keys plus a signed manifest of key ID, algorithm, creation/activation/retirement time and archive checksum. It is written to an off-host backup location under a credential separated from PostgreSQL, runtime and email credentials. Key archives are retained for at least 400 days, covering the 365-day audit retention plus the 30-day database-backup window and restore overlap. Deletion is blocked while any retained database backup or audit record references the key ID.
+
+Restore must obtain the database backup and the corresponding key archive independently, verify archive encryption/checksum and manifest signature, mount it read-only, enumerate every retained audit `key_id`, prove exactly one matching verification key for each ID and verify sampled plus boundary audit HMACs before trusted audit or privileged operation readiness becomes true. A missing, duplicate or mismatched key ID fails closed and raises a critical recovery incident.
+
 ## Observability Infrastructure
 
 - API and worker emit bounded metrics and OpenTelemetry events to the existing collector.
 - Prometheus gains U06 scrape targets and alert rules for latency/outcome, queue depth/oldest age, email circuit/terminal rate, pool wait, audit HMAC mismatch, health contributions, incident lifecycle, retention backlog and storage capacity.
-- Grafana gains one provisioned U06 dashboard. Loki remains the existing searchable log backend where collector routing is enabled.
-- Per the selected prototype decision, JSON stdout with Docker logging-driver rotation is the host-level source of record. Remote Code Generation must configure bounded rotation. Promotion beyond one host requires durable collector-to-Loki routing and retention evidence before release.
-- Shallow health reports process state. Deep health uses bounded PostgreSQL, port and email checks and the approved immutable truth table. Email may be degraded; missing required database or audit-integrity evidence makes readiness false.
+- Grafana gains one provisioned U06 dashboard. Loki is an optional derived central-search replica populated from the stdout collection path; it is not the recovery source of record and loss or lag of the replica never changes the original log retention claim.
+- JSON stdout retained by the Docker `json-file` logging driver with bounded `max-size` and `max-file` rotation is the prototype original log. Rotation settings, host access control and capacity alarms are blocking release evidence. Loki may index a filtered privacy-safe copy for search; duplicate delivery, indexing failure and Loki retention are monitored separately from original-log durability.
+- `/health/live` reports process/event-loop state only and performs no downstream I/O. `/health/ready` evaluates required local configuration, PostgreSQL, audit-key availability and admission ability within a bounded budget; optional email failure is degraded rather than unready. `/health/deep` executes the bounded U02~U05/U07 and email dependency truth table for diagnostic/synthetic monitoring and is never used as a restart trigger.
+
+### Health Endpoint Consumers
+
+| Consumer | Endpoint | Purpose and behavior |
+|---|---|---|
+| API Compose healthcheck | Internal API `/health/live` | Marks process health; `unhealthy` alerts but does not cause automatic restart |
+| Worker Compose healthcheck | Internal worker health server `/health/live` | Proves scheduler loop heartbeat; `unhealthy` alerts and requires operator action |
+| Caddy active upstream check | API `/health/ready` | Removes an unready API from routing; public clients do not receive deep evidence |
+| Prometheus metrics job | API/worker `/metrics` | Scrapes bounded operational metrics; this is not a health endpoint |
+| Prometheus synthetic probe job | API and worker `/health/deep` over `observability_net` | Records dependency state/latency and alerts; response fields and labels are allowlisted |
+| Operator/runbook | `/health/live`, `/health/ready`, then `/health/deep` | Diagnoses process, traffic eligibility and dependency closure in that order |
 
 Metric labels use only bounded operation, lane/channel, status, outcome, reason code and policy/key version. Direct identifiers, notification text, trace content, incident narrative and provider bodies are prohibited.
 
 ## Backup and Recovery
 
-The existing encrypted daily PostgreSQL backup includes the `u06_engagement` schema and key metadata but never secret values. Retention is 30 days. A restore uses an isolated PostgreSQL target and validates schema head, deduplication, lease/fencing, override closure, audit sequence/HMAC, one-open-incident and legal-hold/checkpoint invariants.
+The existing encrypted daily PostgreSQL backup includes the `u06_engagement` schema and non-secret key IDs but never HMAC key material. Retention is 30 days. The separately encrypted key-ring archive follows the 400-day policy above. A restore uses an isolated PostgreSQL target and independently restores the matching key archive before validating schema head, deduplication, lease/fencing, override closure, audit sequence/HMAC, one-open-incident and legal-hold/checkpoint invariants.
 
-Re-entry order is read-only health, in-app lane, email lane after provider/circuit preflight, then maintenance. Monthly dependency-failure tests cover email, U02 through U05 ports, stale health and alert storms. A quarterly actual restore drill records checksum, duration, invariant results and RTO/RPO evidence.
+Re-entry order is read-only health, audit-key ID/HMAC closure, in-app lane, email lane after provider/circuit preflight, then maintenance. Monthly dependency-failure tests cover email, U02 through U05 ports, stale health and alert storms. Every quarterly actual restore drill selects a database backup, locates the matching independently stored key archive, verifies archive/manifest integrity, proves all retained database key IDs resolve, verifies audit HMAC samples across key-rotation boundaries, exercises a missing-key failure, then records checksum, duration, invariant results and RTO/RPO evidence. A database-only restore does not pass the drill.
 
 ## Delivery and Rollback
 
@@ -123,8 +140,9 @@ Production claims require multi-zone compute and PostgreSQL, load balancing, rep
 | Worker | Deduplication, claim/lease/fencing, lane isolation, cancellation, retry/circuit and crash recovery |
 | PBT | P-U06-01~12 with reusable strategies, shrinking and replayable seed evidence |
 | Privacy/security | Secret scan, egress checks, role/non-enumeration tests and prohibited-field telemetry scan |
-| Observability | Scrape/alert/dashboard provisioning, bounded labels, deep-health truth table and audit-integrity alert |
-| Recovery | Encrypted backup, isolated restore, ordered re-entry and quarterly drill evidence |
+| Observability | Separate live/ready/deep consumers, scrape/probe/alert/dashboard provisioning, original-versus-Loki-copy evidence, bounded labels and audit-integrity alert |
+| Recovery | Database and independent key-ring encrypted backups, key-ID closure, isolated restore, ordered re-entry and quarterly drill evidence |
+| CPU limit | Remote Compose renders API 1.0, worker 1.0 and maintenance 0.5 CPU; host capacity evidence passes before Code Generation implementation begins |
 | Release | Immutable digest, migration compatibility, manual workflow evidence and previous-image rollback |
 
 ## Extension Compliance

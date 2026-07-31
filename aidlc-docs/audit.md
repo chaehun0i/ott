@@ -1708,3 +1708,19 @@
 **Context**: CONSTRUCTION - standardized Infrastructure Design review gate; waiting for explicit approval
 
 ---
+
+## U06 Infrastructure Design Review Changes
+**Timestamp**: 2026-07-31T06:50:04Z
+**User Input**: "U06 Infrastructure Design은 다음 세 가지 차단 사항을 수정한 뒤 재검토가 필요합니다.\n\n1. `restart: unless-stopped`는 unhealthy 상태에 대한 health-based restart를 수행하지 않으므로, 자동 재시작 요구를 제거하고 운영자 대응으로 바꾸거나 실제 health restart controller를 명시해줘.\n2. PostgreSQL 백업에서 제외되는 audit HMAC key ring의 별도 암호화 백업·보존·복원·key ID 대응 검증과 분기별 restore drill 절차를 추가해줘.\n3. liveness, readiness, deep health endpoint를 분리하고 Compose healthcheck, Caddy routing, Prometheus scrape가 각각 어떤 endpoint를 사용하는지 명시해줘.\n\n추가로 JSON stdout·Docker rotation과 Loki의 관계를 원본 로그와 선택적 중앙 검색 복제로 구분하고, Code Generation 전에 실제 CPU limit을 확정하는 blocking gate를 유지해줘."
+**AI Response**: "Remediated all three blocking findings and the two additional review requirements. Defined operator-led unhealthy recovery without a health restart controller; added independent encrypted HMAC key-ring backup with 400-day retention, signed key-ID manifest, restore closure and quarterly drill; separated live/ready/deep endpoints and their Compose/Caddy/Prometheus consumers; distinguished rotated Docker JSON originals from optional Loki search replicas; and fixed API/worker/maintenance CPU limits at 1.0/1.0/0.5 as a blocking Code Generation admission gate. Infrastructure Design remains at re-approval review."
+**Context**: CONSTRUCTION - U06 Infrastructure Design remediation completed; awaiting explicit re-approval
+
+---
+
+## U06 Infrastructure Design Remediation Approval Prompt
+**Timestamp**: 2026-07-31T06:50:04Z
+**User Input**: ""
+**AI Response**: "Infrastructure Design remediation complete - U06 Engagement and Operations. Review required. Options: Request Changes or Continue to Next Stage (U06 Code Generation)."
+**Context**: CONSTRUCTION - standardized Infrastructure Design re-review gate; Code Generation blocked pending approval
+
+---

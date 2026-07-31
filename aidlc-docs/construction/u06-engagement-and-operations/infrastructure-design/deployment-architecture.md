@@ -5,7 +5,7 @@
 | Source | Destination | Contract |
 |---|---|---|
 | User/operator | Caddy | HTTPS only; authenticated public/admin routes |
-| Caddy | FastAPI API | U06 notification, admin, trace, audit, incident and health endpoints |
+| Caddy | FastAPI API | U06 routes; active upstream check uses `/health/ready`, never `/health/deep` |
 | API U06 module | U02/U03/U04/U05 ports | Versioned, bounded and detached values; no cross-schema write |
 | API | PostgreSQL `u06_engagement` | Private network through `u06_api_runtime` |
 | `u06-worker` | PostgreSQL `u06_engagement` | Outbox claim/lease/fencing through `u06_worker_runtime` |
@@ -13,7 +13,7 @@
 | `u06-maintenance` | PostgreSQL and recovery evidence | Explicit profile with `u06_maintenance_runtime` |
 | API/worker/maintenance | OTel collector | Bounded privacy-safe telemetry |
 | Prometheus/Grafana/Loki | U06 telemetry | Shared internal monitoring, dashboard, alert and log query |
-| Backup/restore verifier | PostgreSQL | Encrypted backup and isolated restore validation |
+| Backup/restore verifier | PostgreSQL and independent key archive | Encrypted database restore plus audit key-ID/HMAC closure |
 
 Text alternative: Internet traffic terminates at Caddy and reaches only the API. The API records bounded U06 intents and reads other units through in-process ports. The worker claims committed PostgreSQL outbox jobs, delivers through isolated in-app/email lanes and closes attempts with fencing tokens. Maintenance performs retention, integrity and recovery work only when explicitly invoked. All runtime processes send privacy-safe telemetry to the shared observability stack.
 
@@ -31,25 +31,29 @@ Text alternative: Internet traffic terminates at Caddy and reaches only the API.
 
 | Service/profile | Networks | Secret access | Persistent storage | Public port |
 |---|---|---|---|---|
-| `api` | `public_net`, `private_net`, `observability_net` | `database_u06_api`, existing API/identity secrets | Existing bounded application volumes only | None; Caddy only |
-| `u06-worker` | `private_net`, `observability_net`, `email_egress_net` | `database_u06_worker`, `email_provider`, `u06_audit_keyring` | None | None |
-| `u06-maintenance` | `private_net`, `observability_net` | `database_u06_maintenance`, `u06_audit_keyring` | Isolated temporary evidence only | None |
+| `api` | `public_net`, `private_net`, `observability_net` | `database_u06_api`, existing API/identity secrets | Existing bounded application volumes only | None; Caddy only; 1.0 CPU |
+| `u06-worker` | `private_net`, `observability_net`, `email_egress_net` | `database_u06_worker`, `email_provider`, `u06_audit_keyring` | None | None; 1.0 CPU |
+| `u06-maintenance` | `private_net`, `observability_net` | `database_u06_maintenance`, `u06_audit_keyring` | Isolated temporary evidence only | None; 0.5 CPU |
 | `postgres` | `private_net` | Existing bootstrap secret | `postgres_data` | None remotely |
 | OTel/Prometheus/Loki/Grafana | `observability_net` | Existing purpose-specific secrets | Existing telemetry volumes | Protected Caddy route only where configured |
 | Backup/restore | `private_net` | Existing backup/restore credential, never channel credential | Isolated restore volume | None |
 
 Code Generation must add secret references and ignored example files only; it must never commit values. The new `email_egress_net` name may reuse an existing provider-egress mechanism if the resulting host policy remains destination-restricted and independently testable.
 
+Compose healthchecks use `/health/live` for the API and the worker's internal health server. They only mark health and emit alerts: `restart: unless-stopped` does not restart a still-running unhealthy container. The operator runbook owns diagnostic capture and service recreation. Caddy uses `/health/ready` for routing eligibility. Prometheus scrapes `/metrics` and separately probes `/health/deep`; it does not use deep health for restart or Caddy routing.
+
+Docker rotated JSON stdout is the original prototype log. A privacy-filtered Loki stream is an optional searchable replica with independent lag, failure and retention signals; it is not substituted for the original during recovery or audit evidence collection.
+
 ## Deployment Sequence
 
 1. Run format, lint, type, unit, contract, PBT, privacy/security and real PostgreSQL integration gates with selected integration skip count zero.
 2. Validate clean-install and upgrade migrations, U06 roles, constraints, query plans and previous API/consumer contracts.
 3. Build one backend image and record its immutable digest plus configuration and policy versions.
-4. Create and validate a pre-deploy encrypted backup.
+4. Create and validate a pre-deploy encrypted PostgreSQL backup and a separately encrypted audit-key archive with signed key-ID manifest.
 5. Apply expand-compatible U06 schema and grants as `u06_migration_owner`.
-6. Validate secret-file permissions, network destinations, connection budgets, worker lane limits and telemetry prohibited fields.
+6. Validate secret-file permissions, network destinations, connection budgets, worker lane limits, API/worker/maintenance CPU limits of 1.0/1.0/0.5 and telemetry prohibited fields.
 7. Deploy the pinned API and `u06-worker` through the approved direct/in-place Compose flow.
-8. Verify shallow/deep health, Prometheus targets, alert rules, dashboard provisioning and an in-app synthetic delivery.
+8. Verify Compose `/health/live`, Caddy `/health/ready`, Prometheus `/metrics` and `/health/deep` jobs, alert rules, dashboard provisioning and an in-app synthetic delivery.
 9. Enable email delivery only after provider timeout, credential and circuit preflight passes.
 10. Run the maintenance verification profile and record deployment/health/recovery evidence.
 
@@ -67,13 +71,14 @@ Automatic GitHub Actions triggers remain disabled. Steps 1 through 3 use control
 ## Restore and Re-entry Sequence
 
 1. Provision an isolated PostgreSQL 17 restore target.
-2. Restore the encrypted shared backup including `u06_engagement` without injecting runtime secret values.
-3. Validate migration head, grants, deduplication, lease/fencing, overrides, append-only audit/HMAC, incidents, retention checkpoints and legal holds.
-4. Run U02 through U05 and U07 contract compatibility checks against restored state.
-5. Start API read-only health and investigation paths.
-6. Resume in-app delivery and verify idempotent synthetic completion.
-7. Resume email only after destination, provider, timeout and circuit checks pass.
-8. Resume maintenance and attach restore duration/invariant evidence to the incident record.
+2. Restore the encrypted shared database backup including `u06_engagement` without injecting runtime secret values.
+3. Independently restore the matching encrypted HMAC key archive, verify its checksum/signed manifest and prove every retained database `key_id` maps to exactly one key.
+4. Validate migration head, grants, deduplication, lease/fencing, overrides, append-only audit/HMAC across rotation boundaries, incidents, retention checkpoints and legal holds.
+5. Run U02 through U05 and U07 contract compatibility checks against restored state.
+6. Start API read-only health and investigation paths only after key-ID/HMAC closure.
+7. Resume in-app delivery and verify idempotent synthetic completion.
+8. Resume email only after destination, provider, timeout and circuit checks pass.
+9. Resume maintenance and attach restore duration/invariant evidence to the incident record.
 
 ## Failure Routing
 
@@ -103,7 +108,9 @@ Evolution order is additional worker process isolation, bounded concurrency adju
 | Worker resilience | Lane bulkhead, retry/circuit, lease expiry, fencing and crash recovery |
 | PBT | P-U06-01~12 with seed replay and shrinking evidence |
 | Observability/privacy | Scrape, alerts, dashboard, log rotation/routing and prohibited-field scans |
-| Recovery | Backup checksum, isolated restore, contract closure and ordered lane re-entry |
+| Recovery | Database/key-archive checksums, signed key-ID manifest, isolated restore, rotation-boundary HMAC verification and ordered lane re-entry |
+| Health contract | Compose live, Caddy ready, Prometheus metrics/deep probe and operator-only restart response |
+| CPU admission | Rendered API/worker/maintenance limits equal 1.0/1.0/0.5 CPU before Code Generation proceeds |
 | Delivery | Immutable digest, manual gate evidence, direct rollback and prior-version compatibility |
 
 ## Extension Compliance

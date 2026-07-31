@@ -77,7 +77,7 @@ X) Other (please describe after the `[Answer]:` tag)
 ## Question 3
 초기 compute sizing과 재시작 정책을 어떻게 적용합니까?
 
-A) API/worker에 명시적 CPU·memory limit과 health-based restart를 적용하고 lane concurrency 2/2, maintenance 1을 환경 설정으로 제한하며 자동 확장은 사용하지 않는다
+A) API/worker에 명시적 CPU·memory limit을 적용하고 unhealthy는 alert 후 운영자가 재시작하며 lane concurrency 2/2, maintenance 1을 환경 설정으로 제한하고 자동 확장은 사용하지 않는다
 
 B) container 자원 한도 없이 host가 허용하는 만큼 사용하고 자동 재시작만 적용한다
 
@@ -218,6 +218,14 @@ X) Other (please describe after the `[Answer]:` tag)
 - Questions 5, 9 and 10 decide RESILIENCY-05~07 and RESILIENCY-11~14 infrastructure evidence.
 - Questions 6~7 decide RESILIENCY-06 and RESILIENCY-10 dependency isolation and failure containment.
 - All answers and both artifacts are validated; no blocking enabled-extension finding remains.
+
+## Review Remediation
+
+- [x] `restart: unless-stopped`를 process-exit 재시작으로만 정의하고 unhealthy 상태는 alert와 운영자 runbook 대응으로 분리한다.
+- [x] audit HMAC key ring의 별도 암호화 백업, 400일 보존, key-ID manifest 검증과 분기별 동시 복원 절차를 정의한다.
+- [x] `/health/live`, `/health/ready`, `/health/deep`를 분리하고 Compose, Caddy와 Prometheus의 소비 endpoint를 매핑한다.
+- [x] Docker 회전 JSON stdout을 원본 로그로, Loki를 선택적 중앙 검색 복제로 구분한다.
+- [x] Code Generation 진입 전 CPU limit 차단 Gate를 충족하도록 API 1.0 CPU, worker 1.0 CPU, maintenance 0.5 CPU를 확정한다.
 
 ### Property-Based Testing
 
