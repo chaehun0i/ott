@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U06 Engagement and Operations - Functional Design planning and questions
+- **Current Stage**: U06 Engagement and Operations - Functional Design review required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -67,8 +67,8 @@
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
-| U06 Engagement and Operations | Planning - awaiting answers | Pending | Pending | Pending | Pending |
+| U06 Engagement and Operations | Generated - awaiting approval | Pending | Pending | Pending | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Complete all `[Answer]:` fields in `aidlc-docs/construction/plans/u06-engagement-and-operations-functional-design-plan.md`, then confirm completion so the answers can be validated before U06 design generation.
+Review U06 Functional Design artifacts. Choose Request Changes or Continue to Next Stage; U06 NFR Requirements cannot begin before explicit approval.

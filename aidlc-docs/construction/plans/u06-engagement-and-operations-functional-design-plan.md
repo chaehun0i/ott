@@ -29,36 +29,36 @@
 
 - [x] 알림, 운영 Override, 감사, 추적 조회, 경보와 Incident 흐름에 영향을 주는 미결 비즈니스 결정을 식별한다.
 - [x] 상호 배타적 선택지와 마지막 `X) Other` 선택지를 포함한 Question 1~12를 작성한다.
-- [ ] 모든 `[Answer]:` 값을 수집하고 제공된 선택지와 일치하는지 검증한다.
-- [ ] 답변 간 모순과 모호성을 분석하고 필요한 경우 별도 clarification 파일을 작성한다.
+- [x] 모든 `[Answer]:` 값을 수집하고 제공된 선택지와 일치하는지 검증한다. Question 1~12는 모두 유효한 `A`다.
+- [x] 답변 간 모순과 모호성을 분석하고 필요한 경우 별도 clarification 파일을 작성한다. 모든 답변이 일관되어 추가 질문이 필요하지 않다.
 
 ### Step 3 - Business Logic Model
 
-- [ ] 승인 이벤트부터 대상 선정, 중복 제거, 예약, 전달, 재시도, 취소까지 알림 흐름을 설계한다.
-- [ ] 권한 검증, 충돌 확인, Override 적용, U03 반영, 감사 기록과 종료까지 운영 변경 흐름을 설계한다.
-- [ ] U05 비식별 Trace 조회와 U07 Health·Metrics·Alert를 Incident로 연결하는 흐름을 설계한다.
-- [ ] Primary Story와 Supporting Contract traceability를 포함한 `business-logic-model.md`를 생성한다.
+- [x] 승인 이벤트부터 대상 선정, 중복 제거, 예약, 전달, 재시도, 취소까지 알림 흐름을 설계한다.
+- [x] 권한 검증, 충돌 확인, Override 적용, U03 반영, 감사 기록과 종료까지 운영 변경 흐름을 설계한다.
+- [x] U05 비식별 Trace 조회와 U07 Health·Metrics·Alert를 Incident로 연결하는 흐름을 설계한다.
+- [x] Primary Story와 Supporting Contract traceability를 포함한 `business-logic-model.md`를 생성한다.
 
 ### Step 4 - Domain Entities
 
-- [ ] Notification Preference, Interest Subscription, Notification Event, Job, Delivery Attempt와 상태 전이를 정의한다.
-- [ ] Admin Override, Audit Event, Trace Query, Health Snapshot, Alert Signal, Incident와 관계를 정의한다.
-- [ ] 식별자, 불변 버전, 소유권, 보존 경계와 외부 참조를 정의한다.
-- [ ] `domain-entities.md`를 생성한다.
+- [x] Notification Preference, Interest Subscription, Notification Event, Job, Delivery Attempt와 상태 전이를 정의한다.
+- [x] Admin Override, Audit Event, Trace Query, Health Snapshot, Alert Signal, Incident와 관계를 정의한다.
+- [x] 식별자, 불변 버전, 소유권, 보존 경계와 외부 참조를 정의한다.
+- [x] `domain-entities.md`를 생성한다.
 
 ### Step 5 - Business Rules and Testable Properties
 
-- [ ] 알림 적격성, 중복 방지, 취소, 빈도 제한, 재시도 및 실패 격리 규칙을 정의한다.
-- [ ] 역할 분리, Override 우선순위·만료·충돌, 감사 불변성과 Trace 최소화 규칙을 정의한다.
-- [ ] Health 집계, 경보 상관관계, Incident 상태 전이·에스컬레이션·종료 규칙을 정의한다.
-- [ ] PBT-01에 따라 round-trip, invariant, idempotence, commutativity, oracle, stateful, easy-verification 속성을 분류하고 `business-rules.md`를 생성한다.
+- [x] 알림 적격성, 중복 방지, 취소, 빈도 제한, 재시도 및 실패 격리 규칙을 정의한다.
+- [x] 역할 분리, Override 우선순위·만료·충돌, 감사 불변성과 Trace 최소화 규칙을 정의한다.
+- [x] Health 집계, 경보 상관관계, Incident 상태 전이·에스컬레이션·종료 규칙을 정의한다.
+- [x] PBT-01에 따라 round-trip, invariant, idempotence, commutativity, oracle, stateful, easy-verification 속성을 분류하고 `business-rules.md`를 생성한다.
 
 ### Step 6 - Validation and Completion
 
-- [ ] Story/FR/DR/NFR traceability와 U02~U05/U07 Contract 정합성을 검증한다.
-- [ ] RESILIENCY-01~15와 PBT-01의 적용 여부 및 준수 근거를 검증한다.
-- [ ] Markdown 문법, 특수문자, 표와 코드 표기 호환성을 검증한다.
-- [ ] 계획·상태·감사 기록을 갱신하고 표준 Functional Design 승인 지점을 제시한다.
+- [x] Story/FR/DR/NFR traceability와 U02~U05/U07 Contract 정합성을 검증한다.
+- [x] RESILIENCY-01~15와 PBT-01의 적용 여부 및 준수 근거를 검증한다.
+- [x] Markdown 문법, 특수문자, 표와 코드 표기 호환성을 검증한다.
+- [x] 계획·상태·감사 기록을 갱신하고 표준 Functional Design 승인 지점을 제시한다.
 
 ## Functional Design Questions
 
@@ -75,7 +75,7 @@ C) 공급자 원본 이벤트를 즉시 알림으로 보내고 이후 검증 결
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 프로토타입에서 지원할 사용자 알림 채널 범위는 무엇입니까?
@@ -88,7 +88,7 @@ C) 인앱 알림만 지원하며 외부 채널은 상용 전환 때 추가한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 동일 작품·이벤트가 반복 수신될 때 중복 알림과 예약 알림을 어떻게 처리해야 합니까?
@@ -101,7 +101,7 @@ C) 하루 단위로 모든 알림을 하나의 요약 알림으로만 합친다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 알림 전달 실패의 재시도와 사용자 영향은 어떻게 격리해야 합니까?
@@ -114,7 +114,7 @@ C) 첫 전달 실패 즉시 Job을 삭제하고 별도 실패 기록을 남기�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 운영자가 변경할 수 있는 콘텐츠 범위와 적용 방식은 무엇입니까?
@@ -127,7 +127,7 @@ C) 운영자는 노출 상태만 변경할 수 있고 콘텐츠 필드 보정은
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 자동 수집 값과 운영자 Override가 충돌할 때 우선순위와 수명은 어떻게 관리해야 합니까?
@@ -140,7 +140,7 @@ C) 최신 변경 시각만 비교해 자동 값과 운영자 값 중 더 최근 
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 운영 변경의 역할 분리와 승인 수준은 어떻게 해야 합니까?
@@ -153,7 +153,7 @@ C) 모든 변경에 두 명의 운영자 승인을 필수로 한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 감사 기록은 어떤 내용을 보존하고 어떤 내용을 제외해야 합니까?
@@ -166,7 +166,7 @@ C) 변경자와 시각만 기록하고 전후 값과 결과는 보존하지 않�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 US-023 추천 Trace 조회에서 운영자에게 공개할 범위는 무엇입니까?
@@ -179,7 +179,7 @@ C) 최종 콘텐츠 ID와 성공·실패 여부만 공개한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 여러 Unit의 상태를 U06 운영 상태로 어떻게 집계해야 합니까?
@@ -192,7 +192,7 @@ C) 프로세스 실행 여부만 확인하고 하위 의존성 상태는 표시�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 11
 경보를 Incident로 승격하고 중복을 억제하는 정책은 무엇입니까?
@@ -205,7 +205,7 @@ C) Incident는 운영자가 수동으로만 생성하며 경보와 연결하지 
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 12
 Incident의 표준 수명주기와 사후 조치는 무엇입니까?
@@ -218,7 +218,7 @@ C) 경보가 정상화되면 검토 없이 Incident를 자동 삭제한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 
