@@ -10,6 +10,12 @@ services:
       API_SECRET_FILE: /run/secrets/api_secret
       SESSION_COOKIE_SECURE: "true"
       GOOGLE_REDIRECT_URI: https://${APP_DOMAIN:?set public domain}/api/v1/identity/oauth/google/callback
+  u06-worker:
+    image: ${API_IMAGE:?set immutable API image digest}
+    build: null
+  u06-maintenance:
+    image: ${API_IMAGE:?set immutable API image digest}
+    build: null
   worker:
     image: ${API_IMAGE:?set immutable API image digest}
     build: null

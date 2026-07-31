@@ -48,11 +48,11 @@ Application code remains in the workspace root, never under `aidlc-docs/`.
 
 ### Step 1 - Minimal Compose Contract and Blocking CPU Admission
 
-- [ ] Domain code보다 먼저 최소 Compose 계약을 추가한다. 기존 `api`에 1.0 CPU를 명시하고, `u06-worker`와 `u06-maintenance` service/profile skeleton에 CPU 1.0/0.5, memory 1 GiB/512 MiB, command placeholder, `private_net`/`observability_net`/`email_egress_net`, database/email/audit-key secret reference, pool 4/2/1과 lane 2/2/1 환경변수를 반영한다. Placeholder command는 명확한 비성공 종료로 실제 runtime 구현 전 accidental start를 막는다. `docker compose config`와 remote overlay render에서 service/profile/reference/value 및 4-vCPU/8-GiB host 적합성을 검증한다. 실패, 누락 또는 값 변경 시 Step 2로 진행하지 않는다.
+- [x] Domain code보다 먼저 최소 Compose 계약을 추가한다. 기존 `api`에 1.0 CPU를 명시하고, `u06-worker`와 `u06-maintenance` service/profile skeleton에 CPU 1.0/0.5, memory 1 GiB/512 MiB, command placeholder, `private_net`/`observability_net`/`email_egress_net`, database/email/audit-key secret reference, pool 4/2/1과 lane 2/2/1 환경변수를 반영한다. Base/maintenance/remote overlay render에서 CPU 1.0/1.0/0.5, memory, profiles, references와 fail-closed exit 78 placeholder를 검증했다. 동시 U06 CPU ceiling은 2.5로 4-vCPU host에 1.5 CPU를 공유 infrastructure headroom으로 남긴다.
 
 ### Step 2 - Baseline, Package Skeleton, Configuration and Ports
 
-- [ ] Step 1 Compose render evidence를 다시 확인한 뒤 현재 전체 test/format/lint/type baseline을 실행하고 결과를 기록한다. Baseline이 통과하면 `backend/src/ott_feed/engagement/` package, typed config, versioned U02/U03/U04/U05/U07 ports, bounded result/error types와 public exports를 생성하고 unit tests를 추가한다. Domain business logic은 이 Step에 포함하지 않는다.
+- [x] Step 1 Compose render evidence를 다시 확인하고 실제 PostgreSQL 17.10 격리 DB에 migration 0001~0005를 적용했다. Baseline은 Ruff, strict MyPy 188 files와 전체 pytest 288 passed/skip 0을 통과했다. `backend/src/ott_feed/engagement/` package, typed config, versioned U02/U03/U04/U05/U07 ports, bounded interfaces/public exports와 3개 unit tests를 생성했으며 재검증은 Ruff, strict MyPy 195 files, 3 tests passed다. Domain business logic은 추가하지 않았다.
 
 ### Step 3 - Notification Domain
 

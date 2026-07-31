@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U06 Engagement and Operations - revised Code Generation Part 1 plan review required
+- **Current Stage**: U06 Engagement and Operations - Code Generation Part 2 Step 2 complete
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -67,8 +67,8 @@
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
-| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Part 1 revised - awaiting approval |
+| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Part 2 in progress - Step 2/20 complete |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Re-review and explicitly approve the revised 20-Step U06 Code Generation plan. Step 1 now creates and validates the minimum Compose/CPU contract before baseline/package work and domain implementation; Part 2 remains blocked pending approval.
+Execute U06 Code Generation Step 3: implement notification event/job/attempt/channel/lease/fencing/cancellation domain models and US-019 examples.

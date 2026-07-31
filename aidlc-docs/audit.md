@@ -1756,3 +1756,19 @@
 **Context**: CONSTRUCTION - revised U06 Code Generation planning gate
 
 ---
+
+## U06 Code Generation Part 2 Approval and Step 1 Completion
+**Timestamp**: 2026-07-31T07:08:00Z
+**User Input**: "이제 모든 스텝 작업 바랍ㄴ다."
+**AI Response**: "Recorded approval of the complete revised twenty-step plan and started Part 2. Completed Step 1 by adding the minimum base and remote-overlay Compose contract: API/u06-worker/u06-maintenance CPU 1.0/1.0/0.5, memory, fail-closed command placeholders, profile, networks, secret references and pool/lane environment values. Validated Compose rendering and retained 1.5 CPU of the four-vCPU host for shared infrastructure."
+**Context**: CONSTRUCTION - U06 Code Generation Part 2; Step 1 of 20 completed
+
+---
+
+## U06 Code Generation Step 2 Completion
+**Timestamp**: 2026-07-31T07:18:00Z
+**User Input**: ""
+**AI Response**: "Recovered Docker Desktop, started the existing PostgreSQL 17.10 test container, provisioned an isolated database and installed required extensions, then applied migrations 0001 through 0005. Baseline passed Ruff, strict MyPy over 188 source files and the full 288-test suite with zero skips. Created only the U06 package/config/versioned ports and boundary tests; focused verification passed Ruff, strict MyPy over 195 files and three unit tests."
+**Context**: CONSTRUCTION - U06 Code Generation Part 2; Step 2 of 20 completed
+
+---

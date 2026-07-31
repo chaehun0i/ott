@@ -40,12 +40,15 @@ services:
       U05_DRAFT_TIMEOUT_MS: ${U05_DRAFT_TIMEOUT_MS:-4250}
       U05_AI_CONCURRENCY: ${U05_AI_CONCURRENCY:-4}
       U05_DAILY_AI_UNITS: ${U05_DAILY_AI_UNITS:-100000}
-    secrets: [api_secret, database_u04_api, database_u05_api, ai_provider, identity_kek, identity_blind_index_key, identity_session_pepper, google_client_secret, search_cursor_key, search_cursor_previous_key]
+      U06_DATABASE_URL_FILE: /run/secrets/database_u06_api
+      U06_DB_POOL_SIZE: ${U06_API_DB_POOL_SIZE:-4}
+    secrets: [api_secret, database_u04_api, database_u05_api, database_u06_api, ai_provider, identity_kek, identity_blind_index_key, identity_session_pepper, google_client_secret, search_cursor_key, search_cursor_previous_key]
     volumes: [identity_exports:/var/lib/ott-feed/exports]
     networks: [public_net, private_net, observability_net, ai_egress_net]
     depends_on:
       postgres: {condition: service_healthy}
     mem_limit: 1g
+    cpus: 1.0
   worker:
     build: {context: ./backend}
     command: ["python", "-m", "ott_feed.worker"]
@@ -117,6 +120,41 @@ services:
     depends_on:
       postgres: {condition: service_healthy}
     mem_limit: 512m
+  u06-worker:
+    build: {context: ./backend}
+    command: ["python", "-c", "import sys; print('u06-worker runtime not generated'); sys.exit(78)"]
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      U06_DATABASE_URL_FILE: /run/secrets/database_u06_worker
+      U06_EMAIL_CREDENTIAL_FILE: /run/secrets/u06_email_provider
+      U06_AUDIT_KEYRING_FILE: /run/secrets/u06_audit_keyring
+      U06_DB_POOL_SIZE: ${U06_WORKER_DB_POOL_SIZE:-2}
+      U06_IN_APP_CONCURRENCY: ${U06_IN_APP_CONCURRENCY:-2}
+      U06_EMAIL_CONCURRENCY: ${U06_EMAIL_CONCURRENCY:-2}
+    secrets: [database_u06_worker, u06_email_provider, u06_audit_keyring]
+    networks: [private_net, observability_net, email_egress_net]
+    depends_on:
+      postgres: {condition: service_healthy}
+    restart: "no"
+    mem_limit: 1g
+    cpus: 1.0
+  u06-maintenance:
+    build: {context: ./backend}
+    command: ["python", "-c", "import sys; print('u06-maintenance runtime not generated'); sys.exit(78)"]
+    profiles: ["maintenance"]
+    environment:
+      APP_ENV: ${APP_ENV:-local}
+      U06_DATABASE_URL_FILE: /run/secrets/database_u06_maintenance
+      U06_AUDIT_KEYRING_FILE: /run/secrets/u06_audit_keyring
+      U06_DB_POOL_SIZE: ${U06_MAINTENANCE_DB_POOL_SIZE:-1}
+      U06_MAINTENANCE_CONCURRENCY: ${U06_MAINTENANCE_CONCURRENCY:-1}
+    secrets: [database_u06_maintenance, u06_audit_keyring]
+    networks: [private_net, observability_net]
+    depends_on:
+      postgres: {condition: service_healthy}
+    restart: "no"
+    mem_limit: 512m
+    cpus: 0.5
   postgres:
     image: ${POSTGRES_IMAGE:-pgvector/pgvector:0.8.2-pg17-bookworm@sha256:feb68f4f15446397d8cac7f4fe48fe4586de83160d1fc48b46283312d1a33966}
     environment:
@@ -152,6 +190,7 @@ networks:
   private_net: {internal: true}
   provider_egress_net: {}
   ai_egress_net: {}
+  email_egress_net: {}
   observability_net: {internal: true}
 volumes:
   postgres_data: {}
@@ -168,6 +207,11 @@ secrets:
   database_u04_worker: {file: ./secrets/database_u04_worker.txt}
   database_u05_api: {file: ./secrets/database_u05_api.txt}
   database_u05_maintenance: {file: ./secrets/database_u05_maintenance.txt}
+  database_u06_api: {file: ./secrets/database_u06_api.txt}
+  database_u06_worker: {file: ./secrets/database_u06_worker.txt}
+  database_u06_maintenance: {file: ./secrets/database_u06_maintenance.txt}
+  u06_email_provider: {file: ./secrets/u06_email_provider.json}
+  u06_audit_keyring: {file: ./secrets/u06_audit_keyring.json}
   ai_provider: {file: ./secrets/ai_provider.txt}
   u04_provider_credentials: {file: ./secrets/u04_provider_credentials.json}
   postgres_password: {file: ./secrets/postgres_password.txt}
