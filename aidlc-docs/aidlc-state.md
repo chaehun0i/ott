@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U06 Engagement and Operations - NFR Design review required
+- **Current Stage**: U06 Engagement and Operations - Infrastructure Design planning and questions
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -56,7 +56,7 @@
 - **Placeholder**: Operations
 - **Risk Level**: High
 - **Current Unit**: U06 Engagement and Operations
-- **Next Stage After Approval**: U06 Engagement and Operations - Infrastructure Design
+- **Next Stage After Approval**: U06 Engagement and Operations - Code Generation
 
 ## Unit Progress
 
@@ -67,8 +67,8 @@
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
-| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Generated - awaiting approval | Pending | Pending |
+| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Planning - awaiting answers | Pending |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Review U06 NFR Design artifacts. Choose Request Changes or Continue to Next Stage; U06 Infrastructure Design cannot begin before explicit approval.
+Complete every `[Answer]:` in `aidlc-docs/construction/plans/u06-engagement-and-operations-infrastructure-design-plan.md`. Infrastructure artifacts cannot be generated until all answers are validated.
