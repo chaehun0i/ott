@@ -17,37 +17,37 @@
 - [x] U06 NFR, ADR, Functional Rule과 U02~U05/U07 Contract를 읽는다.
 - [x] 다섯 필수 NFR Design Category의 미결 패턴을 식별한다.
 - [x] 상호 배타적 선택지와 마지막 `X) Other`를 포함한 Question 1~14를 작성한다.
-- [ ] 모든 `[Answer]:` 값을 수집하고 유효성·모순·기존 결정 충돌을 검증한다.
-- [ ] 모호성이 있으면 별도 clarification 질문을 작성하고 해결한다.
+- [x] 모든 `[Answer]:` 값을 수집하고 유효성·모순·기존 결정 충돌을 검증한다. Question 1~14는 모두 유효한 `A`다.
+- [x] 모호성이 있으면 별도 clarification 질문을 작성하고 해결한다. 모든 답변이 일관되어 추가 질문은 필요하지 않다.
 
 ### Step 2 - Resilience and Processing Patterns
 
-- [ ] Notification lane, claim/lease, retry, circuit breaker, cancellation과 recovery 패턴을 설계한다.
-- [ ] U03/U04/U05/U07 Port 실패 격리와 감사 fail-closed 패턴을 설계한다.
-- [ ] Alert correlation, Incident state machine, recovery evidence와 COE 패턴을 설계한다.
-- [ ] 월별 Failure Test와 분기별 Restore Drill Scenario를 설계한다.
+- [x] Notification lane, claim/lease, retry, circuit breaker, cancellation과 recovery 패턴을 설계한다.
+- [x] U03/U04/U05/U07 Port 실패 격리와 감사 fail-closed 패턴을 설계한다.
+- [x] Alert correlation, Incident state machine, recovery evidence와 COE 패턴을 설계한다.
+- [x] 월별 Failure Test와 분기별 Restore Drill Scenario를 설계한다.
 
 ### Step 3 - Performance, Scale and Persistence Patterns
 
-- [ ] Worker concurrency, shared connection budget, batch, pagination과 rate limit 패턴을 설계한다.
-- [ ] Deduplication, optimistic version, append-only audit와 주요 query index 패턴을 설계한다.
-- [ ] Retention lane, checkpoint와 legal-hold 패턴을 설계한다.
-- [ ] Scale Trigger 이후 Worker/Broker evolution 경계를 설계한다.
+- [x] Worker concurrency, shared connection budget, batch, pagination과 rate limit 패턴을 설계한다.
+- [x] Deduplication, optimistic version, append-only audit와 주요 query index 패턴을 설계한다.
+- [x] Retention lane, checkpoint와 legal-hold 패턴을 설계한다.
+- [x] Scale Trigger 이후 Worker/Broker evolution 경계를 설계한다.
 
 ### Step 4 - Security, Observability and Logical Components
 
-- [ ] 역할·최근 인증·Idempotency·non-enumeration enforcement pattern을 설계한다.
-- [ ] Audit digest/key rotation, trace allowlist와 telemetry privacy pattern을 설계한다.
-- [ ] Health aggregation, bounded Metrics/Events, Alert Router와 Dashboard component를 설계한다.
-- [ ] 모든 Logical Component와 Port, 상태 소유권, Transaction 경계를 정의한다.
+- [x] 역할·최근 인증·Idempotency·non-enumeration enforcement pattern을 설계한다.
+- [x] Audit digest/key rotation, trace allowlist와 telemetry privacy pattern을 설계한다.
+- [x] Health aggregation, bounded Metrics/Events, Alert Router와 Dashboard component를 설계한다.
+- [x] 모든 Logical Component와 Port, 상태 소유권, Transaction 경계를 정의한다.
 
 ### Step 5 - Artifacts and Validation
 
-- [ ] `nfr-design-patterns.md`를 생성한다.
-- [ ] `logical-components.md`를 생성한다.
-- [ ] U06-NFR-001~075, ADR-U06-001~010, RESILIENCY-01~15와 P-U06-01~12 traceability를 검증한다.
-- [ ] Markdown 문법과 표 구조를 검증한다.
-- [ ] 계획·상태·감사 기록을 갱신하고 표준 NFR Design 승인 지점을 제시한다.
+- [x] `nfr-design-patterns.md`를 생성한다.
+- [x] `logical-components.md`를 생성한다.
+- [x] U06-NFR-001~075, ADR-U06-001~010, RESILIENCY-01~15와 P-U06-01~12 traceability를 검증한다.
+- [x] Markdown 문법과 표 구조를 검증한다.
+- [x] 계획·상태·감사 기록을 갱신하고 표준 NFR Design 승인 지점을 제시한다.
 
 ## NFR Design Questions
 
@@ -64,7 +64,7 @@ C) 사용자별 전용 lane을 만들어 완전히 직렬 처리한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 PostgreSQL Outbox Job claim과 장애 복구 패턴은 무엇입니까?
@@ -77,7 +77,7 @@ C) 상태를 processing으로 바꾸고 lease 없이 Worker 재시작 시 운영
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 Email Channel circuit breaker의 초기 패턴은 무엇입니까?
@@ -90,7 +90,7 @@ C) 회로 차단 없이 개별 Timeout·Retry만 적용한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 세 번의 Email Retry 지연 패턴은 무엇입니까?
@@ -103,7 +103,7 @@ C) Provider의 Retry-After 값만 따르고 자체 상한을 두지 않는다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 U06의 PostgreSQL connection budget은 어떻게 배분합니까?
@@ -116,7 +116,7 @@ C) 단일 연결을 API와 모든 Worker가 순차 공유한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 초기 U06 Table의 index와 partition 패턴은 무엇입니까?
@@ -129,7 +129,7 @@ C) Primary Key 외에는 index를 두지 않고 Application filtering을 사용�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 Audit alteration detection용 digest 패턴은 무엇입니까?
@@ -142,7 +142,7 @@ C) Database row 전체를 직렬화한 평문 checksum만 저장한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 고영향 운영 Command의 최근 인증과 재전송 보호 패턴은 무엇입니까?
@@ -155,7 +155,7 @@ C) System Administrator 역할 문자열을 Client가 보내면 추가 검증 �
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 Health contribution 집계와 Deep Check fan-out 패턴은 무엇입니까?
@@ -168,7 +168,7 @@ C) 최근 성공 상태를 만료 없이 cache하여 의존성 호출을 생략�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 Alert correlation과 Incident update의 concurrency 패턴은 무엇입니까?
@@ -181,7 +181,7 @@ C) 중복을 허용하고 이후 수동으로 Incident를 병합한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 11
 운영 API rate limiting과 비용 격리 패턴은 무엇입니까?
@@ -194,7 +194,7 @@ C) 운영자 API에는 rate limit을 적용하지 않는다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 12
 초기 U06 cache 패턴은 무엇입니까?
@@ -207,7 +207,7 @@ C) 모든 조회를 10분 process cache하고 별도 invalidation은 사용하�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 13
 Scale Trigger 이후 U06 확장 순서는 무엇입니까?
@@ -220,7 +220,7 @@ C) 계속 단일 Process만 수직 확장하고 구조 변경을 금지한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 14
 U06 복원력 Mechanism은 어떤 방식으로 검증합니까?
@@ -233,7 +233,7 @@ C) 기능 Test만 수행하고 Failure Injection과 Restore Drill은 생략한�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 
