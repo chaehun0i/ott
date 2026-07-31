@@ -1740,3 +1740,19 @@
 **Context**: CONSTRUCTION - U06 Code Generation planning gate; application code generation blocked pending approval
 
 ---
+
+## U06 Code Generation Plan Sequence Revision
+**Timestamp**: 2026-07-31T07:03:17Z
+**User Input**: "U06 Code Generation 계획은 실행 순서 수정이 필요합니다.\n\n현재 Step 1은 `docker compose config`에서 API/worker/maintenance CPU 1.0/1.0/0.5가 실제 렌더링되어야 Step 2로 진행할 수 있도록 차단하지만, 해당 Compose 설정 추가는 Step 18에 배치되어 있어 순서상 Step 1을 통과할 수 없습니다.\n\n초기 단계에 최소 Compose 계약을 추가해줘. API, `u06-worker`, `u06-maintenance`의 service/profile skeleton, CPU 1.0/1.0/0.5, memory, command placeholder, network·secret reference와 pool/lane 환경변수를 먼저 반영하고 `docker compose config`로 검증한 뒤 domain 구현을 시작하도록 순서를 조정해줘.\n\n기존 Step 18은 healthcheck, Caddy routing, Docker log rotation과 최종 secret/network wiring을 완료하는 통합 단계로 유지하면 됩니다.\n\n수정된 전체 실행 순서를 다시 제시하면 재검토 후 Part 2 진행 여부를 승인하겠습니다."
+**AI Response**: "Revised the complete twenty-step sequence. Step 1 now creates a minimal renderable Compose contract for API, u06-worker and u06-maintenance with fixed CPU/memory, fail-closed placeholder commands, network/secret references and pool/lane variables, then blocks on base and remote-overlay compose rendering plus host-capacity validation. Step 2 runs the baseline and creates package/config/ports without domain logic. Domain implementation begins at Step 3. Step 18 remains the final healthcheck, Caddy, log rotation and runtime/secret/network integration stage and must remove every placeholder."
+**Context**: CONSTRUCTION - U06 Code Generation Part 1 sequence revised; Part 2 remains blocked pending explicit approval
+
+---
+
+## Revised U06 Code Generation Plan Approval Prompt
+**Timestamp**: 2026-07-31T07:03:17Z
+**User Input**: ""
+**AI Response**: "Revised U06 Code Generation Part 1 plan complete. Review all twenty steps and explicitly approve the revised sequence before Part 2 begins."
+**Context**: CONSTRUCTION - revised U06 Code Generation planning gate
+
+---

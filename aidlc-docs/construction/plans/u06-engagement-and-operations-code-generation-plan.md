@@ -46,13 +46,13 @@ Application code remains in the workspace root, never under `aidlc-docs/`.
 
 ## Part 2 Execution Plan
 
-### Step 1 - Blocking Admission and Baseline
+### Step 1 - Minimal Compose Contract and Blocking CPU Admission
 
-- [ ] 현재 전체 test/format/lint/type baseline을 실행하고 결과를 기록한다. `docker compose config`에서 API 1.0 CPU, U06 worker 1.0 CPU, maintenance 0.5 CPU와 4-vCPU/8-GiB host 적합성을 검증할 수 있도록 Compose 계약을 먼저 확정한다. 값 변경이나 미확정 상태에서는 Step 2로 진행하지 않는다.
+- [ ] Domain code보다 먼저 최소 Compose 계약을 추가한다. 기존 `api`에 1.0 CPU를 명시하고, `u06-worker`와 `u06-maintenance` service/profile skeleton에 CPU 1.0/0.5, memory 1 GiB/512 MiB, command placeholder, `private_net`/`observability_net`/`email_egress_net`, database/email/audit-key secret reference, pool 4/2/1과 lane 2/2/1 환경변수를 반영한다. Placeholder command는 명확한 비성공 종료로 실제 runtime 구현 전 accidental start를 막는다. `docker compose config`와 remote overlay render에서 service/profile/reference/value 및 4-vCPU/8-GiB host 적합성을 검증한다. 실패, 누락 또는 값 변경 시 Step 2로 진행하지 않는다.
 
-### Step 2 - Package Skeleton, Configuration and Ports
+### Step 2 - Baseline, Package Skeleton, Configuration and Ports
 
-- [ ] `backend/src/ott_feed/engagement/` package, typed config, versioned U02/U03/U04/U05/U07 ports, bounded result/error types와 public exports를 생성하고 unit tests를 추가한다.
+- [ ] Step 1 Compose render evidence를 다시 확인한 뒤 현재 전체 test/format/lint/type baseline을 실행하고 결과를 기록한다. Baseline이 통과하면 `backend/src/ott_feed/engagement/` package, typed config, versioned U02/U03/U04/U05/U07 ports, bounded result/error types와 public exports를 생성하고 unit tests를 추가한다. Domain business logic은 이 Step에 포함하지 않는다.
 
 ### Step 3 - Notification Domain
 
@@ -116,7 +116,7 @@ Application code remains in the workspace root, never under `aidlc-docs/`.
 
 ### Step 18 - Compose, Health and Secret Infrastructure
 
-- [ ] `compose.yaml`/remote/example config에 U06 API/worker/maintenance roles, secrets, networks, CPU 1.0/1.0/0.5, memory, lane limits와 Docker JSON rotation을 추가한다. Compose healthcheck=`/health/live`, Caddy routing check=`/health/ready`, Prometheus deep probe=`/health/deep`를 검증하고 unhealthy 운영자 runbook 경계를 보존한다.
+- [ ] Step 1의 최소 Compose skeleton을 실제 Step 14~15 runtime command와 최종 role/secret/network wiring으로 교체·완성한다. CPU 1.0/1.0/0.5, memory, pool/lane 값은 변경 없이 유지한다. Docker JSON rotation, Compose healthcheck=`/health/live`, Caddy routing check=`/health/ready`, Prometheus deep probe=`/health/deep`를 통합 검증하고 unhealthy 운영자 runbook 경계를 보존한다. Placeholder command나 미사용 임시 reference가 하나라도 남으면 완료하지 않는다.
 
 ### Step 19 - Observability, Backup and Restore Artifacts
 
@@ -152,6 +152,7 @@ No PBT generation claim is complete until Step 16 and the Step 20 execution evid
 
 - Real PostgreSQL integration tests selected by `-m integration` must run with zero skips; a skipped PostgreSQL test cannot complete U06.
 - API/worker/maintenance CPU limits are fixed at 1.0/1.0/0.5 and must render in Compose before implementation proceeds past Step 1.
+- Step 1 owns the minimal renderable Compose contract; Step 18 completes health, routing, log rotation and final runtime/secret/network integration without moving the CPU admission gate later.
 - `restart: unless-stopped` is process-exit behavior only. Unhealthy state generates an operator action and is never claimed as automatic health restart.
 - Database restore does not pass without the independently restored HMAC key archive and complete key-ID/HMAC closure.
 - Live, ready, deep and metrics endpoints have separate consumers and tests.
