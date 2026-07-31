@@ -26,32 +26,32 @@
 
 - [x] 아직 확정되지 않은 U06 성능, 전달, 보존, 권한, 관측, 경보와 Queue 결정을 식별한다.
 - [x] 상호 배타적 선택지와 마지막 `X) Other`를 포함한 Question 1~10을 작성한다.
-- [ ] 모든 `[Answer]:` 값을 수집하고 선택지 유효성을 검증한다.
-- [ ] 답변 간 모순과 기존 Baseline 충돌을 분석하고 필요한 경우 clarification 파일을 작성한다.
+- [x] 모든 `[Answer]:` 값을 수집하고 선택지 유효성을 검증한다. Question 1~10은 모두 유효한 `A`다.
+- [x] 답변 간 모순과 기존 Baseline 충돌을 분석하고 필요한 경우 clarification 파일을 작성한다. 모든 답변이 일관되어 추가 질문이 필요하지 않다.
 
 ### Step 3 - NFR Requirements
 
-- [ ] 작업 부하 중요도, 용량, 확장 검토 Trigger와 Resource Bound를 정의한다.
-- [ ] API 지연, 알림 전달, 처리량, Timeout, Retry와 Expiry 목표를 정의한다.
-- [ ] 가용성, 일관성, 멱등성, 저하 운용, 복구와 데이터 보존 요구를 정의한다.
-- [ ] 권한, 개인정보, 감사 무결성, 비밀정보와 운영 Evidence 보호 요구를 정의한다.
-- [ ] Metrics, Logs, Traces, Health, Alert, Incident와 비용·유지보수 요구를 정의한다.
-- [ ] `nfr-requirements.md`를 생성한다.
+- [x] 작업 부하 중요도, 용량, 확장 검토 Trigger와 Resource Bound를 정의한다.
+- [x] API 지연, 알림 전달, 처리량, Timeout, Retry와 Expiry 목표를 정의한다.
+- [x] 가용성, 일관성, 멱등성, 저하 운용, 복구와 데이터 보존 요구를 정의한다.
+- [x] 권한, 개인정보, 감사 무결성, 비밀정보와 운영 Evidence 보호 요구를 정의한다.
+- [x] Metrics, Logs, Traces, Health, Alert, Incident와 비용·유지보수 요구를 정의한다.
+- [x] `nfr-requirements.md`를 생성한다.
 
 ### Step 4 - Technology and Quality Gates
 
-- [ ] 기존 Python/PostgreSQL Modular Monolith와 Outbox 유지 여부를 확정한다.
-- [ ] 알림 Adapter, Scheduler, Health Registry, Prometheus/Grafana와 API Contract 기술 결정을 기록한다.
-- [ ] PBT-09에 따라 Hypothesis를 U06 Property Framework로 확정하고 P-U06-01~12 Gate를 연결한다.
-- [ ] Example, Contract, PBT, PostgreSQL Integration, Failure, Privacy와 Capacity Gate를 정의한다.
-- [ ] `tech-stack-decisions.md`를 생성한다.
+- [x] 기존 Python/PostgreSQL Modular Monolith와 Outbox 유지 여부를 확정한다.
+- [x] 알림 Adapter, Scheduler, Health Registry, Prometheus/Grafana와 API Contract 기술 결정을 기록한다.
+- [x] PBT-09에 따라 Hypothesis를 U06 Property Framework로 확정하고 P-U06-01~12 Gate를 연결한다.
+- [x] Example, Contract, PBT, PostgreSQL Integration, Failure, Privacy와 Capacity Gate를 정의한다.
+- [x] `tech-stack-decisions.md`를 생성한다.
 
 ### Step 5 - Validation and Completion
 
-- [ ] U06 Story/Functional Rule/NFR/Technology traceability를 검증한다.
-- [ ] RESILIENCY-01~15와 PBT-09 준수 및 N/A 근거를 평가한다.
-- [ ] Markdown 문법과 표 구조를 검증한다.
-- [ ] 계획·상태·감사 기록을 갱신하고 표준 NFR Requirements 승인 지점을 제시한다.
+- [x] U06 Story/Functional Rule/NFR/Technology traceability를 검증한다.
+- [x] RESILIENCY-01~15와 PBT-09 준수 및 N/A 근거를 평가한다.
+- [x] Markdown 문법과 표 구조를 검증한다.
+- [x] 계획·상태·감사 기록을 갱신하고 표준 NFR Requirements 승인 지점을 제시한다.
 
 ## NFR Requirements Questions
 
@@ -68,7 +68,7 @@ C) 프로토타입에서는 응답 시간 목표를 두지 않고 기능 정확�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 신규 공개·가용성 변경 알림의 전달 시간 목표는 무엇입니까?
@@ -81,7 +81,7 @@ C) 당일 전달만 보장하고 별도 percentile 목표를 두지 않는다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 U06의 초기 용량과 확장 재검토 기준은 무엇입니까?
@@ -94,7 +94,7 @@ C) 기능 테스트만 수행하고 용량 한도는 상용 전환 시 처음 �
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 이메일 전달 실패의 Timeout·Retry·Expiry 정책은 무엇입니까?
@@ -107,7 +107,7 @@ C) 재시도 없이 첫 실패를 terminal 상태로 처리한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 U06 운영 데이터 보존 기간은 어떻게 설정합니까?
@@ -120,7 +120,7 @@ C) 감사와 Incident를 영구 보존하고 알림 데이터만 30일 보존한
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 운영·Trace 권한과 민감 작업 보호 수준은 무엇입니까?
@@ -133,7 +133,7 @@ C) 모든 운영·Trace 기능을 두 명 승인 방식으로 제한한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 감사 무결성과 저장 보호를 어느 수준으로 적용합니까?
@@ -146,7 +146,7 @@ C) 외부 전용 감사 SaaS를 신규 도입해 모든 기록을 전송한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 운영 Metrics·Logs·Trace의 개인정보와 Cardinality 정책은 무엇입니까?
@@ -159,7 +159,7 @@ C) Metrics만 수집하고 구조화 Log와 상관관계 ID는 사용하지 않�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 초기 경보와 Incident 승격 기준은 어떻게 정의합니까?
@@ -172,7 +172,7 @@ C) 자동 경보 없이 운영자가 Dashboard를 수동 확인한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 Notification Job과 운영 Event 처리 기술은 무엇을 사용합니까?
@@ -185,7 +185,7 @@ C) 외부 Managed Queue를 필수로 도입하고 PostgreSQL Outbox를 제거한
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 
