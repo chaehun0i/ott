@@ -56,7 +56,7 @@ Application code remains in the workspace root, never under `aidlc-docs/`.
 
 ### Step 3 - Notification Domain
 
-- [ ] Notification event/job/attempt/channel/lease/fencing/cancellation domain models와 invariants를 구현하고 US-019 example tests를 추가한다.
+- [x] Notification event/job/attempt/channel/lease/fencing/cancellation domain models와 invariants를 구현했다. Active lease 보호, expiry, 재claim fencing-token 증가, stale completion 거부, idempotent cancellation과 US-019 example tests를 추가했으며 Ruff, strict MyPy 197 files와 engagement unit 7 tests를 통과했다.
 
 ### Step 4 - Notification Admission and Scheduling
 
