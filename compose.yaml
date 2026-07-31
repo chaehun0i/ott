@@ -49,6 +49,12 @@ services:
       postgres: {condition: service_healthy}
     mem_limit: 1g
     cpus: 1.0
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/live', timeout=2)"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+    logging: {driver: json-file, options: {max-size: "10m", max-file: "5"}}
   worker:
     build: {context: ./backend}
     command: ["python", "-m", "ott_feed.worker"]
@@ -122,7 +128,7 @@ services:
     mem_limit: 512m
   u06-worker:
     build: {context: ./backend}
-    command: ["python", "-c", "import sys; print('u06-worker runtime not generated'); sys.exit(78)"]
+    command: ["python", "-m", "ott_feed.engagement.worker"]
     environment:
       APP_ENV: ${APP_ENV:-local}
       U06_DATABASE_URL_FILE: /run/secrets/database_u06_worker
@@ -135,12 +141,18 @@ services:
     networks: [private_net, observability_net, email_egress_net]
     depends_on:
       postgres: {condition: service_healthy}
-    restart: "no"
+    restart: unless-stopped
     mem_limit: 1g
     cpus: 1.0
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8081/health/live', timeout=2)"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+    logging: {driver: json-file, options: {max-size: "10m", max-file: "5"}}
   u06-maintenance:
     build: {context: ./backend}
-    command: ["python", "-c", "import sys; print('u06-maintenance runtime not generated'); sys.exit(78)"]
+    command: ["python", "-m", "ott_feed.engagement.maintenance", "verify-recovery"]
     profiles: ["maintenance"]
     environment:
       APP_ENV: ${APP_ENV:-local}
@@ -155,6 +167,7 @@ services:
     restart: "no"
     mem_limit: 512m
     cpus: 0.5
+    logging: {driver: json-file, options: {max-size: "10m", max-file: "5"}}
   postgres:
     image: ${POSTGRES_IMAGE:-pgvector/pgvector:0.8.2-pg17-bookworm@sha256:feb68f4f15446397d8cac7f4fe48fe4586de83160d1fc48b46283312d1a33966}
     environment:
@@ -173,8 +186,13 @@ services:
     networks: [observability_net]
   prometheus:
     image: ${PROMETHEUS_IMAGE:-prom/prometheus:latest}
-    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "./infra/prometheus/u04-alerts.yml:/etc/prometheus/u04-alerts.yml:ro", "./infra/prometheus/u05-alerts.yml:/etc/prometheus/u05-alerts.yml:ro", "prometheus_data:/prometheus"]
+    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "./infra/prometheus/u04-alerts.yml:/etc/prometheus/u04-alerts.yml:ro", "./infra/prometheus/u05-alerts.yml:/etc/prometheus/u05-alerts.yml:ro", "./infra/prometheus/u06-alerts.yml:/etc/prometheus/u06-alerts.yml:ro", "prometheus_data:/prometheus"]
     networks: [observability_net]
+  blackbox-exporter:
+    image: ${BLACKBOX_IMAGE:-prom/blackbox-exporter:latest}
+    command: ["--config.file=/etc/blackbox/blackbox.yml"]
+    volumes: ["./infra/blackbox/blackbox.yml:/etc/blackbox/blackbox.yml:ro"]
+    networks: [observability_net, private_net]
   loki:
     image: ${LOKI_IMAGE:-grafana/loki:latest}
     command: ["-config.file=/etc/loki/config.yaml"]

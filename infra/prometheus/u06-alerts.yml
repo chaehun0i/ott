@@ -1,0 +1,18 @@
+groups:
+  - name: u06-engagement
+    rules:
+      - alert: U06WorkerUnavailable
+        expr: up{job="ott-u06-worker"} == 0
+        for: 1m
+        labels: {severity: critical}
+        annotations: {summary: "U06 worker metrics unavailable; operator recreation may be required"}
+      - alert: U06DeepHealthFailed
+        expr: probe_success{job="ott-u06-deep-health"} == 0
+        for: 1m
+        labels: {severity: critical}
+        annotations: {summary: "U06 deep health probe failed"}
+      - alert: U06QueueOldestAgeHigh
+        expr: ott_u06_queue_oldest_seconds > 300
+        for: 5m
+        labels: {severity: warning}
+        annotations: {summary: "U06 queue oldest age exceeds five minutes"}

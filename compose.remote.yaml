@@ -27,6 +27,8 @@ services:
     image: ${OTEL_IMAGE:?set immutable OTel image digest}
   prometheus:
     image: ${PROMETHEUS_IMAGE:?set immutable Prometheus image digest}
+  blackbox-exporter:
+    image: ${BLACKBOX_IMAGE:?set immutable blackbox exporter image digest}
   loki:
     image: ${LOKI_IMAGE:?set immutable Loki image digest}
   grafana:

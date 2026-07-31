@@ -76,3 +76,9 @@ GRANT USAGE ON SCHEMA u05_recommendation TO u05_api_runtime, u05_maintenance_run
 GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA u05_recommendation TO u05_api_runtime;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA u05_recommendation TO u05_maintenance_runtime;
 GRANT SELECT ON ALL TABLES IN SCHEMA u05_recommendation TO ott_backup_reader;
+-- U06 roles are created by the deployment administrator; grants are intentionally schema scoped.
+GRANT USAGE ON SCHEMA u06_engagement TO u06_api_runtime, u06_worker_runtime, u06_maintenance_runtime;
+GRANT SELECT, INSERT ON ALL TABLES IN SCHEMA u06_engagement TO u06_api_runtime;
+GRANT SELECT, INSERT, UPDATE ON u06_engagement.notification_jobs TO u06_worker_runtime;
+GRANT SELECT, INSERT ON u06_engagement.audit_events TO u06_api_runtime, u06_maintenance_runtime;
+GRANT SELECT, UPDATE ON u06_engagement.retention_checkpoints TO u06_maintenance_runtime;

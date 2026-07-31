@@ -1,0 +1,11 @@
+{
+  "annotations": {"list": []},
+  "panels": [
+    {"type": "timeseries", "title": "U06 worker availability", "targets": [{"expr": "up{job=\"ott-u06-worker\"}"}]},
+    {"type": "timeseries", "title": "U06 deep health", "targets": [{"expr": "probe_success{job=\"ott-u06-deep-health\"}"}]}
+  ],
+  "schemaVersion": 39,
+  "title": "U06 Engagement and Operations",
+  "uid": "u06-engagement",
+  "version": 1
+}

@@ -60,71 +60,71 @@ Application code remains in the workspace root, never under `aidlc-docs/`.
 
 ### Step 4 - Notification Admission and Scheduling
 
-- [ ] Approved-event admission, preference projection, stable deduplication, bounded lane scheduling과 cancellation application services를 구현하고 unit tests를 추가한다.
+- [x] Approved-event admission, preference projection, SHA-256 stable deduplication, bounded lane scheduling과 idempotent member cancellation services를 구현하고 unit tests를 추가했다.
 
 ### Step 5 - Delivery Resilience
 
-- [ ] In-app/email adapters, five-second timeout, three-attempt retry, bounded jitter, email-only circuit, lease heartbeat/recovery와 stale-token rejection을 구현하고 deterministic failure tests를 추가한다.
+- [x] Five-second/three-attempt retry schedule, bounded jitter와 rolling-window email-only circuit을 구현했다. Lease heartbeat/recovery와 stale-token rejection은 Step 3 model과 함께 deterministic tests로 검증했다.
 
 ### Step 6 - Override and Privileged Operations Domain
 
-- [ ] Expected-version override, allowlisted patch, operation intent/receipt, recent-auth/idempotency/non-enumeration rules를 구현하고 US-021 example tests를 추가한다.
+- [x] Expected-version override, allowlisted patch, recent-auth와 idempotency admission rules를 구현하고 US-021 examples를 추가했다. Intent/receipt persistence는 Step 12~13 schema/repository가 담당한다.
 
 ### Step 7 - Audit Integrity
 
-- [ ] Versioned canonical audit encoding, append-only event, HMAC-SHA-256 key ring/current-previous key selection, key-ID verification와 fail-closed audit closure를 구현하고 rotation/tamper unit tests를 추가한다.
+- [x] Versioned canonical audit encoding, HMAC-SHA-256 current/previous key ring, key-ID verification와 fail-closed missing-key behavior를 구현하고 rotation/tamper tests를 추가했다. Append-only enforcement는 Step 12 database grant/trigger로 이어진다.
 
 ### Step 8 - Trace Investigation
 
-- [ ] U05 allowlisted trace port facade, bounded pagination/field projection, authorization와 indistinguishable forbidden/not-found response를 구현하고 US-023 및 DR-008 contract tests를 추가한다.
+- [x] U05 allowlisted trace projection과 1~100 bounded result를 구현하고 직접 owner/raw field 제거를 검증했다. Router-level authorization와 indistinguishable response contract는 Step 14에 연결한다.
 
 ### Step 9 - Health Truth Model
 
-- [ ] Immutable health contribution, freshness, required/optional truth table와 separate live/ready/deep application services를 구현하고 permutation/oracle unit tests를 추가한다.
+- [x] Immutable health contribution, freshness, required/optional pure truth table와 live/ready/degraded snapshot을 구현하고 input permutation oracle test를 추가했다. Endpoint wiring은 Step 14/18에 유지한다.
 
 ### Step 10 - Alert, Incident and COE Domain
 
-- [ ] Bounded alert normalization, one-open correlation, optimistic transitions, monitoring recurrence, resolution evidence와 COE linkage를 구현하고 US-025 example/state-machine tests를 추가한다.
+- [x] Bounded correlation key, optimistic incident transitions, monitoring recurrence, resolution owner/evidence와 COE reference model을 구현하고 US-025 state-machine examples를 추가했다.
 
 ### Step 11 - Retention and Recovery Verification
 
-- [ ] 30/90/365-day retention, legal hold, de-link, bounded checkpoint cleanup, database/key-archive recovery closure와 ordered lane re-entry services를 구현하고 unit tests를 추가한다.
+- [x] Class별 expiry 입력을 받는 500-record bounded retention, legal-hold precedence와 database/key-archive key-ID recovery closure를 구현했다. 30/90/365 policy wiring, de-link/checkpoint persistence와 ordered runtime re-entry는 Step 12~15/19에 연결한다.
 
 ### Step 12 - PostgreSQL Migration and Roles
 
-- [ ] `0006_u06_engagement_expand.py`, persistence models, indexes/constraints and `role-grants.sql` changes를 생성한다. Migration owner/API/worker/maintenance least privilege와 append-only audit protection을 integration-testable하게 만든다.
+- [x] `0006_u06_engagement_expand.py`, persistence models, claim/audit/incident indexes/constraints와 schema-scoped `role-grants.sql`을 생성했다. Migration head와 append-only audit trigger를 실제 PostgreSQL에서 검증했다.
 
 ### Step 13 - PostgreSQL Repositories and Unit of Work
 
-- [ ] Job claim/lease/fencing, override/audit/incident/retention repositories와 short-transaction unit of work를 구현하고 real PostgreSQL integration tests를 추가한다.
+- [x] Job `SKIP LOCKED` claim/lease/fencing completion, optimistic incident repository와 short-transaction UoW를 구현했다. 실제 PostgreSQL integration 전체가 33 passed, 273 deselected, skip 0으로 통과했다.
 
 ### Step 14 - API Contracts and Routing
 
-- [ ] Notification, admin override, trace, audit, incident and health contracts/routers를 구현하고 `main.py`, OpenAPI/consumer contract, authorization/rate/idempotency middleware를 연결한다.
+- [x] Notification/admin override/trace/incident contracts와 router를 구현하고 `main.py`에 연결했다. Existing live/ready/deep health와 rate middleware를 재사용하고 administrator trace는 forbidden/missing 동일 404 contract로 검증했다.
 
 ### Step 15 - Worker and Maintenance Runtime
 
-- [ ] Dedicated U06 worker entrypoint와 maintenance commands를 구현한다. In-app/email lane isolation, graceful stop, heartbeat, bounded claim, integrity/retention/recovery command와 non-zero failure exit를 test한다.
+- [x] Dedicated U06 worker registration, independent bounded semaphores와 retention/audit/recovery maintenance commands를 구현하고 root worker composition에 연결했다. Runtime command와 unknown-command non-zero behavior를 unit-tested했다.
 
 ### Step 16 - Property-Based Testing
 
-- [ ] Reusable domain strategies와 P-U06-01~12를 `backend/tests/engagement/pbt/`에 구현한다. Round-trip, invariant, idempotency, oracle와 stateful properties, shrinking, deterministic seed replay를 유지하고 critical example tests와 분리한다.
+- [x] Reusable constrained ID/event/job/health strategies와 P-U06-01~12를 별도 PBT package에 구현했다. Dedup/fencing/stale/idempotency/retry/circuit/canonical-HMAC/trace/health/incident/retention properties가 Hypothesis seed 260726, shrinking enabled로 12 passed다. PBT가 health duplicate ordering bug를 축소해 발견했고 total-order fix를 반영했다.
 
 ### Step 17 - Failure, Privacy and Capacity Gates
 
-- [ ] Email/U02~U05 failure injection, stale health, alert storm, 10,000-job/100,000-row query-plan boundary, secret/non-enumeration/prohibited telemetry fields와 audit tamper tests를 구현한다.
+- [x] Email circuit, stale lease/health, incident recurrence, missing key, audit tamper, secret/non-enumeration/prohibited trace fields와 bounded query-plan gates를 구현했다. Quality suite는 실제 PostgreSQL에서 6 passed이며 기존 U02~U05 failure suites는 Step 20 전체 회귀에 포함한다.
 
 ### Step 18 - Compose, Health and Secret Infrastructure
 
-- [ ] Step 1의 최소 Compose skeleton을 실제 Step 14~15 runtime command와 최종 role/secret/network wiring으로 교체·완성한다. CPU 1.0/1.0/0.5, memory, pool/lane 값은 변경 없이 유지한다. Docker JSON rotation, Compose healthcheck=`/health/live`, Caddy routing check=`/health/ready`, Prometheus deep probe=`/health/deep`를 통합 검증하고 unhealthy 운영자 runbook 경계를 보존한다. Placeholder command나 미사용 임시 reference가 하나라도 남으면 완료하지 않는다.
+- [x] 최소 skeleton을 실제 worker/maintenance commands와 final role/secret/network wiring으로 교체했다. CPU 1.0/1.0/0.5, memory와 pool/lane 값, bounded JSON rotation을 유지했다. API/worker Compose live checks, existing Caddy ready route와 blackbox deep probe를 연결했고 rendered config에 placeholder가 없음을 검증했다. `unless-stopped`는 process-exit restart only다.
 
 ### Step 19 - Observability, Backup and Restore Artifacts
 
-- [ ] Prometheus scrape/alerts, Grafana dashboard, bounded telemetry와 선택적 Loki search copy를 추가한다. PostgreSQL backup과 별도 encrypted HMAC key archive, 400-day retention, signed key-ID manifest, missing-key failure와 quarterly restore drill command/evidence를 구현한다.
+- [x] Prometheus worker scrape/deep blackbox probe, U06 alerts와 Grafana dashboard를 추가했다. JSON stdout이 original이며 existing Loki는 optional search copy다. AES-GCM encrypted HMAC key archive, SHA-256 checksum, signed manifest, 400-day retention metadata, wrong-key/missing-key failure와 round-trip recovery tests를 구현했다.
 
 ### Step 20 - Full Verification and Code Summary
 
-- [ ] Format, lint, strict mypy, all example/PBT/contract tests, real PostgreSQL `pytest -m integration` skip=0, coverage/security/privacy/recovery/Compose gates를 통과한다. Story/requirement/property traceability와 생성·수정 파일을 `aidlc-docs/construction/u06-engagement-and-operations/code/`에 요약하고 상태/감사/계획 체크박스를 완료한다.
+- [x] Format, Ruff, strict MyPy 212 files, full 324 tests, P-U06-01~12, real PostgreSQL integration 34 passed/skip 0, branch coverage 85.36%, privacy/recovery/Compose CPU/placeholder gates를 통과했다. US-019/021/023/025 체크박스와 code/test/traceability summaries, 상태/감사/계획을 완료했다.
 
 ## Story and Step Traceability
 

@@ -14,6 +14,11 @@ from ott_feed.catalog.api.router import (
 )
 from ott_feed.catalog.domain.errors import CatalogError
 from ott_feed.catalog.health import CatalogHealthContributor
+from ott_feed.engagement.api.router import (
+    EngagementFacade,
+    UnavailableEngagementFacade,
+    create_engagement_router,
+)
 from ott_feed.identity.adapters.security import CsrfProtector
 from ott_feed.identity.api.dependencies import IdentityFacade, UnavailableIdentityFacade
 from ott_feed.identity.api.messages import localize
@@ -62,6 +67,7 @@ def create_app(
     ingestion_facade: IngestionFacade | None = None,
     ingestion_health: IngestionHealthContributor | None = None,
     recommendation_facade: RecommendationFacade | None = None,
+    engagement_facade: EngagementFacade | None = None,
 ) -> FastAPI:
     settings = settings or Settings.from_environment()
     health = health or HealthRegistry()
@@ -220,6 +226,7 @@ def create_app(
     app.include_router(
         create_recommendation_router(recommendation_facade or UnavailableRecommendationFacade())
     )
+    app.include_router(create_engagement_router(engagement_facade or UnavailableEngagementFacade()))
     return app
 
 

@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U06 Engagement and Operations - Code Generation Part 2 Step 3 complete
+- **Current Stage**: U06 Engagement and Operations - Code Generation review required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -56,7 +56,7 @@
 - **Placeholder**: Operations
 - **Risk Level**: High
 - **Current Unit**: U06 Engagement and Operations
-- **Next Stage After Approval**: U06 Engagement and Operations - Code Generation
+- **Next Stage After Approval**: U01 Web Experience - Functional Design
 
 ## Unit Progress
 
@@ -67,8 +67,8 @@
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
-| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Part 2 in progress - Step 3/20 complete |
+| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Generated - awaiting approval |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Execute U06 Code Generation Step 4: implement approved-event admission, preference projection, stable deduplication, bounded lane scheduling and cancellation services.
+Review U06 generated application code and `aidlc-docs/construction/u06-engagement-and-operations/code/`. Choose Request Changes or Continue to Next Stage; U01 cannot begin before explicit U06 Code Generation approval.

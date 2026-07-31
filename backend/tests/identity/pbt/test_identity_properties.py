@@ -283,6 +283,7 @@ class DeletionLifecycle(RuleBasedStateMachine):
 
 
 TestDeletionLifecycle = DeletionLifecycle.TestCase
+FEATURE_SNAPSHOT_ADAPTER = TypeAdapter(FeatureSnapshot)
 
 
 @given(values=feature_values)
@@ -295,6 +296,5 @@ def test_pbt_u02_11_versioned_dto_round_trip(values: dict[str, int | float | boo
         NOW + timedelta(minutes=5),
         values,
     )
-    adapter = TypeAdapter(FeatureSnapshot)
-    encoded = adapter.dump_json(snapshot)
-    assert adapter.validate_json(encoded) == snapshot
+    encoded = FEATURE_SNAPSHOT_ADAPTER.dump_json(snapshot)
+    assert FEATURE_SNAPSHOT_ADAPTER.validate_json(encoded) == snapshot

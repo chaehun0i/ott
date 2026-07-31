@@ -36,9 +36,7 @@ def test_us019_job_claim_delivery_and_replay_safety() -> None:
 
 def test_expired_lease_reclaim_fences_stale_worker() -> None:
     first = make_job().claim("worker-a", NOW, NOW + timedelta(seconds=5))
-    reclaimed = first.claim(
-        "worker-b", NOW + timedelta(seconds=6), NOW + timedelta(seconds=36)
-    )
+    reclaimed = first.claim("worker-b", NOW + timedelta(seconds=6), NOW + timedelta(seconds=36))
     assert reclaimed.fencing_token == 2
     with pytest.raises(StaleFencingToken):
         reclaimed.complete("worker-a", 1, delivered=True)

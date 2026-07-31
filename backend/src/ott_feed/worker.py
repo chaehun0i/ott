@@ -1,6 +1,7 @@
 """Worker bootstrap. Business units register typed handlers at composition time."""
 
 from ott_feed.catalog.worker import CatalogWorkerHandlers, U03LaneBudgets, register_catalog_handlers
+from ott_feed.engagement.worker import EngagementWorkerHandlers, register_engagement_handlers
 from ott_feed.identity.config import IdentitySettings
 from ott_feed.identity.worker import IdentityWorkerHandlers, LaneBudgets, register_identity_handlers
 from ott_feed.ingestion.worker import (
@@ -22,6 +23,7 @@ def build_worker_registry(
     u03_budgets: U03LaneBudgets | None = None,
     ingestion_handlers: IngestionWorkerHandlers | None = None,
     u04_budgets: U04LaneBudgets | None = None,
+    engagement_handlers: EngagementWorkerHandlers | None = None,
 ) -> HandlerRegistry:
     platform_settings = settings or Settings.from_environment()
     registry = HandlerRegistry()
@@ -46,4 +48,6 @@ def build_worker_registry(
             register_search_handlers(registry, search_handlers, resolved_budgets)
     if ingestion_handlers is not None:
         register_ingestion_handlers(registry, ingestion_handlers, u04_budgets or U04LaneBudgets())
+    if engagement_handlers is not None:
+        register_engagement_handlers(registry, engagement_handlers)
     return registry
