@@ -1640,3 +1640,10 @@
 **Context**: CONSTRUCTION - standardized Functional Design review gate; waiting for explicit approval
 
 ---
+## U06 Functional Design Approval and NFR Requirements Start
+**Timestamp**: 2026-07-31T05:54:05Z
+**User Input**: "다음 다 진행해줘"
+**AI Response**: "Recorded explicit approval of U06 Functional Design and started U06 NFR Requirements. Reused the approved project availability, recovery, runtime and testing baselines, then created a checkbox plan with ten required decisions for U06 latency, delivery, capacity, retry, retention, authorization, audit, observability, alerting and queue technology."
+**Context**: CONSTRUCTION - U06 Functional Design approved; U06 NFR Requirements planning and questions
+
+---
