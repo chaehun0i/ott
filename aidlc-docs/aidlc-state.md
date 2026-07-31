@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U06 Engagement and Operations - Infrastructure Design remediation review required
+- **Current Stage**: U06 Engagement and Operations - Code Generation Part 1 plan review required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -67,8 +67,8 @@
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
-| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Remediated - awaiting re-approval | Pending |
+| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Part 1 planned - awaiting approval |
 | U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Re-review the remediated U06 Infrastructure Design. Code Generation remains blocked until explicit approval; its implementation plan must preserve the fixed API/worker/maintenance CPU limits of 1.0/1.0/0.5.
+Review and explicitly approve `aidlc-docs/construction/plans/u06-engagement-and-operations-code-generation-plan.md`. Part 2 implementation cannot begin before approval of all 20 steps and their sequence.
