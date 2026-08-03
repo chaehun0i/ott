@@ -1,0 +1,10 @@
+groups:
+  - name: u01-web
+    rules:
+      - alert: U01WebSyntheticFailure
+        expr: probe_success{job="ott-web-public"} == 0
+        for: 5m
+        labels: {severity: warning}
+        annotations:
+          summary: Public web journey is unavailable
+          runbook: Check web container health and Caddy routing; unhealthy-running requires operator action.

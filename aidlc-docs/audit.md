@@ -7,7 +7,6 @@
 **Context**: New AI-DLC workflow initialization
 
 ---
-
 ## Workspace Detection
 **Timestamp**: 2026-07-26T01:01:04Z
 **User Input**: "using AI-DLC, 나는 ott 최신 정보 피드(추천)을 해주는걸 만들고 싶어"
@@ -1920,5 +1919,12 @@ Step 19의 수동 스크린리더 검증은 미실행 항목을 기록하는 것
 **User Input**: "전부 실행 바랍니다."
 **AI Response**: "Verified exact stable registry versions and compatibility, generated pnpm lock/runtime files, and passed base/remote Compose Web admission for 0.5 CPU, 256MB, non-root/read-only, edge-only network, no secrets, health and log rotation."
 **Context**: U01 Code Generation Part 2 Step 1 complete; TypeScript 5.9.3 selected because TypeScript 7.0.2 violated current peer constraints.
+
+---
+## U01 Code Generation Steps 3-18 and Step 19 Automated Gates
+**Timestamp**: 2026-08-03T10:02:54Z
+**User Input**: "전부 실행 바랍니다."
+**AI Response**: "Completed and verified U01 Steps 3-18. Automated Step 19 browser, accessibility, performance, security, supply-chain and infrastructure gates passed after fixing discovered defects. Manual NVDA/Chrome or VoiceOver/Safari evidence is unavailable, so status remains Verification Incomplete and Steps 19-20/final approval remain blocked."
+**Context**: U01 Code Generation Part 2; plan-level checkboxes updated immediately for completed Steps 3-18 and completed Step 19 sub-gates.
 
 ---

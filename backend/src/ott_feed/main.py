@@ -5,6 +5,7 @@ import hashlib
 from fastapi import APIRouter, Depends, FastAPI, Header, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 
+from ott_feed.api.browser_telemetry import browser_metrics, create_browser_telemetry_router
 from ott_feed.api.middleware import RateLimitMiddleware, RequestContextMiddleware, current_request
 from ott_feed.api.openapi import docs_paths
 from ott_feed.catalog.api.router import (
@@ -194,11 +195,12 @@ def create_app(
         return Response(
             "# HELP ott_platform_up Platform process availability.\n"
             "# TYPE ott_platform_up gauge\n"
-            "ott_platform_up 1\n",
+            "ott_platform_up 1\n" + browser_metrics(),
             media_type="text/plain; version=0.0.4",
         )
 
     app.include_router(router)
+    app.include_router(create_browser_telemetry_router())
     origins = {f"https://{settings.domain}"}
     if settings.environment in {"local", "test"}:
         origins.add(f"http://{settings.domain}")

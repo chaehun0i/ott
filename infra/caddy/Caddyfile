@@ -1,15 +1,27 @@
 {$APP_DOMAIN} {
     encode zstd gzip
-    request_body { max_size 2MB }
-    reverse_proxy /api/* api:8000 {
-        health_uri /api/v1/health/ready
-        health_interval 15s
-        transport http { dial_timeout 2s response_header_timeout 15s }
+    request_body {
+        max_size 2MB
+    }
+    handle /api/* {
+        reverse_proxy api:8000 {
+            health_uri /api/v1/health/ready
+            health_interval 15s
+            transport http {
+                dial_timeout 2s
+                response_header_timeout 15s
+            }
+        }
+    }
+    handle {
+        reverse_proxy web:8080
     }
     header {
         -Server
+        Content-Security-Policy "default-src 'self'; img-src 'self' https: data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
         X-Content-Type-Options nosniff
         Referrer-Policy strict-origin-when-cross-origin
+        X-Frame-Options DENY
     }
 }
-

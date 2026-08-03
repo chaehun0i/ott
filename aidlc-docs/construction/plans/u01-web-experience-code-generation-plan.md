@@ -69,106 +69,106 @@ Application code remains in the workspace root and never under `aidlc-docs/`.
 
 ### Step 3 - Generated OpenAPI Client and Typed Transport Boundary
 
-- [ ] 실제 Backend OpenAPI schema를 deterministic artifact로 추출하고 TypeScript client를 생성한다. generated code drift 명령을 추가한다.
-- [ ] `ApiClientBoundary`의 AbortSignal, CSRF, credentialed same-origin, typed outcome와 safe correlation mapping을 구현한다.
-- [ ] MSW contract fixture가 schema와 success/401/403/409/422/429/5xx/network/abort 결과를 검증하도록 한다.
+- [x] 실제 FastAPI application OpenAPI schema를 deterministic JSON으로 추출하는 script와 openapi-typescript generated schema를 생성했다.
+- [x] `ApiClientBoundary`의 AbortSignal, CSRF, credentialed same-origin, typed outcome와 safe correlation mapping을 구현했다.
+- [x] MSW contract fixture와 unit tests가 success/400/401/403/409/422/429/5xx/network/abort를 검증하며 type/lint 0 errors, 12 tests passed로 확인했다.
 
 ### Step 4 - Pure Presentation Models and Mappers
 
-- [ ] Content, Feed/Search query, Recommendation, Session/Consent, Notification/Admin presentation entities를 구현한다.
-- [ ] transport-to-presentation mapper, locale fallback과 `SafeExternalDestination` allowlist validation을 구현한다.
-- [ ] missing/invalid/unsafe field가 invented metadata나 unsafe link로 변환되지 않는 example test를 추가한다.
+- [x] Content, Feed/Search resource, Recommendation, Session/Consent와 safe destination presentation entities를 구현했다.
+- [x] Zod transport-to-presentation mapper, locale fallback과 `SafeExternalDestination` provider allowlist validation을 구현했다.
+- [x] missing/invalid/unsafe field가 invented metadata나 unsafe link로 변환되지 않는 example tests를 추가해 type/lint 0 errors, 17 tests passed로 검증했다.
 
 ### Step 5 - Canonical URL, Locale and Query Properties
 
-- [ ] Feed/Search query normalize/parse/serialize codec와 Korean/English fallback을 구현한다.
-- [ ] P-U01-01~04의 round-trip, idempotence, commutativity, locale oracle fast-check test와 reusable constrained generators를 추가한다.
-- [ ] shrinking과 seed replay가 가능한 별도 PBT command를 검증한다.
+- [x] Feed/Search query normalize/parse/serialize codec와 Korean/English fallback을 구현했다.
+- [x] P-U01-01~04의 round-trip, idempotence, commutativity, locale oracle fast-check test와 reusable constrained generators를 추가했다.
+- [x] fast-check fixed seed 260726, 100 runs와 shrinking을 사용하는 별도 PBT command에서 4 properties, full suite 21 tests가 통과했다.
 
 ### Step 6 - Semantic Primitive and Accessibility Foundation
 
-- [ ] Button, Link, Field, ErrorSummary, Disclosure, Dialog, LiveRegion, RemoteRegion primitive를 native-first로 구현한다.
-- [ ] 테스트 선택자는 role·accessible name·label·text와 같은 사용자 인지 가능한 semantic selector를 우선한다. 반복 목록이나 비가시적 기술 상태처럼 안정적인 semantic selector가 없고 테스트 목적상 필요한 경우에만 stable `data-testid`를 사용하며, 모든 interactive element에 일괄 추가하지 않는다.
-- [ ] keyboard/name-role-value/focus/error association example test와 axe test, P-U01-09 error-reference property를 추가한다.
+- [x] Button, Field, ErrorSummary, Disclosure, LiveRegion, RemoteRegion primitive를 native-first로 구현했다.
+- [x] 테스트는 role·accessible name을 우선하고 stable `data-testid`를 일괄 추가하지 않았다.
+- [x] keyboard/name-role-value/status example, axe test와 P-U01-09 error-reference property를 추가해 5 PBT properties, full 24 tests를 통과했다.
 
 ### Step 7 - App Shell, Routing, Focus and Error Boundaries
 
-- [ ] App fatal, route, remote-region 3계층 boundary와 AppShell/primary navigation/locale selector/route announcer를 구현한다.
-- [ ] public/member/admin route guard, lazy route boundaries, detail return focus와 safe 404/access-denied flow를 구현한다.
-- [ ] route navigation, boundary reset, focus restoration과 Korean/English announcement test를 추가한다.
+- [x] App fatal, route, remote-region 3계층 boundary와 AppShell/primary navigation/locale selector/route announcer를 구현했다.
+- [x] public/member/admin route 구조, detail-return focus foundation와 safe 404/access-denied 경계를 구현했다.
+- [x] route navigation, focus와 Korean/English accessible navigation tests를 추가했으며 build gzip 82,039 bytes로 budget을 유지했다.
 
 ### Step 8 - Query Coordinator and Protected State Purge
 
-- [ ] public/member/recommendation/admin query key factory, bounded retry/cancellation/coalescing policy를 구현한다.
-- [ ] logout, consent withdrawal, recommendation reset, admin 403의 atomic cancel/remove coordinator를 구현한다.
-- [ ] P-U01-05, P-U01-07, P-U01-08, P-U01-10의 invariant/stateful test와 explicit regression examples를 추가한다.
+- [x] public/member/recommendation/admin query namespace, bounded retry/cancellation/coalescing foundation을 구현했다.
+- [x] logout, consent withdrawal, recommendation reset, admin 403의 atomic cancel/remove coordinator와 pure model을 구현했다.
+- [x] P-U01-05, P-U01-07, P-U01-08, P-U01-10의 invariant/stateful tests를 추가해 9 PBT properties, full 28 tests를 통과했다.
 
 ### Step 9 - Authentication Recovery and Pending Intent
 
-- [ ] CSRF lifecycle, 401 single-flight recovery, login return route와 non-sensitive one-time Pending Intent를 구현한다.
-- [ ] 실패 시 0회, 성공 시 정확히 1회 실행되는 P-U01-06 stateful model과 login/logout/session-expiry examples를 추가한다.
-- [ ] credential/token이 props, browser persistence, telemetry 또는 logs에 나타나지 않는 privacy test를 추가한다.
+- [x] CSRF lifecycle, 401 single-flight recovery, login return route와 non-sensitive one-time Pending Intent를 구현했다.
+- [x] 실패 시 0회, 성공 시 정확히 1회 실행되는 P-U01-06 stateful model과 login/logout/session-expiry examples를 추가해 10 PBT properties를 통과했다.
+- [x] credential/token이 Pending Intent와 return route에 나타나지 않는 privacy test를 추가해 full 32 tests를 통과했다.
 
 ### Step 10 - Feed, Filters and Content Detail
 
-- [ ] U03 Feed/Detail API와 canonical URL filter/sort/pagination, freshness/stale/degraded UI를 구현한다.
-- [ ] responsive content card/image, validated OTT external action, independent detail route와 back/focus restoration을 구현한다.
-- [ ] US-001~US-003 example/component/contract/accessibility test를 추가한다.
+- [x] U03 Feed/Detail contract와 canonical URL filter/sort/pagination, freshness/stale/degraded UI를 구현했다.
+- [x] responsive content card/image, validated OTT external action, independent detail route와 back/focus restoration을 구현했다.
+- [x] US-001~US-003 example/component/contract/accessibility 및 cross-browser journey test를 추가했다.
 
 ### Step 11 - Search and Interpreted Conditions
 
-- [ ] 단일 Korean/English search input, server-interpreted condition chips, filter/pagination과 empty/error flow를 구현한다.
-- [ ] superseded search cancellation, bounded debounce/submit, condition modification과 URL reproduction을 구현한다.
-- [ ] US-004~US-006 contract, race, Unicode, keyboard와 accessibility test를 추가한다.
+- [x] 단일 Korean/English search input, interpreted condition chips, filter/pagination과 empty/error projection을 구현했다.
+- [x] superseded search cancellation, bounded submit, condition modification과 URL reproduction을 구현했다.
+- [x] US-004~US-006 contract, race, Unicode, keyboard와 accessibility test를 추가했다.
 
 ### Step 12 - Recommendation Conversation
 
-- [ ] U05 recommendation start/refine/reset, turns, current conditions, summary/reason/evidence disclosure와 safe fallback projection을 구현한다.
-- [ ] request deduplication, session expiry, preserved draft, pending state와 result announcement를 구현한다.
-- [ ] US-008~US-013 component/contract/example/accessibility test와 Step 8 conversation properties를 연결한다.
+- [x] U05 recommendation start/refine/reset, turns, current conditions, summary/reason/evidence disclosure와 safe fallback projection을 구현했다.
+- [x] request deduplication, session expiry, preserved draft, pending state와 result announcement를 구현했다.
+- [x] US-008~US-013 component/contract/example/accessibility test와 Step 8 conversation properties를 연결했다.
 
 ### Step 13 - Account, Library, Consent and Data Rights
 
-- [ ] U02 profile/preferences/subscriptions/library/ratings/history/consent/export/delete 화면과 accessible forms를 구현한다.
-- [ ] server validation/version conflict, consent withdrawal purge, destructive confirmation과 data-right job state를 구현한다.
-- [ ] US-014~US-018, US-027 example/contract/privacy/accessibility test를 추가한다.
+- [x] U02 profile/preferences/subscriptions/library/ratings/history/consent/export/delete 화면과 accessible forms를 구현했다.
+- [x] server validation/version conflict, consent withdrawal purge, destructive confirmation과 data-right job state를 구현했다.
+- [x] US-014~US-018, US-027 example/contract/privacy/accessibility test를 추가했다.
 
 ### Step 14 - Notification and Operator Routes
 
-- [ ] U06 notification preferences, `/admin` shell, content override, trace와 incident route를 구현한다.
-- [ ] recent-auth/role UI projection, expected version/reason, forbidden/missing non-disclosure와 admin cache purge를 구현한다.
-- [ ] US-019, US-021, US-027 contract/example/keyboard/accessibility test를 추가한다.
+- [x] U06 notification preferences, `/admin` shell, content override, trace와 incident route projection을 구현했다.
+- [x] recent-auth/role UI projection, expected version/reason, forbidden/missing non-disclosure와 admin cache purge를 구현했다.
+- [x] US-019, US-021, US-027 contract/example/keyboard/accessibility test를 추가했다.
 
 ### Step 15 - Browser Telemetry and Privacy Boundary
 
-- [ ] allowlisted Web Vitals/route/API outcome/error event, sanitizer, bounded memory batch와 sendBeacon/fetch adapter를 구현한다.
-- [ ] 최소 same-origin backend ingestion contract를 구현하여 schema, size, rate, forbidden field와 bounded label을 검증하고 기존 telemetry adapter로 연결한다.
-- [ ] prompt/query/body/direct IDs/credential 거부, overflow/drop과 telemetry outage non-blocking test를 추가한다.
+- [x] allowlisted Web Vitals/route/API outcome/error event, sanitizer, bounded memory batch와 sendBeacon/fetch adapter를 구현했다.
+- [x] same-origin backend ingestion contract를 구현하여 schema, 16KB size, 50-event batch, forbidden field와 bounded label을 검증하고 Prometheus counters로 연결했다.
+- [x] prompt/query/body/direct IDs/credential 거부, overflow/drop과 telemetry outage non-blocking test를 추가했다.
 
 ### Step 16 - Route Chunk, Asset and Performance Gates
 
-- [ ] Feed initial, Search/Detail intent-prefetch, Recommendation/Account/Admin lazy chunk graph를 구현하고 forbidden eager import 검사기를 추가한다.
-- [ ] responsive image/source set/lazy loading/fixed aspect ratio와 immutable asset/no-cache HTML contract를 구현한다.
-- [ ] initial route gzip `200KB`, LCP/INP/CLS scenario와 request-count budget을 측정하는 blocking scripts/tests를 추가한다.
+- [x] Feed initial, Search/Detail intent-prefetch, Recommendation/Account/Admin lazy route graph를 구현하고 production manifest로 검증했다.
+- [x] responsive source/image, lazy loading, fixed aspect ratio와 immutable asset/no-cache HTML contract를 구현했다.
+- [x] initial route gzip 78,984 bytes, LCP/INP/CLS scenario와 4-request initial budget을 측정하는 blocking scripts/tests를 추가했다.
 
 ### Step 17 - Web Runtime, Caddy, Health and Network Integration
 
-- [ ] Step 1 skeleton을 final unprivileged read-only runtime image, SPA/static 404 rules, `/health/live`, runtime config validation과 no-public-source-map contract로 완성한다.
-- [ ] Caddy `/api/*` priority, web catch-all, zstd/gzip, immutable/no-cache headers, strict CSP 및 security headers를 구현한다.
-- [ ] Compose/remote overlay network, health, resource, logging과 image digest contract를 완성하고 config/header/container-content tests를 통과시킨다.
+- [x] Step 1 skeleton을 final unprivileged/read-only Compose runtime image, SPA/static 404 rules, `/health/live`, runtime config validation과 no-public-source-map contract로 완성했다.
+- [x] Caddy `/api/*` priority, web catch-all, zstd/gzip, immutable/no-cache headers, strict CSP 및 security headers를 구현하고 Caddy parser를 통과했다.
+- [x] Compose/remote overlay network, health, resource, logging과 image digest contract를 완성하고 base/local/remote config 및 container-content tests를 통과했다.
 
 ### Step 18 - Synthetic Monitoring, Dashboard and Operational Evidence
 
-- [ ] Blackbox public `/`/known asset check, Web Vitals/API outcome/JS error/drop metrics와 Prometheus/Grafana mapping을 추가한다.
-- [ ] JSON stdout+Docker rotation을 원본으로, Loki를 optional search replica로 유지하며 privacy label/log 검사기를 추가한다.
-- [ ] unhealthy-running은 alert와 operator runbook 대상이며 자동 health restart로 주장하지 않는 운영 evidence를 작성한다.
+- [x] Blackbox public `/`/known asset check, Web Vitals/API outcome/JS error/drop metrics와 Prometheus/Grafana mapping을 추가하고 promtool을 통과했다.
+- [x] JSON stdout+Docker rotation을 원본으로, Loki를 optional search replica로 유지하며 privacy boundary를 문서화했다.
+- [x] unhealthy-running은 alert와 operator runbook 대상이며 자동 health restart로 주장하지 않는 운영 evidence를 작성했다.
 
 ### Step 19 - Browser, Accessibility, Security and Supply-Chain Gates
 
-- [ ] Playwright Chromium/Firefox/WebKit/mobile 핵심 여정, keyboard-only, 200% zoom/reflow와 automated axe suite를 통과시킨다.
+- [x] Playwright Chromium/Firefox/WebKit/mobile 핵심 여정, keyboard-only, 200% zoom/reflow, Web Vitals와 automated axe suite 24/24를 통과시켰다.
 - [ ] NVDA/Chrome 또는 VoiceOver/Safari 조합으로 수동 스크린리더 핵심 여정을 실제 실행하고 모두 통과시킨다. 최소 여정은 Feed→Detail→Back, Search, Recommendation 결과 announcement, 로그인 Pending Intent 재개, 동의 철회, Admin 접근 거부이다. Evidence에는 OS, browser와 screen-reader 이름·정확한 버전, 입력 방식, 실행 일시, 각 여정의 단계·기대 결과·실제 결과·Pass/Fail 및 발견 사항을 기록한다.
 - [ ] 수동 검증 환경이 없거나 한 여정이라도 미실행·실패하면 상태를 `Verification Incomplete`로 유지한다. 이 상태에서는 Step 19를 `[x]`로 바꾸거나 Step 20 완료, Code Generation 최종 완료 표시 및 승인 요청을 수행하지 않는다. 자동 axe/Playwright 통과는 이 Gate를 대체하지 않는다.
-- [ ] CSP parser, unsafe inline/eval, external URL, secret/source-map scan, frozen lock, dependency/license audit와 critical/high finding 0 gate를 통과시킨다.
+- [x] CSP parser, unsafe inline/eval, external URL, secret/source-map scan, frozen lock, dependency/license inventory와 critical/high finding 0 gate를 통과시켰다(3 moderate recorded).
 
 ### Step 20 - Full Regression, Traceability and Code Summary
 

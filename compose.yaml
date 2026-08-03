@@ -201,7 +201,7 @@ services:
     networks: [observability_net]
   prometheus:
     image: ${PROMETHEUS_IMAGE:-prom/prometheus:latest}
-    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "./infra/prometheus/u04-alerts.yml:/etc/prometheus/u04-alerts.yml:ro", "./infra/prometheus/u05-alerts.yml:/etc/prometheus/u05-alerts.yml:ro", "./infra/prometheus/u06-alerts.yml:/etc/prometheus/u06-alerts.yml:ro", "prometheus_data:/prometheus"]
+    volumes: ["./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro", "./infra/prometheus/u01-alerts.yml:/etc/prometheus/u01-alerts.yml:ro", "./infra/prometheus/u02-alerts.yml:/etc/prometheus/u02-alerts.yml:ro", "./infra/prometheus/u03-alerts.yml:/etc/prometheus/u03-alerts.yml:ro", "./infra/prometheus/u04-alerts.yml:/etc/prometheus/u04-alerts.yml:ro", "./infra/prometheus/u05-alerts.yml:/etc/prometheus/u05-alerts.yml:ro", "./infra/prometheus/u06-alerts.yml:/etc/prometheus/u06-alerts.yml:ro", "prometheus_data:/prometheus"]
     networks: [observability_net]
   blackbox-exporter:
     image: ${BLACKBOX_IMAGE:-prom/blackbox-exporter:latest}

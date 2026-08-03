@@ -10,9 +10,12 @@
   "scripts": {
     "build": "vite build",
     "check:bundle": "node scripts/check-bundle.mjs",
+    "check:security": "node scripts/check-security.mjs",
     "dev": "vite",
     "format:check": "prettier --check .",
+    "generate:api": "openapi-typescript openapi/openapi.json -o src/shared/api/generated/schema.d.ts",
     "lint": "eslint .",
+    "preview:test": "vite build && vite preview --host 127.0.0.1 --port 4174",
     "test": "vitest run --coverage",
     "test:unit": "vitest run",
     "test:pbt": "vitest run tests/pbt",
@@ -26,7 +29,7 @@
     "react-dom": "19.2.8",
     "react-hook-form": "7.84.0",
     "react-i18next": "17.0.11",
-    "react-router-dom": "7.18.2",
+    "react-router-dom": "6.30.4",
     "zod": "4.4.3"
   },
   "devDependencies": {
@@ -37,8 +40,8 @@
     "@testing-library/user-event": "14.6.1",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "@vitest/coverage-v8": "4.1.10",
     "@vitejs/plugin-react": "6.0.5",
+    "@vitest/coverage-v8": "4.1.10",
     "axe-core": "4.12.1",
     "eslint": "10.8.0",
     "eslint-plugin-react-hooks": "7.1.1",

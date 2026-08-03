@@ -14,4 +14,7 @@ const bytes = files.reduce(
   0,
 );
 if (bytes > 200 * 1024) throw new Error(`Initial route gzip budget exceeded: ${bytes} bytes`);
+if (files.length > 6)
+  throw new Error(`Initial request-count budget exceeded: ${files.length} assets`);
 console.log(`Initial route gzip: ${bytes} bytes`);
+console.log(`Initial route asset requests: ${files.length}`);
