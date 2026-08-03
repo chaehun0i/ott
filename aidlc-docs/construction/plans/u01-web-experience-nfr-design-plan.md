@@ -17,34 +17,34 @@
 - [x] 승인된 U01 NFR Requirements, 기술 결정, Functional Rules 및 P-U01-01~10을 분석했다.
 - [x] Resilience, Scalability, Performance, Security, Logical Components의 미결정 패턴을 식별했다.
 - [x] 각 질문에 상호 배타적인 선택지와 마지막 `X) Other`를 포함했다.
-- [ ] Question 1~12의 모든 `[Answer]:` 값을 수집한다.
-- [ ] 답변 유효성, 상호 모순 및 NFR 충돌을 검증하고 필요한 경우 clarification 질문을 작성한다.
+- [x] Question 1~12의 모든 `[Answer]:` 값을 수집했다. 모든 답변은 `A`이다.
+- [x] 답변 유효성, 상호 모순 및 NFR 충돌을 검증했다. clarification 필요가 없다.
 
 ### Step 2 - Resilience and State Patterns
 
-- [ ] route/region error boundary와 stale/degraded 상태 조합 패턴을 설계한다.
-- [ ] read cancellation, retry budget, mutation idempotency 및 auth recovery 패턴을 설계한다.
-- [ ] cache partition, protected-state purge 및 recommendation state machine을 설계한다.
+- [x] route/region error boundary와 stale/degraded 상태 조합 패턴을 설계했다.
+- [x] read cancellation, retry budget, mutation idempotency 및 auth recovery 패턴을 설계했다.
+- [x] cache partition, protected-state purge 및 recommendation state machine을 설계했다.
 
 ### Step 3 - Performance and Scale Patterns
 
-- [ ] route chunk, prefetch, image loading 및 rendering budget 패턴을 설계한다.
-- [ ] query cache lifetime, request coalescing 및 bounded concurrency를 설계한다.
-- [ ] 초기 단일 서버와 scale trigger 이후 정적 자산·telemetry 확장 경계를 설계한다.
+- [x] route chunk, prefetch, image loading 및 rendering budget 패턴을 설계했다.
+- [x] query cache lifetime, request coalescing 및 bounded concurrency를 설계했다.
+- [x] 초기 단일 서버와 scale trigger 이후 정적 자산·telemetry 확장 경계를 설계했다.
 
 ### Step 4 - Security, Accessibility and Logical Components
 
-- [ ] CSP bootstrap, cookie/CSRF, URL allowlist 및 private source-map 패턴을 설계한다.
-- [ ] semantic primitive, focus manager, route announcer 및 error association 패턴을 설계한다.
-- [ ] API Gateway Client, Query Coordinator, Telemetry Adapter와 Quality Gate 구성요소를 정의한다.
+- [x] CSP bootstrap, cookie/CSRF, URL allowlist 및 private source-map 패턴을 설계했다.
+- [x] semantic primitive, focus manager, route announcer 및 error association 패턴을 설계했다.
+- [x] API Gateway Client, Query Coordinator, Telemetry Adapter와 Quality Gate 구성요소를 정의했다.
 
 ### Step 5 - Artifacts and Validation
 
-- [ ] `nfr-design-patterns.md`를 생성한다.
-- [ ] `logical-components.md`를 생성한다.
-- [ ] NFR-U01-01~30, BR-U01-01~28, P-U01-01~10과 확장 규칙 추적성을 검증한다.
-- [ ] Markdown과 질문·답변 구조를 검증한다.
-- [ ] 계획·상태·감사 로그를 갱신하고 NFR Design 검토를 요청한다.
+- [x] `nfr-design-patterns.md`를 생성했다.
+- [x] `logical-components.md`를 생성했다.
+- [x] NFR-U01-01~30, BR-U01-01~28, P-U01-01~10과 확장 규칙 추적성을 검증했다.
+- [x] Markdown과 질문·답변 구조를 검증했다.
+- [x] 계획·상태·감사 로그를 갱신하고 NFR Design 검토를 요청한다.
 
 ## NFR Design Questions
 
@@ -61,7 +61,7 @@ C) Error Boundary 없이 각 component의 try/catch만 사용한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 TanStack Query read retry와 cancellation 패턴은 무엇인가요?
@@ -74,7 +74,7 @@ C) 자동 재시도와 cancellation을 모두 사용하지 않는다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 client cache와 보호 상태의 분리·삭제 패턴은 무엇인가요?
@@ -87,7 +87,7 @@ C) 모든 응답을 local storage에 영구 저장하고 로그인 상태와 무
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 route chunk와 prefetch 경계는 어떻게 구성할까요?
@@ -100,7 +100,7 @@ C) 모든 route를 즉시 prefetch해 navigation latency를 최소화한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 목록 rendering과 이미지 loading의 확장 패턴은 무엇인가요?
@@ -113,7 +113,7 @@ C) pagination 없이 무제한 infinite scroll만 사용한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 CSP와 runtime configuration bootstrap은 어떻게 설계할까요?
@@ -126,7 +126,7 @@ C) API base URL과 비밀정보를 build-time JavaScript 상수에 모두 포함
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 CSRF와 인증 만료 복구는 어떤 공유 component가 담당할까요?
@@ -139,7 +139,7 @@ C) CSRF 없이 bearer token을 local storage에서 읽어 첨부한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 접근성 상호작용 primitive의 소유권은 무엇인가요?
@@ -152,7 +152,7 @@ C) 시각 component library 기본 동작을 별도 검증 없이 사용한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 browser telemetry 수집과 전송 패턴은 무엇인가요?
@@ -165,7 +165,7 @@ C) backend audit endpoint에 browser telemetry를 domain audit event로 기록�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 OpenAPI client와 presentation mapper의 실패 처리 경계는 무엇인가요?
@@ -178,7 +178,7 @@ C) OpenAPI client 없이 endpoint마다 수동 fetch type을 작성한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 11
 PBT stateful model과 seed 재현은 어디에 배치할까요?
@@ -191,7 +191,7 @@ C) PBT는 query string 함수에만 한정하고 stateful test를 제외한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 12
 초기 규모를 넘었을 때 U01 확장 순서는 무엇인가요?
@@ -204,7 +204,7 @@ C) 구조 변경 없이 browser cache 기간만 늘린다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 
