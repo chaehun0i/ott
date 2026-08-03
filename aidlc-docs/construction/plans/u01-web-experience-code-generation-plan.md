@@ -5,8 +5,8 @@
 ## Approval Status
 
 - **Infrastructure Design**: Approved on 2026-08-03.
-- **Code Generation Part 1**: Planning complete; explicit execution approval required.
-- **Code Generation Part 2**: Not started.
+- **Code Generation Part 1**: Approved on 2026-08-03.
+- **Code Generation Part 2**: In progress from Step 1.
 - **Automatic GitHub Actions**: Paused; local and controlled manual verification only.
 
 ## Unit Context
@@ -58,8 +58,8 @@ Application code remains in the workspace root and never under `aidlc-docs/`.
 
 ### Step 1 - Registry, Runtime and Minimal Web Infrastructure Admission
 
-- [ ] 공식 registry에서 Node 24 LTS patch와 React/Vite/TypeScript/pnpm 및 선택 package의 stable 호환 버전을 재검증하고 exact `package.json`, `pnpm-lock.yaml`, `.node-version`을 생성한다. pre-release/deprecated package는 거부하고 clean `pnpm install --frozen-lockfile`을 통과시킨다.
-- [ ] feature code보다 먼저 최소 `frontend/Dockerfile`, web-server config, runtime config skeleton과 Compose `web` service를 추가한다. `docker compose config`에서 CPU `0.5`, memory `256m`, non-root/read-only, edge network only, no secret/DB/private network, healthcheck, JSON rotation과 remote immutable image reference가 렌더링되어야 Step 2로 진행한다.
+- [x] 공식 registry에서 Node 24.18.0 LTS, React 19.2.8, Vite 8.2.0, pnpm 11.18.0과 선택 package의 stable 호환 버전을 재검증하고 exact `package.json`, `pnpm-lock.yaml`, `.node-version`을 생성했다. TypeScript 7.0.2는 typescript-eslint/openapi-typescript peer 범위를 벗어나므로 호환 가능한 5.9.3으로 고정했으며 clean `pnpm install --frozen-lockfile`과 peer Gate를 통과했다.
+- [x] feature code보다 먼저 최소 `frontend/Dockerfile`, web-server config, runtime config skeleton과 Compose `web` service를 추가했다. base/remote `docker compose config`에서 CPU `0.5`, memory `256m`, user `101:101`, read-only, edge network only, no secret/DB/private network, healthcheck, JSON rotation과 remote immutable image reference를 검증했다.
 
 ### Step 2 - Frontend Workspace and Quality Skeleton
 

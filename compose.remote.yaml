@@ -1,6 +1,9 @@
 services:
   caddy:
     image: ${CADDY_IMAGE:?set immutable Caddy image digest}
+  web:
+    image: ${WEB_IMAGE:?set immutable Web image digest}
+    build: null
   api:
     image: ${API_IMAGE:?set immutable API image digest}
     build: null

@@ -1908,3 +1908,17 @@ Step 19의 수동 스크린리더 검증은 미실행 항목을 기록하는 것
 **Context**: U01 Code Generation Part 1 review remediation; approval remains pending.
 
 ---
+## U01 Code Generation Part 2 Approval
+**Timestamp**: 2026-08-03T08:54:16Z
+**User Input**: "전부 실행 바랍니다."
+**AI Response**: "The remediated complete 20-Step U01 Code Generation plan was approved. Part 2 execution started at Step 1 with registry/runtime and minimal Compose admission gates."
+**Context**: U01 Code Generation Part 2 explicit full-plan approval.
+
+---
+## U01 Code Generation Step 1 Complete
+**Timestamp**: 2026-08-03T08:54:16Z
+**User Input**: "전부 실행 바랍니다."
+**AI Response**: "Verified exact stable registry versions and compatibility, generated pnpm lock/runtime files, and passed base/remote Compose Web admission for 0.5 CPU, 256MB, non-root/read-only, edge-only network, no secrets, health and log rotation."
+**Context**: U01 Code Generation Part 2 Step 1 complete; TypeScript 5.9.3 selected because TypeScript 7.0.2 violated current peer constraints.
+
+---

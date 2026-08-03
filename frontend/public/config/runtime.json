@@ -1,0 +1,6 @@
+{
+  "apiBasePath": "/api/v1",
+  "defaultLocale": "ko",
+  "supportedLocales": ["ko", "en"],
+  "release": "local"
+}

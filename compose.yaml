@@ -9,6 +9,21 @@ services:
       - caddy_data:/data
     networks: [public_net, observability_net]
     restart: unless-stopped
+  web:
+    build: {context: ./frontend}
+    user: "101:101"
+    networks: [public_net]
+    read_only: true
+    tmpfs: ["/tmp:size=16m,mode=1777"]
+    mem_limit: 256m
+    cpus: 0.5
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1:8080/health/live"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+    logging: {driver: json-file, options: {max-size: "10m", max-file: "5"}}
   api:
     build: {context: ./backend}
     environment:
