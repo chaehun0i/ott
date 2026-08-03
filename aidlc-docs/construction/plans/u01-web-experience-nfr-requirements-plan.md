@@ -26,31 +26,31 @@
 
 - [x] 성능, 접근성, 지원 브라우저, 기술 스택, 테스트 및 관측성의 미결정을 식별했다.
 - [x] 모든 질문에 상호 배타적 선택지와 마지막 `X) Other`를 포함했다.
-- [ ] Question 1~12의 모든 `[Answer]:` 값을 수집한다.
-- [ ] 답변의 유효성·일관성·기존 기준 충돌 여부를 검증하고 필요한 경우 clarification 질문을 작성한다.
+- [x] Question 1~12의 모든 `[Answer]:` 값을 수집했다. 모든 답변은 `A`이다.
+- [x] 답변의 유효성·일관성·기존 기준 충돌 여부를 검증했다. 모순이나 clarification 필요가 없다.
 
 ### Step 3 - NFR Requirements
 
-- [ ] 페이지·상호작용·bundle·이미지 체감 성능 목표를 정의한다.
-- [ ] 접근성 적합성, 키보드·스크린리더 및 다국어 품질 Gate를 정의한다.
-- [ ] 브라우저 보안, 세션, CSP, 개인정보 및 외부 링크 기준을 정의한다.
-- [ ] 부분 장애, 재시도, 캐시, 로깅 및 사용자 관측성 기준을 정의한다.
-- [ ] `nfr-requirements.md`를 생성한다.
+- [x] 페이지·상호작용·bundle·이미지 체감 성능 목표를 정의했다.
+- [x] 접근성 적합성, 키보드·스크린리더 및 다국어 품질 Gate를 정의했다.
+- [x] 브라우저 보안, 세션, CSP, 개인정보 및 외부 링크 기준을 정의했다.
+- [x] 부분 장애, 재시도, 캐시, 로깅 및 사용자 관측성 기준을 정의했다.
+- [x] `nfr-requirements.md`를 생성했다.
 
 ### Step 4 - Technology and Quality Gates
 
-- [ ] UI framework, language, build/package, routing/data/form/i18n/style 기술 결정을 기록한다.
-- [ ] unit, component, accessibility, PBT, contract 및 browser E2E 도구를 확정한다.
-- [ ] PBT-09 framework와 P-U01-01~10의 실행 Gate를 연결한다.
-- [ ] 정적 분석, type checking, coverage, bundle 및 OpenAPI drift Gate를 정의한다.
-- [ ] `tech-stack-decisions.md`를 생성한다.
+- [x] UI framework, language, build/package, routing/data/form/i18n/style 기술 결정을 기록했다.
+- [x] unit, component, accessibility, PBT, contract 및 browser E2E 도구를 확정했다.
+- [x] PBT-09 framework와 P-U01-01~10의 실행 Gate를 연결했다.
+- [x] 정적 분석, type checking, coverage, bundle 및 OpenAPI drift Gate를 정의했다.
+- [x] `tech-stack-decisions.md`를 생성했다.
 
 ### Step 5 - Validation and Completion
 
-- [ ] U01 Story/Functional Rule/NFR/Technology 추적성을 검증한다.
-- [ ] Resiliency와 Property-Based Testing 확장 규칙 준수를 검증한다.
-- [ ] Markdown 및 질문·답변 구조를 검증한다.
-- [ ] 계획·상태·감사 로그를 갱신하고 NFR Requirements 검토를 요청한다.
+- [x] U01 Story/Functional Rule/NFR/Technology 추적성을 검증했다.
+- [x] Resiliency와 Property-Based Testing 확장 규칙 준수를 검증했다.
+- [x] Markdown 및 질문·답변 구조를 검증했다.
+- [x] 계획·상태·감사 로그를 갱신하고 NFR Requirements 검토를 요청한다.
 
 ## NFR Requirements Questions
 
@@ -67,7 +67,7 @@ C) 서버 렌더링 템플릿과 최소 JavaScript를 사용한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 Node.js와 package 관리 기준은 무엇으로 정할까요?
@@ -80,7 +80,7 @@ C) 시스템 Node.js 최신 버전과 lockfile 없는 설치를 허용한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 라우팅·서버 상태·폼 상태의 기본 라이브러리 경계는 무엇인가요?
@@ -93,7 +93,7 @@ C) 외부 상태 라이브러리 없이 React state와 직접 fetch만 사용한
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 스타일과 컴포넌트 접근 방식은 무엇으로 정할까요?
@@ -106,7 +106,7 @@ C) 완성형 UI component suite의 기본 theme와 interaction을 그대로 사�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 접근성 적합성과 검증 범위는 무엇인가요?
@@ -119,7 +119,7 @@ C) semantic HTML code review만 수행하고 자동·수동 접근성 gate는 �
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 지원 브라우저 기준은 무엇인가요?
@@ -132,7 +132,7 @@ C) 데스크톱 최신 브라우저만 지원하고 모바일 브라우저는 �
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 프런트엔드 체감 성능과 bundle 예산은 무엇으로 확정할까요?
@@ -145,7 +145,7 @@ C) 기능 완성 후 운영 전환 단계에서 처음 성능 예산을 정한�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 이미지와 route resource loading 전략은 무엇인가요?
@@ -158,7 +158,7 @@ C) 포스터 이미지를 초기 버전에서 표시하지 않는다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 프런트엔드 보안 기준은 무엇으로 정할까요?
@@ -171,7 +171,7 @@ C) 브라우저 저장소에 bearer token을 저장하고 API 요청에 직접 �
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 테스트 도구와 PBT framework는 무엇으로 정할까요?
@@ -184,7 +184,7 @@ C) Playwright E2E만 사용하고 unit/component/PBT를 두지 않는다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 11
 프런트엔드 품질 Gate는 무엇인가요?
@@ -197,7 +197,7 @@ C) production build 성공만 필수로 한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 12
 브라우저 telemetry와 개인정보 기준은 무엇인가요?
@@ -210,7 +210,7 @@ C) 초기 버전에서는 오류나 성능 telemetry를 전혀 수집하지 않�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 
