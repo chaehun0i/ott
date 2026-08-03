@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U01 Web Experience - Functional Design review required
+- **Current Stage**: U01 Web Experience - NFR Requirements questions awaiting answers
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -68,7 +68,7 @@
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
 | U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Completed - approved 2026-08-03 |
-| U01 Web Experience | Generated - awaiting approval | Pending | Pending | Pending | Pending |
+| U01 Web Experience | Completed - approved 2026-08-03 | Planning - questions awaiting answers | Pending | Pending | Pending |
 
 ## Next Step
-Review `aidlc-docs/construction/u01-web-experience/functional-design/`. Choose Request Changes or Continue to Next Stage; U01 NFR Requirements cannot begin before explicit Functional Design approval.
+Complete all `[Answer]:` fields in `aidlc-docs/construction/plans/u01-web-experience-nfr-requirements-plan.md`. Answers will be validated before U01 NFR Requirements artifacts are generated.
