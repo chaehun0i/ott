@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U01 Web Experience - Infrastructure Design review required
+- **Current Stage**: U01 Web Experience - Code Generation Part 1 approval required
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -68,7 +68,7 @@
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
 | U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Completed - approved 2026-08-03 |
-| U01 Web Experience | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Generated - awaiting approval | Pending |
+| U01 Web Experience | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Part 1 planned - awaiting approval |
 
 ## Next Step
-Review `aidlc-docs/construction/u01-web-experience/infrastructure-design/`. Choose Request Changes or Continue to Next Stage; U01 Code Generation planning cannot begin before explicit Infrastructure Design approval.
+Review and approve the complete 20-Step sequence in `aidlc-docs/construction/plans/u01-web-experience-code-generation-plan.md`. Part 2 must not start before explicit plan approval.

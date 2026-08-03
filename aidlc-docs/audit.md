@@ -1876,3 +1876,18 @@
 **Context**: U01 Web Experience - Infrastructure Design answer validation and artifact generation.
 
 ---
+## U01 Infrastructure Design Approval / Code Generation Part 1
+**Timestamp**: 2026-08-03T08:35:55Z
+**User Input**: "다음 진행해줘"
+**AI Response**: "U01 Infrastructure Design 승인을 기록하고 registry/lockfile 및 minimal Compose admission부터 full regression까지의 순차 20-Step Code Generation 계획을 작성했다."
+**Context**: U01 Infrastructure Design explicit approval; Code Generation Part 1 planning.
+
+---
+
+## U01 Code Generation Part 1 Approval Prompt
+**Timestamp**: 2026-08-03T08:35:55Z
+**User Input**: "다음 진행해줘"
+**AI Response**: "Complete 20-Step U01 Code Generation plan prepared. Explicit approval is required before Part 2 execution."
+**Context**: U01 Code Generation Part 1 approval gate; plan path `aidlc-docs/construction/plans/u01-web-experience-code-generation-plan.md`.
+
+---
