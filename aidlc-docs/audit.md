@@ -1820,3 +1820,10 @@
 **Context**: CONSTRUCTION - standardized U06 Code Generation review gate
 
 ---
+## U06 Code Generation Approval / U01 Functional Design Start
+**Timestamp**: 2026-08-03T00:43:26Z
+**User Input**: "다음 진행 바랍니다."
+**AI Response**: "U06 Code Generation 승인을 기록하고 U01 Web Experience Functional Design의 단위 맥락 분석, 체크박스 계획 및 결정 질문 작성을 시작했다."
+**Context**: U06 Code Generation explicit approval; transition to U01 Functional Design planning and questions.
+
+---

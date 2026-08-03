@@ -4,7 +4,7 @@
 - **Project Type**: Greenfield
 - **Start Date**: 2026-07-26T01:01:04Z
 - **Current Phase**: CONSTRUCTION
-- **Current Stage**: U06 Engagement and Operations - Code Generation review required
+- **Current Stage**: U01 Web Experience - Functional Design questions awaiting answers
 - **Project Intent**: Build an OTT latest-information feed and recommendation product
 
 ## Workspace State
@@ -55,8 +55,8 @@
 - **Skip**: Reverse Engineering (Greenfield)
 - **Placeholder**: Operations
 - **Risk Level**: High
-- **Current Unit**: U06 Engagement and Operations
-- **Next Stage After Approval**: U01 Web Experience - Functional Design
+- **Current Unit**: U01 Web Experience
+- **Next Stage After Approval**: U01 Web Experience - NFR Requirements
 
 ## Unit Progress
 
@@ -67,8 +67,8 @@
 | U03 Catalog and Discovery | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
-| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Generated - awaiting approval |
-| U01 Web Experience | Pending | Pending | Pending | Pending | Pending |
+| U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Completed - approved 2026-08-03 |
+| U01 Web Experience | Planning - questions awaiting answers | Pending | Pending | Pending | Pending |
 
 ## Next Step
-Review U06 generated application code and `aidlc-docs/construction/u06-engagement-and-operations/code/`. Choose Request Changes or Continue to Next Stage; U01 cannot begin before explicit U06 Code Generation approval.
+Complete all `[Answer]:` fields in `aidlc-docs/construction/plans/u01-web-experience-functional-design-plan.md`. Answers will be validated before U01 Functional Design artifacts are generated.
