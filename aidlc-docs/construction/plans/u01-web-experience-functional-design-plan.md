@@ -26,38 +26,38 @@
 
 - [x] 화면 구조, 탐색 상태, 추천 대화, 인증 경계, 오류·저하 상태 및 접근성의 미결정을 식별했다.
 - [x] 각 질문에 상호 배타적인 선택지와 마지막 `X) Other` 선택지를 작성했다.
-- [ ] Question 1~12의 모든 `[Answer]:` 값을 수집한다.
-- [ ] 답변의 유효성·일관성·모호성을 검토하고 필요한 경우 clarification 질문을 작성한다.
+- [x] Question 1~12의 모든 `[Answer]:` 값을 수집했다. 모든 답변은 `A`이다.
+- [x] 답변의 유효성·일관성·모호성을 검토했다. 모순이나 추가 clarification 필요가 없다.
 
 ### Step 3 - Business Logic Model
 
-- [ ] 방문자·회원·운영자 여정과 라우트 전이를 정의한다.
-- [ ] Feed·Search·Recommendation의 query, pagination, refinement 및 reset 흐름을 정의한다.
-- [ ] 인증 만료, 권한 거부, 부분 장애, stale data 및 재시도 흐름을 정의한다.
-- [ ] `business-logic-model.md`를 생성하고 Story/API 계약 추적성을 연결한다.
+- [x] 방문자·회원·운영자 여정과 라우트 전이를 정의했다.
+- [x] Feed·Search·Recommendation의 query, pagination, refinement 및 reset 흐름을 정의했다.
+- [x] 인증 만료, 권한 거부, 부분 장애, stale data 및 재시도 흐름을 정의했다.
+- [x] `business-logic-model.md`를 생성하고 Story/API 계약 추적성을 연결했다.
 
 ### Step 4 - Domain Entities
 
-- [ ] UI Route, View State, Query State, Recommendation Conversation 및 Session Reference를 정의한다.
-- [ ] Content Card, Evidence, Availability, Freshness, Consent 및 Feedback 표현 모델을 정의한다.
-- [ ] 로컬 상태와 서버 원본 상태의 소유권·수명·초기화 규칙을 정의한다.
-- [ ] `domain-entities.md`를 생성한다.
+- [x] UI Route, View State, Query State, Recommendation Conversation 및 Session Reference를 정의했다.
+- [x] Content Card, Evidence, Availability, Freshness, Consent 및 Feedback 표현 모델을 정의했다.
+- [x] 로컬 상태와 서버 원본 상태의 소유권·수명·초기화 규칙을 정의했다.
+- [x] `domain-entities.md`를 생성했다.
 
 ### Step 5 - Business Rules and Frontend Components
 
-- [ ] 로딩·빈 결과·오류·저하·오래된 데이터 표시 규칙과 복구 동작을 정의한다.
-- [ ] 인증·동의·운영자 권한·외부 OTT 이동·행동 이벤트 규칙을 정의한다.
-- [ ] 한국어·영어, 키보드, 초점, 라이브 영역, 대체 텍스트 및 오류 연결 규칙을 정의한다.
-- [ ] 컴포넌트 계층, props/state, 상호작용, validation 및 API 연계를 정의한다.
-- [ ] PBT 대상 UI 상태 전이와 불변조건을 분류한다.
-- [ ] `business-rules.md`와 `frontend-components.md`를 생성한다.
+- [x] 로딩·빈 결과·오류·저하·오래된 데이터 표시 규칙과 복구 동작을 정의했다.
+- [x] 인증·동의·운영자 권한·외부 OTT 이동·행동 이벤트 규칙을 정의했다.
+- [x] 한국어·영어, 키보드, 초점, 라이브 영역, 대체 텍스트 및 오류 연결 규칙을 정의했다.
+- [x] 컴포넌트 계층, props/state, 상호작용, validation 및 API 연계를 정의했다.
+- [x] PBT 대상 UI 상태 전이와 불변조건을 분류했다.
+- [x] `business-rules.md`와 `frontend-components.md`를 생성했다.
 
 ### Step 6 - Validation and Completion
 
-- [ ] Story/FR/DR/NFR 및 U02~U07 API 계약 추적성을 검증한다.
-- [ ] Resiliency와 Property-Based Testing 확장 규칙 준수를 검증한다.
-- [ ] Markdown 구조와 질문·답변 파싱 호환성을 검증한다.
-- [ ] 계획, 상태 및 감사 로그를 갱신하고 Functional Design 검토를 요청한다.
+- [x] Story/FR/DR/NFR 및 U02~U07 API 계약 추적성을 검증했다.
+- [x] Resiliency와 Property-Based Testing 확장 규칙 준수를 검증했다.
+- [x] Markdown 구조와 질문·답변 파싱 호환성을 검증했다.
+- [x] 계획, 상태 및 감사 로그를 갱신하고 Functional Design 검토를 요청한다.
 
 ## Functional Design Questions
 
@@ -74,7 +74,7 @@ C) 모든 기능을 단일 대시보드 화면의 섹션으로 제공한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 방문자가 회원 전용 동작(찜, 평가, 추천 저장 등)을 선택하면 어떻게 처리할까요?
@@ -87,7 +87,7 @@ C) 방문자 로컬 상태로 저장하고 가입 시 일괄 병합한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 피드 필터와 정렬 상태를 어디까지 유지할까요?
@@ -100,7 +100,7 @@ C) 회원 프로필에 마지막 상태를 영구 저장한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 목록에서 작품 상세를 여는 기본 상호작용은 무엇인가요?
@@ -113,7 +113,7 @@ C) 카드 안에서 상세 내용을 확장한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 검색 입력은 구조 검색과 자연어 검색을 어떻게 구분할까요?
@@ -126,7 +126,7 @@ C) 검색은 구조 검색만 제공하고 자연어 입력은 추천 화면에�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 추천 대화 결과와 조건 변경을 어떤 화면 모델로 제공할까요?
@@ -139,7 +139,7 @@ C) 대화 없이 매 요청마다 새 추천 폼과 결과로 교체한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 추천 카드의 이유·요약·근거는 기본적으로 어떻게 노출할까요?
@@ -152,7 +152,7 @@ C) 요약, 이유, 근거 필드를 모두 카드에 항상 표시한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 API 일부가 실패하거나 stale 상태일 때 화면 정책은 무엇인가요?
@@ -165,7 +165,7 @@ C) 오류를 표시하지 않고 마지막 성공 데이터를 계속 보여준�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 언어 선택과 콘텐츠 번역 fallback은 어떻게 동작해야 하나요?
@@ -178,7 +178,7 @@ C) 브라우저 언어로만 자동 결정하고 수동 선택을 제공하지 �
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 개인화 동의 철회 후 현재 화면 상태는 어떻게 처리할까요?
@@ -191,7 +191,7 @@ C) 현재 결과는 유지하되 경고 문구만 표시한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 11
 OTT 외부 이동은 어떤 확인과 추적 규칙을 적용할까요?
@@ -204,7 +204,7 @@ C) 실제 이동 없이 OTT 이름과 이용 가능 여부만 표시한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 12
 운영자 UI는 일반 사용자 UI와 어떤 경계로 제공할까요?
@@ -217,7 +217,7 @@ C) 운영자 UI를 U01 초기 범위에서 제외한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 
