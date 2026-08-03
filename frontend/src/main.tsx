@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { App } from "@/app/App";
 
 const root = document.getElementById("root");
 
@@ -9,8 +10,6 @@ if (!root) {
 
 createRoot(root).render(
   <React.StrictMode>
-    <main>
-      <h1>OTT Feed</h1>
-    </main>
+    <App />
   </React.StrictMode>,
 );

@@ -9,11 +9,14 @@
   },
   "scripts": {
     "build": "vite build",
+    "check:bundle": "node scripts/check-bundle.mjs",
     "dev": "vite",
     "format:check": "prettier --check .",
     "lint": "eslint .",
-    "test": "vitest run",
-    "test:pbt": "vitest run --project pbt",
+    "test": "vitest run --coverage",
+    "test:unit": "vitest run",
+    "test:pbt": "vitest run tests/pbt",
+    "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -27,12 +30,14 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
+    "@eslint/js": "10.0.1",
     "@playwright/test": "1.62.1",
     "@testing-library/jest-dom": "7.0.0",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "@vitest/coverage-v8": "4.1.10",
     "@vitejs/plugin-react": "6.0.5",
     "axe-core": "4.12.1",
     "eslint": "10.8.0",

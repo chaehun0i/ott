@@ -63,9 +63,9 @@ Application code remains in the workspace root and never under `aidlc-docs/`.
 
 ### Step 2 - Frontend Workspace and Quality Skeleton
 
-- [ ] Vite React/TypeScript strict workspace, path aliases, CSS Modules/token, locale bootstrap과 empty AppShell을 생성한다.
-- [ ] TypeScript strict/noUncheckedIndexedAccess, ESLint, formatting, Vitest, coverage, axe, fast-check와 Playwright configuration을 연결한다.
-- [ ] typecheck, lint, unit smoke와 production build를 실행하고 initial route budget script skeleton이 manifest를 읽는지 확인한다.
+- [x] Vite React/TypeScript strict workspace, path aliases, CSS Modules/token, locale bootstrap과 empty AppShell을 생성했다.
+- [x] TypeScript strict/noUncheckedIndexedAccess, ESLint, formatting, Vitest coverage, axe, fast-check와 Playwright configuration을 연결했다.
+- [x] formatting, typecheck, lint, unit smoke, production build를 통과하고 initial route manifest gzip 80,045 bytes로 200KB budget 이내임을 확인했다.
 
 ### Step 3 - Generated OpenAPI Client and Typed Transport Boundary
 
