@@ -1862,3 +1862,10 @@
 **Context**: U01 Web Experience - NFR Design answer validation and artifact generation.
 
 ---
+## U01 NFR Design Approval / Infrastructure Design Start
+**Timestamp**: 2026-08-03T08:27:34Z
+**User Input**: "다음 진행 해줘"
+**AI Response**: "U01 NFR Design 승인을 기록하고 기존 Compose/Caddy/observability를 분석하여 Infrastructure Design 체크박스 계획과 인프라 결정 질문을 작성했다."
+**Context**: U01 NFR Design explicit approval; transition to U01 Infrastructure Design planning and questions.
+
+---
