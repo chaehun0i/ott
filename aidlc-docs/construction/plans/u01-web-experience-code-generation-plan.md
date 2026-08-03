@@ -46,6 +46,14 @@ Application code remains in the workspace root and never under `aidlc-docs/`.
 - [x] registry/lockfile, Compose resource, PBT, 접근성, browser, privacy, CSP와 full regression Gate를 포함했다.
 - [x] 계획 승인 전 application code와 infrastructure file을 변경하지 않았다.
 
+## Review Remediation
+
+- [x] Step 19의 수동 스크린리더 검증을 실제 통과가 필요한 blocking Gate로 강화했다. 실행 불가나 일부 미실행은 `Verification Incomplete`이며 Step 19·20과 최종 완료를 차단한다.
+- [x] 수동 evidence에 검증 환경, OS/browser/screen-reader 버전, 핵심 여정별 결과와 발견 사항을 기록하도록 명시했다.
+- [x] 최소 수동 여정에 Feed→Detail→Back, Search, Recommendation 결과 announcement, 로그인 Pending Intent 재개, 동의 철회, Admin 접근 거부를 포함했다.
+- [x] Step 6의 선택자 정책을 role·accessible name 우선으로 변경하고 `data-testid`는 안정적인 semantic selector가 없는 경우에만 허용했다.
+- [x] 기존 20-Step 실행 순서와 나머지 blocking Gate를 변경하지 않았다.
+
 ## Part 2 Execution Plan
 
 ### Step 1 - Registry, Runtime and Minimal Web Infrastructure Admission
@@ -80,7 +88,7 @@ Application code remains in the workspace root and never under `aidlc-docs/`.
 ### Step 6 - Semantic Primitive and Accessibility Foundation
 
 - [ ] Button, Link, Field, ErrorSummary, Disclosure, Dialog, LiveRegion, RemoteRegion primitive를 native-first로 구현한다.
-- [ ] stable `data-testid`를 `{component}-{element-role}` 규칙으로 interactive element에 추가한다.
+- [ ] 테스트 선택자는 role·accessible name·label·text와 같은 사용자 인지 가능한 semantic selector를 우선한다. 반복 목록이나 비가시적 기술 상태처럼 안정적인 semantic selector가 없고 테스트 목적상 필요한 경우에만 stable `data-testid`를 사용하며, 모든 interactive element에 일괄 추가하지 않는다.
 - [ ] keyboard/name-role-value/focus/error association example test와 axe test, P-U01-09 error-reference property를 추가한다.
 
 ### Step 7 - App Shell, Routing, Focus and Error Boundaries
@@ -158,11 +166,13 @@ Application code remains in the workspace root and never under `aidlc-docs/`.
 ### Step 19 - Browser, Accessibility, Security and Supply-Chain Gates
 
 - [ ] Playwright Chromium/Firefox/WebKit/mobile 핵심 여정, keyboard-only, 200% zoom/reflow와 automated axe suite를 통과시킨다.
-- [ ] manual NVDA/Chrome 또는 VoiceOver/Safari checklist artifact를 생성하고 실행 가능한 범위와 미실행 항목을 허위 없이 기록한다.
+- [ ] NVDA/Chrome 또는 VoiceOver/Safari 조합으로 수동 스크린리더 핵심 여정을 실제 실행하고 모두 통과시킨다. 최소 여정은 Feed→Detail→Back, Search, Recommendation 결과 announcement, 로그인 Pending Intent 재개, 동의 철회, Admin 접근 거부이다. Evidence에는 OS, browser와 screen-reader 이름·정확한 버전, 입력 방식, 실행 일시, 각 여정의 단계·기대 결과·실제 결과·Pass/Fail 및 발견 사항을 기록한다.
+- [ ] 수동 검증 환경이 없거나 한 여정이라도 미실행·실패하면 상태를 `Verification Incomplete`로 유지한다. 이 상태에서는 Step 19를 `[x]`로 바꾸거나 Step 20 완료, Code Generation 최종 완료 표시 및 승인 요청을 수행하지 않는다. 자동 axe/Playwright 통과는 이 Gate를 대체하지 않는다.
 - [ ] CSP parser, unsafe inline/eval, external URL, secret/source-map scan, frozen lock, dependency/license audit와 critical/high finding 0 gate를 통과시킨다.
 
 ### Step 20 - Full Regression, Traceability and Code Summary
 
+- [ ] Step 19의 수동 스크린리더 evidence가 지정된 도구 조합과 최소 6개 여정을 모두 실제 Pass로 기록했는지 먼저 검증한다. `Verification Incomplete`, Fail 또는 누락이 있으면 Step 20에 진입하거나 완료 처리하지 않는다.
 - [ ] frontend type/lint/format/build/unit/component/PBT/contract/a11y/browser/performance/security suite와 backend full test, real PostgreSQL integration skip=0을 모두 실행한다.
 - [ ] Compose base/local/remote config, Caddy, web image/resource/network/health/logging, OpenAPI drift와 clean frozen install을 재검증한다.
 - [ ] US-001~US-019/US-021/US-027, BR-U01-01~28, NFR-U01-01~30, P-U01-01~10 traceability와 `code-generation-summary.md`, `test-evidence.md`, `traceability.md`를 생성한다.
@@ -199,6 +209,8 @@ No PBT completion claim is allowed before Steps 5~9 and Step 20 evidence pass.
 - API and SPA route precedence, static asset 404 behavior, CSP and health consumers are independently tested.
 - Browser telemetry is best-effort observability data, never audit/domain truth, and rejects raw input/direct identifiers.
 - PBT, accessibility, browser, privacy/security, performance and supply-chain gates are blocking.
+- NVDA/Chrome 또는 VoiceOver/Safari 실제 수동 검증은 대체 불가능한 blocking Gate이다. 최소 6개 여정이 모두 Pass이고 환경·정확한 버전·여정·결과 evidence가 완전할 때만 Step 19와 Step 20을 완료할 수 있다.
+- 수동 스크린리더 검증을 실행할 수 없거나 일부만 실행한 경우 `Verification Incomplete`로 유지하며, Code Generation 완료 선언·최종 체크·승인 요청을 금지한다.
 - Backend PostgreSQL integration selection must complete with skip=0; frontend success cannot mask a backend integration skip.
 - Automatic GitHub Actions triggers remain paused throughout U01 Code Generation.
 
@@ -210,4 +222,4 @@ No PBT completion claim is allowed before Steps 5~9 and Step 20 evidence pass.
 
 ## Approval Gate
 
-Part 2 must not start until the user explicitly approves this complete 20-Step plan and execution sequence.
+Part 2 must not start until the user explicitly approves this complete 20-Step plan and execution sequence. Part 2가 승인되더라도 Step 19 수동 스크린리더 Gate가 실제 통과하지 않으면 최종 Code Generation 승인 요청을 제시할 수 없다.

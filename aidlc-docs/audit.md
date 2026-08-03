@@ -1891,3 +1891,20 @@
 **Context**: U01 Code Generation Part 1 approval gate; plan path `aidlc-docs/construction/plans/u01-web-experience-code-generation-plan.md`.
 
 ---
+## U01 Code Generation Plan Review Remediation
+**Timestamp**: 2026-08-03T08:40:20Z
+**User Input**: "U01 Code Generation Plan은 다음 차단 사항을 수정한 뒤 승인하겠습니다.
+
+Step 19의 수동 스크린리더 검증은 미실행 항목을 기록하는 것만으로 완료 처리할 수 없도록 수정해줘. 기존 NFR에 따라 NVDA/Chrome 또는 VoiceOver/Safari 핵심 여정이 실제 통과해야 Step 19, Step 20 및 U01 Code Generation 최종 완료가 가능하도록 해줘.
+
+환경상 수동 검증을 실행하지 못하면 `Verification Incomplete` 상태로 유지하고 최종 완료 체크와 승인 요청을 차단해줘. 검증 환경·버전·여정·결과도 evidence에 기록해줘.
+
+최소 수동 검증 여정은 Feed→Detail→Back, Search, Recommendation 결과 announcement, 로그인 Pending Intent 재개, 동의 철회, Admin 접근 거부를 포함해줘.
+
+추가로 Step 6의 `data-testid`는 모든 interactive element에 강제하지 말고 role·accessible name 기반 테스트를 우선하며, 안정적인 선택자가 필요한 경우에만 사용하도록 수정해줘.
+
+그 외 20-Step 실행 순서와 blocking Gate는 유지해줘."
+**AI Response**: "Step 19 manual screen-reader verification을 대체 불가능한 blocking Gate로 강화하고 Verification Incomplete 차단, evidence 필드, 최소 6개 여정을 명시했다. Step 6은 semantic selector 우선과 제한적 data-testid 정책으로 수정했으며 20-Step 순서와 기타 Gate는 유지했다."
+**Context**: U01 Code Generation Part 1 review remediation; approval remains pending.
+
+---
