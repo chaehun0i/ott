@@ -1869,3 +1869,10 @@
 **Context**: U01 NFR Design explicit approval; transition to U01 Infrastructure Design planning and questions.
 
 ---
+## U01 Infrastructure Design Answers and Generation
+**Timestamp**: 2026-08-03T08:31:05Z
+**User Input**: "다 A 로 답변했어 다음 진행해줘"
+**AI Response**: "U01 Infrastructure Design Question 1~12의 A 답변을 검증하고 Web build/runtime, Compose resource, Caddy routing/CSP, network, health, telemetry와 deployment architecture를 설계했다."
+**Context**: U01 Web Experience - Infrastructure Design answer validation and artifact generation.
+
+---

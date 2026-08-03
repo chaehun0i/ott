@@ -19,30 +19,30 @@
 - [x] 현재 Compose, Caddy, network, logging과 observability 구성을 확인했다.
 - [x] Deployment, Compute, Storage, Messaging, Network, Monitoring, Shared Infrastructure의 미결정을 식별했다.
 - [x] 모든 질문에 상호 배타적 선택지와 마지막 `X) Other`를 포함했다.
-- [ ] Question 1~12의 모든 `[Answer]:` 값을 수집한다.
-- [ ] 답변 유효성·모순·기존 인프라 충돌을 검증하고 필요한 경우 clarification 질문을 작성한다.
+- [x] Question 1~12의 모든 `[Answer]:` 값을 수집했다. 모든 답변은 `A`이다.
+- [x] 답변 유효성·모순·기존 인프라 충돌을 검증했다. clarification 필요가 없다.
 
 ### Step 2 - Build and Runtime Infrastructure
 
-- [ ] frontend multi-stage build, immutable artifact 및 runtime image 경계를 정의한다.
-- [ ] web compute CPU/memory, filesystem, user, healthcheck와 restart 의미를 정의한다.
-- [ ] storage와 messaging이 U01에 N/A인지 근거를 확정한다.
+- [x] frontend multi-stage build, immutable artifact 및 runtime image 경계를 정의했다.
+- [x] web compute CPU/memory, filesystem, user, healthcheck와 restart 의미를 정의했다.
+- [x] storage와 messaging이 U01에 N/A인지 근거를 확정했다.
 
 ### Step 3 - Network, Security and Observability
 
-- [ ] Caddy public route, SPA fallback, `/api` 우선순위, cache와 compression을 정의한다.
-- [ ] strict CSP, public runtime config, same-origin, source map 및 external egress 경계를 정의한다.
-- [ ] web health, synthetic check, Web Vitals와 privacy-safe telemetry 배치를 정의한다.
-- [ ] JSON stdout 원본 log와 선택적 Loki 검색 복제 관계를 정의한다.
+- [x] Caddy public route, SPA fallback, `/api` 우선순위, cache와 compression을 정의했다.
+- [x] strict CSP, public runtime config, same-origin, source map 및 external egress 경계를 정의했다.
+- [x] web health, synthetic check, Web Vitals와 privacy-safe telemetry 배치를 정의했다.
+- [x] JSON stdout 원본 log와 선택적 Loki 검색 복제 관계를 정의했다.
 
 ### Step 4 - Artifacts and Validation
 
-- [ ] `infrastructure-design.md`를 생성한다.
-- [ ] `deployment-architecture.md`와 text alternative를 생성한다.
-- [ ] shared infrastructure 변경 필요성을 평가하고 필요한 경우에만 문서를 갱신한다.
-- [ ] NFR-U01-01~30, logical component 및 extension traceability를 검증한다.
-- [ ] Markdown과 diagram 구문을 검증한다.
-- [ ] 계획·상태·감사 로그를 갱신하고 Infrastructure Design 검토를 요청한다.
+- [x] `infrastructure-design.md`를 생성했다.
+- [x] `deployment-architecture.md`와 text alternative를 생성했다.
+- [x] shared infrastructure 변경 필요성을 평가했다. 기존 공유 자원을 재사용하므로 별도 문서 변경이 불필요하다.
+- [x] NFR-U01-01~30, logical component 및 extension traceability를 검증했다.
+- [x] Markdown과 diagram 구문을 검증했다. Mermaid/ASCII diagram은 사용하지 않았다.
+- [x] 계획·상태·감사 로그를 갱신하고 Infrastructure Design 검토를 요청한다.
 
 ## Infrastructure Design Questions
 
@@ -59,7 +59,7 @@ C) 정적 파일을 API Python container 내부에 복사해 FastAPI가 직접 �
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 2
 web container와 Caddy의 routing 책임은 어떻게 나눌까요?
@@ -72,7 +72,7 @@ C) web container가 API reverse proxy까지 담당하고 Caddy를 제거한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 3
 초기 web compute resource와 restart 정책은 무엇인가요?
@@ -85,7 +85,7 @@ C) 2 CPU, 2GB memory를 예약하고 별도 health restart controller를 도입�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 4
 web health와 public synthetic monitoring은 어떻게 구성할까요?
@@ -98,7 +98,7 @@ C) frontend에는 healthcheck와 synthetic check를 두지 않는다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 5
 정적 자산 cache와 compression 정책은 무엇인가요?
@@ -111,7 +111,7 @@ C) 모든 응답을 no-store로 제공하고 compression을 끈다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 6
 CSP와 security header는 어느 계층에서 적용할까요?
@@ -124,7 +124,7 @@ C) 초기에는 `unsafe-inline`과 `unsafe-eval`을 허용하고 나중에 강�
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 7
 runtime configuration과 secret 경계는 무엇인가요?
@@ -137,7 +137,7 @@ C) API credential을 runtime JSON에 넣어 browser가 직접 사용한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 8
 U01의 storage와 messaging infrastructure는 어떻게 처리할까요?
@@ -150,7 +150,7 @@ C) IndexedDB를 영속 source of truth와 offline event queue로 사용한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 9
 browser telemetry infrastructure는 어떻게 연결할까요?
@@ -163,7 +163,7 @@ C) 모든 console과 network body를 외부 SaaS에 직접 전송한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 10
 web access log와 중앙 검색 관계는 무엇인가요?
@@ -176,7 +176,7 @@ C) Loki만 원본으로 간주하고 Docker log를 비활성화한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 11
 public/private network와 outbound egress는 어떻게 구성할까요?
@@ -189,7 +189,7 @@ C) web container를 database/private network에도 연결한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Question 12
 초기 규모 이후 shared infrastructure 확장 Gate는 무엇인가요?
@@ -202,7 +202,7 @@ C) 측정값과 무관하게 단일 서버 구조를 영구 유지한다
 
 X) Other (please describe after the `[Answer]:` tag)
 
-[Answer]:
+[Answer]:A
 
 ## Planned Artifacts
 
