@@ -1939,3 +1939,58 @@ Step 1~18의 구현과 자동 검증 결과는 보존하되, NVDA/Chrome 또는 
 **Context**: U01 Code Generation Part 2 manual accessibility blocking gate reaffirmed; no completion status changed.
 
 ---
+## U01 Step 20 Automated Verification Pre-Execution
+**Timestamp**: 2026-08-04T02:08:53Z
+**User Input**: "Proceed with all remaining work that does **not** require the manual screen-reader verification.
+
+Specifically:
+
+* Execute every automated verification that belongs to Step 20.
+* Re-run full regression.
+* Re-run type/lint/build.
+* Re-run unit/component/PBT/contract/browser/performance/security suites.
+* Re-run backend tests and PostgreSQL integration (skip=0).
+* Re-validate Compose, Caddy, OpenAPI drift and frozen install.
+* Generate traceability and summary documents.
+
+However:
+
+* Do NOT mark Step 19 complete.
+* Do NOT mark Step 20 complete.
+* Do NOT declare Code Generation Complete.
+* Final project status must remain **Verification Incomplete**.
+* Clearly list the remaining manual NVDA/VoiceOver verification as the only blocking item.
+
+Everything except the manual accessibility gate should be finished so that the project can be completed immediately after the manual verification passes."
+**AI Response**: "Started all non-manual Step 20 automated verification and documentation work. Step 19, Step 20, Code Generation Complete and final approval remain blocked; state remains Verification Incomplete."
+**Context**: U01 Code Generation Part 2 automated pre-execution explicitly authorized without changing completion gates.
+
+---
+
+## U01 Automated Handoff Verification Executed
+**Timestamp**: 2026-08-04T02:32:40Z
+**User Input**: "Proceed with all remaining work that does **not** require the manual screen-reader verification.
+
+Specifically:
+
+* Execute every automated verification that belongs to Step 20.
+* Re-run full regression.
+* Re-run type/lint/build.
+* Re-run unit/component/PBT/contract/browser/performance/security suites.
+* Re-run backend tests and PostgreSQL integration (skip=0).
+* Re-validate Compose, Caddy, OpenAPI drift and frozen install.
+* Generate traceability and summary documents.
+
+However:
+
+* Do NOT mark Step 19 complete.
+* Do NOT mark Step 20 complete.
+* Do NOT declare Code Generation Complete.
+* Final project status must remain **Verification Incomplete**.
+* Clearly list the remaining manual NVDA/VoiceOver verification as the only blocking item.
+
+Everything except the manual accessibility gate should be finished so that the project can be completed immediately after the manual verification passes."
+**AI Response**: "Executed every non-manual handoff Gate. Frontend final evidence: format/type/lint/build/security passed, 51 unit/component tests, 10 PBT tests, 8 contract tests, 24 browser tests and all coverage thresholds passed. Backend evidence: Ruff and strict MyPy passed, full regression 326 passed with 85.36% coverage, PBT 53 passed, contract/quality 56 passed, and real pgvector/PostgreSQL 17.10 integration 34 passed with zero skipped. Compose base/local/remote, Caddy, Prometheus, frozen Docker build, runtime health, source-map absence, dependency/license checks and OpenAPI/client drift checks passed. Added regression tests, synchronized the telemetry OpenAPI route, generated test evidence, traceability and code summary documents, and kept Steps 19 and 20 unchecked. Final status remains Verification Incomplete; the six-journey NVDA/Chrome or VoiceOver/Safari run is the only blocker."
+**Context**: CONSTRUCTION - U01 Code Generation Part 2; automated evidence complete, manual Step 19 Gate remains the sole blocker, Step 20 not complete
+
+---

@@ -68,7 +68,7 @@
 | U04 Ingestion and Metadata Governance | Completed | Completed | Completed | Completed | Completed - approved 2026-07-28 |
 | U05 Recommendation and AI Grounding | Completed | Completed | Completed | Completed | Completed - approved 2026-07-29 |
 | U06 Engagement and Operations | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - approved 2026-07-31 | Completed - remediation approved 2026-07-31 | Completed - approved 2026-08-03 |
-| U01 Web Experience | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Part 1 approved; Steps 1-18 completed; Step 19 Verification Incomplete |
+| U01 Web Experience | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Completed - approved 2026-08-03 | Part 1 approved; Steps 1-18 completed; Step 19 Verification Incomplete; Step 20 automated evidence pre-executed but Step 20 not complete |
 
 ## Next Step
 Run the required manual screen-reader evidence session with NVDA/Chrome or VoiceOver/Safari for all six journeys. Do not enter Step 20 or request final approval until every journey passes.

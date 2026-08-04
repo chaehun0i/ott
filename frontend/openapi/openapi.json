@@ -24,19 +24,12 @@
             "type": "string"
           },
           "value": {
-            "enum": [
-              "granted",
-              "withdrawn"
-            ],
+            "enum": ["granted", "withdrawn"],
             "title": "Value",
             "type": "string"
           }
         },
-        "required": [
-          "value",
-          "policyVersion",
-          "noticeVersion"
-        ],
+        "required": ["value", "policyVersion", "noticeVersion"],
         "title": "ConsentRequest",
         "type": "object"
       },
@@ -58,11 +51,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "decisionId",
-          "consentVersion",
-          "value"
-        ],
+        "required": ["decisionId", "consentVersion", "value"],
         "title": "ConsentResponse",
         "type": "object"
       },
@@ -74,9 +63,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "csrfToken"
-        ],
+        "required": ["csrfToken"],
         "title": "CsrfResponse",
         "type": "object"
       },
@@ -90,9 +77,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "idempotencyKey"
-        ],
+        "required": ["idempotencyKey"],
         "title": "DataRightsRequestBody",
         "type": "object"
       },
@@ -114,11 +99,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "requestId",
-          "status",
-          "statusVersion"
-        ],
+        "required": ["requestId", "status", "statusVersion"],
         "title": "DataRightsResponse",
         "type": "object"
       },
@@ -289,11 +270,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "items",
-          "generation",
-          "queryFingerprint"
-        ],
+        "required": ["items", "generation", "queryFingerprint"],
         "title": "FeedResponse",
         "type": "object"
       },
@@ -373,12 +350,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "contentId",
-          "eventType",
-          "sourceSurface",
-          "occurredAt"
-        ],
+        "required": ["contentId", "eventType", "sourceSurface", "occurredAt"],
         "title": "FeedbackRequest",
         "type": "object"
       },
@@ -395,10 +367,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "eventId",
-          "created"
-        ],
+        "required": ["eventId", "created"],
         "title": "FeedbackResponse",
         "type": "object"
       },
@@ -435,12 +404,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "incident_id",
-          "severity",
-          "state",
-          "version"
-        ],
+        "required": ["incident_id", "severity", "state", "version"],
         "title": "IncidentView",
         "type": "object"
       },
@@ -521,12 +485,7 @@
             "type": "array"
           }
         },
-        "required": [
-          "rowVersion",
-          "saved",
-          "ratings",
-          "completed"
-        ],
+        "required": ["rowVersion", "saved", "ratings", "completed"],
         "title": "LibraryResponse",
         "type": "object"
       },
@@ -552,11 +511,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "email",
-          "password",
-          "deviceLabel"
-        ],
+        "required": ["email", "password", "deviceLabel"],
         "title": "LoginRequest",
         "type": "object"
       },
@@ -574,10 +529,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "userId",
-          "authorizationVersion"
-        ],
+        "required": ["userId", "authorizationVersion"],
         "title": "LoginResponse",
         "type": "object"
       },
@@ -589,18 +541,12 @@
             "type": "string"
           },
           "status": {
-            "enum": [
-              "accepted",
-              "completed"
-            ],
+            "enum": ["accepted", "completed"],
             "title": "Status",
             "type": "string"
           }
         },
-        "required": [
-          "status",
-          "messageKey"
-        ],
+        "required": ["status", "messageKey"],
         "title": "MessageResponse",
         "type": "object"
       },
@@ -628,13 +574,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "notification_id",
-          "content_id",
-          "event_type",
-          "channel",
-          "created_at"
-        ],
+        "required": ["notification_id", "content_id", "event_type", "channel", "created_at"],
         "title": "NotificationView",
         "type": "object"
       },
@@ -658,11 +598,7 @@
             "type": "object"
           }
         },
-        "required": [
-          "expected_version",
-          "patch",
-          "idempotency_key"
-        ],
+        "required": ["expected_version", "patch", "idempotency_key"],
         "title": "OverrideRequest",
         "type": "object"
       },
@@ -682,10 +618,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "token",
-          "newPassword"
-        ],
+        "required": ["token", "newPassword"],
         "title": "PasswordResetCompleteRequest",
         "type": "object"
       },
@@ -699,9 +632,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "email"
-        ],
+        "required": ["email"],
         "title": "PasswordResetRequest",
         "type": "object"
       },
@@ -732,12 +663,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "profileVersion",
-          "genres",
-          "ottSubscriptions",
-          "locale"
-        ],
+        "required": ["profileVersion", "genres", "ottSubscriptions", "locale"],
         "title": "ProfileResponse",
         "type": "object"
       },
@@ -748,10 +674,7 @@
             "additionalProperties": {
               "anyOf": [
                 {
-                  "enum": [
-                    "liked",
-                    "disliked"
-                  ],
+                  "enum": ["liked", "disliked"],
                   "type": "string"
                 },
                 {
@@ -777,11 +700,7 @@
           },
           "ottSubscriptions": {
             "additionalProperties": {
-              "enum": [
-                "subscribed",
-                "not_subscribed",
-                "unspecified"
-              ],
+              "enum": ["subscribed", "not_subscribed", "unspecified"],
               "type": "string"
             },
             "title": "Ottsubscriptions",
@@ -801,9 +720,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "rating"
-        ],
+        "required": ["rating"],
         "title": "RatingRequest",
         "type": "object"
       },
@@ -846,10 +763,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "text",
-          "locale"
-        ],
+        "required": ["text", "locale"],
         "title": "RecommendRequest",
         "type": "object"
       },
@@ -919,14 +833,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "content_id",
-          "title",
-          "summary",
-          "reason",
-          "score",
-          "metadata_version"
-        ],
+        "required": ["content_id", "title", "summary", "reason", "score", "metadata_version"],
         "title": "RecommendationItemContract",
         "type": "object"
       },
@@ -946,10 +853,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "email",
-          "password"
-        ],
+        "required": ["email", "password"],
         "title": "RegisterRequest",
         "type": "object"
       },
@@ -962,9 +866,7 @@
             "type": "integer"
           }
         },
-        "required": [
-          "expected_version"
-        ],
+        "required": ["expected_version"],
         "title": "ResetRequest",
         "type": "object"
       },
@@ -978,9 +880,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "target_rule_version"
-        ],
+        "required": ["target_rule_version"],
         "title": "RetryRequest",
         "type": "object"
       },
@@ -996,9 +896,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "attempt_key"
-        ],
+        "required": ["attempt_key"],
         "title": "RetryResponse",
         "type": "object"
       },
@@ -1069,13 +967,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "contentId",
-          "title",
-          "actualLocale",
-          "rank",
-          "channels"
-        ],
+        "required": ["contentId", "title", "actualLocale", "rank", "channels"],
         "title": "SearchItemResponse",
         "type": "object"
       },
@@ -1108,10 +1000,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "query",
-          "region"
-        ],
+        "required": ["query", "region"],
         "title": "SearchRequest",
         "type": "object"
       },
@@ -1140,10 +1029,7 @@
             "type": "array"
           }
         },
-        "required": [
-          "items",
-          "generation"
-        ],
+        "required": ["items", "generation"],
         "title": "SearchResponse",
         "type": "object"
       },
@@ -1157,9 +1043,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "token"
-        ],
+        "required": ["token"],
         "title": "TokenRequest",
         "type": "object"
       },
@@ -1197,9 +1081,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "request_id"
-        ],
+        "required": ["request_id"],
         "title": "TraceView",
         "type": "object"
       },
@@ -1235,11 +1117,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
+        "required": ["loc", "msg", "type"],
         "title": "ValidationError",
         "type": "object"
       }
@@ -1311,9 +1189,7 @@
           }
         },
         "summary": "Detail",
-        "tags": [
-          "catalog"
-        ]
+        "tags": ["catalog"]
       }
     },
     "/api/v1/engagement/admin/content/{content_id}/override": {
@@ -1383,9 +1259,7 @@
           }
         },
         "summary": "Override",
-        "tags": [
-          "engagement"
-        ]
+        "tags": ["engagement"]
       }
     },
     "/api/v1/engagement/admin/incidents": {
@@ -1446,9 +1320,7 @@
           }
         },
         "summary": "Incidents",
-        "tags": [
-          "engagement"
-        ]
+        "tags": ["engagement"]
       }
     },
     "/api/v1/engagement/admin/traces/{trace_id}": {
@@ -1504,9 +1376,7 @@
           }
         },
         "summary": "Trace",
-        "tags": [
-          "engagement"
-        ]
+        "tags": ["engagement"]
       }
     },
     "/api/v1/engagement/notifications": {
@@ -1561,9 +1431,7 @@
           }
         },
         "summary": "Notifications",
-        "tags": [
-          "engagement"
-        ]
+        "tags": ["engagement"]
       }
     },
     "/api/v1/feed": {
@@ -1646,9 +1514,7 @@
           }
         },
         "summary": "Feed",
-        "tags": [
-          "catalog"
-        ]
+        "tags": ["catalog"]
       }
     },
     "/api/v1/health/deep": {
@@ -1697,9 +1563,7 @@
           }
         },
         "summary": "Deep",
-        "tags": [
-          "health"
-        ]
+        "tags": ["health"]
       }
     },
     "/api/v1/health/live": {
@@ -1722,9 +1586,7 @@
           }
         },
         "summary": "Live",
-        "tags": [
-          "health"
-        ]
+        "tags": ["health"]
       }
     },
     "/api/v1/health/ready": {
@@ -1745,9 +1607,7 @@
           }
         },
         "summary": "Ready",
-        "tags": [
-          "health"
-        ]
+        "tags": ["health"]
       }
     },
     "/api/v1/identity/consent/personalization": {
@@ -1836,9 +1696,7 @@
           }
         },
         "summary": "Decide Consent",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/csrf": {
@@ -1857,9 +1715,7 @@
           }
         },
         "summary": "Issue Csrf",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/data-rights/deletion": {
@@ -1948,9 +1804,7 @@
           }
         },
         "summary": "Request Deletion",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/data-rights/export": {
@@ -2039,9 +1893,7 @@
           }
         },
         "summary": "Request Export",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/data-rights/{request_id}": {
@@ -2084,9 +1936,7 @@
           }
         },
         "summary": "Data Right Status",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/feedback": {
@@ -2175,9 +2025,7 @@
           }
         },
         "summary": "Feedback",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/library/{content_id}/rating": {
@@ -2265,9 +2113,7 @@
           }
         },
         "summary": "Unrate Content",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       },
       "put": {
         "operationId": "rate_content_api_v1_identity_library__content_id__rating_put",
@@ -2363,9 +2209,7 @@
           }
         },
         "summary": "Rate Content",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/library/{content_id}/save": {
@@ -2453,9 +2297,7 @@
           }
         },
         "summary": "Unsave Content",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       },
       "post": {
         "operationId": "save_content_api_v1_identity_library__content_id__save_post",
@@ -2541,9 +2383,7 @@
           }
         },
         "summary": "Save Content",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/library/{content_id}/watch-complete": {
@@ -2631,9 +2471,7 @@
           }
         },
         "summary": "Complete Watch",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/login": {
@@ -2722,9 +2560,7 @@
           }
         },
         "summary": "Login",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/logout": {
@@ -2803,9 +2639,7 @@
           }
         },
         "summary": "Logout",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/password-reset/complete": {
@@ -2894,9 +2728,7 @@
           }
         },
         "summary": "Complete Password Reset",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/password-reset/request": {
@@ -2985,9 +2817,7 @@
           }
         },
         "summary": "Request Password Reset",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/profile": {
@@ -3076,9 +2906,7 @@
           }
         },
         "summary": "Update Profile",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/register": {
@@ -3167,9 +2995,7 @@
           }
         },
         "summary": "Register",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/sessions/rotate": {
@@ -3248,9 +3074,7 @@
           }
         },
         "summary": "Rotate Session",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/identity/verify-email": {
@@ -3339,9 +3163,7 @@
           }
         },
         "summary": "Verify Email",
-        "tags": [
-          "identity"
-        ]
+        "tags": ["identity"]
       }
     },
     "/api/v1/ingestion/jobs/{job_id}": {
@@ -3397,9 +3219,7 @@
           }
         },
         "summary": "Job Status",
-        "tags": [
-          "ingestion"
-        ]
+        "tags": ["ingestion"]
       }
     },
     "/api/v1/ingestion/quarantine/{quarantine_id}/retry": {
@@ -3476,9 +3296,7 @@
           }
         },
         "summary": "Retry",
-        "tags": [
-          "ingestion"
-        ]
+        "tags": ["ingestion"]
       }
     },
     "/api/v1/ingestion/rules/current": {
@@ -3497,9 +3315,7 @@
           }
         },
         "summary": "Current Rules",
-        "tags": [
-          "ingestion"
-        ]
+        "tags": ["ingestion"]
       }
     },
     "/api/v1/recommendations": {
@@ -3567,9 +3383,7 @@
           }
         },
         "summary": "Recommend",
-        "tags": [
-          "recommendations"
-        ]
+        "tags": ["recommendations"]
       }
     },
     "/api/v1/recommendations/{session_id}/refine": {
@@ -3646,9 +3460,7 @@
           }
         },
         "summary": "Refine",
-        "tags": [
-          "recommendations"
-        ]
+        "tags": ["recommendations"]
       }
     },
     "/api/v1/recommendations/{session_id}/reset": {
@@ -3718,9 +3530,7 @@
           }
         },
         "summary": "Reset",
-        "tags": [
-          "recommendations"
-        ]
+        "tags": ["recommendations"]
       }
     },
     "/api/v1/search": {
@@ -3777,9 +3587,48 @@
           }
         },
         "summary": "Search",
-        "tags": [
-          "search"
-        ]
+        "tags": ["search"]
+      }
+    },
+    "/api/v1/telemetry/browser": {
+      "post": {
+        "operationId": "ingest_browser_events_api_v1_telemetry_browser_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "content-length",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 16384,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Content-Length"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ingest Browser Events",
+        "tags": ["telemetry"]
       }
     }
   }

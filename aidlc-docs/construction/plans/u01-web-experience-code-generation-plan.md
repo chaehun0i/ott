@@ -172,6 +172,8 @@ Application code remains in the workspace root and never under `aidlc-docs/`.
 
 ### Step 20 - Full Regression, Traceability and Code Summary
 
+> 2026-08-04 automated pre-execution evidence: all non-manual regression, PostgreSQL skip=0, infrastructure, frozen-install, OpenAPI drift and documentation work passed and is recorded in the U01 code evidence directory. The checkboxes below intentionally remain unchecked because the Step 19 manual screen-reader prerequisite is still `Verification Incomplete`; this note is not Step 20 entry or completion.
+
 - [ ] Step 19의 수동 스크린리더 evidence가 지정된 도구 조합과 최소 6개 여정을 모두 실제 Pass로 기록했는지 먼저 검증한다. `Verification Incomplete`, Fail 또는 누락이 있으면 Step 20에 진입하거나 완료 처리하지 않는다.
 - [ ] frontend type/lint/format/build/unit/component/PBT/contract/a11y/browser/performance/security suite와 backend full test, real PostgreSQL integration skip=0을 모두 실행한다.
 - [ ] Compose base/local/remote config, Caddy, web image/resource/network/health/logging, OpenAPI drift와 clean frozen install을 재검증한다.
