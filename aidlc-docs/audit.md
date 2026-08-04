@@ -1928,3 +1928,14 @@ Step 19의 수동 스크린리더 검증은 미실행 항목을 기록하는 것
 **Context**: U01 Code Generation Part 2; plan-level checkboxes updated immediately for completed Steps 3-18 and completed Step 19 sub-gates.
 
 ---
+## U01 Manual Screen-Reader Gate Preservation
+**Timestamp**: 2026-08-04T02:05:56Z
+**User Input**: "현재 U01 상태는 `Verification Incomplete`로 유지해줘.
+
+Step 1~18의 구현과 자동 검증 결과는 보존하되, NVDA/Chrome 또는 VoiceOver/Safari에서 지정된 6개 수동 여정이 실제로 모두 통과하기 전에는 Step 19·20, Code Generation Complete, 최종 승인 요청을 처리하지 마.
+
+수동 검증이 완료되면 OS·브라우저·스크린리더 정확한 버전, 입력 방식, 실행 시각, 여정별 기대 결과·실제 결과·Pass/Fail·발견 사항을 `test-evidence.md`에 기록해줘. 실패한 여정이 있으면 관련 구현을 수정하고 자동 회귀 테스트를 추가한 뒤 수동 검증부터 다시 수행해줘."
+**AI Response**: "Confirmed the existing Verification Incomplete state and preserved Steps 1-18 and all automated evidence. Step 19, Step 20, Code Generation Complete and final approval remain blocked until all six specified journeys pass in an actual supported screen-reader/browser combination. Any failure requires implementation repair, automated regression coverage and a complete manual rerun."
+**Context**: U01 Code Generation Part 2 manual accessibility blocking gate reaffirmed; no completion status changed.
+
+---
