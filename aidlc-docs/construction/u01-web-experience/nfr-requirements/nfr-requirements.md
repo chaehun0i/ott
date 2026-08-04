@@ -20,12 +20,16 @@
 
 | ID | Requirement | Verification gate |
 |---|---|---|
-| NFR-U01-08 | 모든 public, member, operator 핵심 화면은 WCAG 2.2 AA를 충족한다. | axe 자동 검사와 수동 checklist가 모두 통과해야 한다. |
+| NFR-U01-08 | 모든 public, member, operator 핵심 화면은 프로토타입의 자동화 가능한 WCAG 2.2 AA 기준을 충족한다. | axe serious/critical violation 0, semantic component test와 Chromium/Firefox/WebKit/mobile Playwright 핵심 여정이 모두 통과해야 한다. |
 | NFR-U01-09 | Feed→Detail→Back, Search, Recommendation start/refine/reset, Login replay, Consent withdrawal, Admin override는 keyboard만으로 완료할 수 있다. | Playwright keyboard journey로 검증한다. |
-| NFR-U01-10 | 핵심 여정은 screen reader로 heading, landmark, name/role/value, live announcement 및 error 관계를 이해할 수 있어야 한다. | NVDA/Chrome 또는 VoiceOver/Safari 수동 검증 결과를 release evidence로 보존한다. |
+| NFR-U01-10 | 핵심 여정은 heading, landmark, accessible name/role/value, live announcement 및 error relationship을 표준 접근성 트리에 노출해야 한다. | Testing Library role/accessibility-name assertion, axe, ARIA semantic component test와 Playwright announcement/focus journey로 검증한다. 실제 NVDA/Chrome 또는 VoiceOver/Safari 실행은 프로토타입 범위 밖이며 Future Manual QA로 분류한다. |
 | NFR-U01-11 | 200% zoom과 320 CSS pixel 폭에서 정보나 기능 손실 없이 reflow한다. | desktop zoom과 mobile viewport 검사로 확인한다. |
 | NFR-U01-12 | focus indicator는 가시적이며 route, modal, error, detail-return 전환에서 예상 지점으로 이동·복원된다. | component와 E2E focus assertion으로 확인한다. |
 | NFR-U01-13 | 상태는 색만으로 전달하지 않고 이미지 대체 텍스트, form label 및 error association을 제공한다. | axe와 semantic component test로 확인한다. |
+
+### Prototype accessibility scope
+
+프로토타입의 필수 접근성 Gate는 Playwright Chromium/Firefox/WebKit/mobile, axe, keyboard-only 핵심 여정, focus 이동·복원, ARIA name/role/value와 live-region assertion, 200% zoom 및 320 CSS pixel reflow이다. 실제 NVDA/Chrome 또는 VoiceOver/Safari 수동 실행은 **Out of Scope for Prototype**이며 **Future Manual QA** 후보이다. 수동 실행을 완료한 것으로 간주하거나 주장하지 않으며, U01 프로토타입 완료를 차단하지 않는다.
 
 ## Localization and Browser Support
 

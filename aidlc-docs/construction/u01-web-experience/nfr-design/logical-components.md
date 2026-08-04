@@ -89,13 +89,13 @@ The adapter accepts only typed allowlisted events. Sanitization occurs before en
 | `StaticGate` | ESLint, format and forbidden import rules |
 | `ExampleGate` | Vitest/Testing Library critical scenarios |
 | `PropertyGate` | P-U01-01~10 fast-check with seed and shrinking |
-| `AccessibilityGate` | axe, keyboard E2E and manual screen-reader checklist |
+| `AccessibilityGate` | axe, semantic component assertions, keyboard/focus E2E, ARIA name/role/value and live announcements, 200% zoom/reflow across Chromium/Firefox/WebKit/mobile |
 | `ContractGate` | generated OpenAPI drift and MSW schema fixtures |
 | `BrowserGate` | Chromium, Firefox, WebKit and mobile viewport smoke |
 | `PerformanceGate` | route gzip 200KB, LCP/INP/CLS scenario evidence |
 | `SupplyChainGate` | frozen lock install and no unapproved critical/high finding |
 
-All automated gates are blocking. The manual screen-reader evidence is blocking before release approval, not before every local development iteration.
+All automated gates are blocking for prototype completion. Native NVDA/Chrome or VoiceOver/Safari execution is Out of Scope for Prototype and retained only as Future Manual QA; it is not claimed as executed.
 
 ## Dependency and Failure Matrix
 

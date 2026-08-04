@@ -42,7 +42,7 @@ Global application state library is not selected initially. URL, TanStack Query,
 |---|---|---|
 | Unit/component | Vitest + Testing Library + user-event | business rules, semantic interactions and error states |
 | API isolation | MSW | OpenAPI-aligned success, delay, partial failure and error scenarios |
-| Accessibility | axe-core integration plus manual screen-reader checklist | automated WCAG violations plus critical manual evidence |
+| Accessibility | axe-core, Testing Library semantic assertions and Playwright browser matrix | axe violations, keyboard-only journeys, focus management, ARIA name/role/value, announcements and 200% zoom/reflow; native screen-reader execution is Future Manual QA outside prototype scope |
 | Property based | fast-check integrated with Vitest | P-U01-01~10, shrinking enabled, replay seed logged |
 | Browser E2E | Playwright | Chromium, Firefox, WebKit and mobile viewport critical journeys |
 | Performance | Playwright/browser metrics plus build manifest budget script | Core Web Vitals scenarios and route bundle budget |

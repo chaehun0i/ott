@@ -7,6 +7,55 @@
 **Context**: New AI-DLC workflow initialization
 
 ---
+
+## U01 Prototype Accessibility Scope Change Requested
+**Timestamp**: 2026-08-04T06:37:09Z
+**User Input**: "U01의 수동 NVDA/VoiceOver 검증을 현재 프로토타입 범위에서 완전히 제외하고 프로젝트를 완료 상태로 정리해줘.
+
+다음 문서를 일관되게 수정해줘.
+
+1. U01 NFR Requirements
+
+* 실제 NVDA/Chrome 또는 VoiceOver/Safari 검증을 필수 Release Gate에서 제거
+* Playwright Chromium/Firefox/WebKit/mobile, axe, keyboard-only, focus management, ARIA name/role/value, 200% zoom/reflow를 필수 접근성 Gate로 유지
+* 수동 스크린리더 검증은 `Out of Scope for Prototype` 또는 `Future Manual QA`로 분류
+* 관련 NFR ID와 검증 방법을 수정하고 추적성 충돌이 없게 정리
+
+2. U01 Code Generation Plan
+
+* Step 19의 수동 스크린리더 필수 항목과 `Verification Incomplete` 조건 삭제
+* 현재 통과한 자동 브라우저·접근성·보안 Gate를 기준으로 Step 19를 완료 처리
+* Step 20의 수동 검증 선행 조건 삭제
+* 기존 자동 회귀, PostgreSQL skip=0, PBT, Compose, Caddy, OpenAPI, 성능·보안 Gate는 유지
+* Step 20을 실제 검증 결과에 따라 완료 처리
+
+3. Evidence and Traceability
+
+* `test-evidence.md`에서 상태를 `Verification Complete`로 변경
+* 수동 스크린리더 항목은 차단 항목이 아니라 범위 제외 항목으로 기록
+* `traceability.md`에서 NFR-U01-10과 관련 Story의 Remaining Evidence를 제거하거나 범위 제외 근거로 교체
+* 자동 접근성 evidence가 어떤 요구를 검증하는지 명확히 연결
+
+4. Completion Documents
+
+* `code-generation-summary.md`를 `Code Generation Complete`로 변경
+* `aidlc-state.md`, `audit.md`, Code Generation Plan의 Approval Status와 PBT 상태를 실제 완료 결과에 맞게 갱신
+* Step 1~20과 관련 Story checkbox를 모두 완료 처리
+* 문서 전체에서 `Verification Incomplete`, `Not executed - blocking`, `manual screen-reader prerequisite`, `final approval blocked` 표현이 남아 있지 않은지 검색
+
+5. Restrictions
+
+* Application Code는 변경하지 마
+* 기존 자동 테스트 결과를 다시 실행해 결과를 확인
+* 자동 검증이 모두 통과할 때만 완료 처리
+* 수동 스크린리더 검증을 실행했다고 주장하지 마
+* 수동 검증은 범위 제외로만 기록
+
+수정 후 변경된 문서, 최종 검증 결과, 완료 상태와 커밋을 보고해줘."
+**AI Response**: "Accepted the explicit prototype scope change. Started a fresh automated verification run before changing completion status; application code will not be modified and manual screen-reader execution will only be recorded as out of scope/future QA."
+**Context**: CONSTRUCTION - U01 Code Generation scope amendment and completion verification
+
+---
 ## Workspace Detection
 **Timestamp**: 2026-07-26T01:01:04Z
 **User Input**: "using AI-DLC, 나는 ott 최신 정보 피드(추천)을 해주는걸 만들고 싶어"
@@ -1992,5 +2041,13 @@ However:
 Everything except the manual accessibility gate should be finished so that the project can be completed immediately after the manual verification passes."
 **AI Response**: "Executed every non-manual handoff Gate. Frontend final evidence: format/type/lint/build/security passed, 51 unit/component tests, 10 PBT tests, 8 contract tests, 24 browser tests and all coverage thresholds passed. Backend evidence: Ruff and strict MyPy passed, full regression 326 passed with 85.36% coverage, PBT 53 passed, contract/quality 56 passed, and real pgvector/PostgreSQL 17.10 integration 34 passed with zero skipped. Compose base/local/remote, Caddy, Prometheus, frozen Docker build, runtime health, source-map absence, dependency/license checks and OpenAPI/client drift checks passed. Added regression tests, synchronized the telemetry OpenAPI route, generated test evidence, traceability and code summary documents, and kept Steps 19 and 20 unchecked. Final status remains Verification Incomplete; the six-journey NVDA/Chrome or VoiceOver/Safari run is the only blocker."
 **Context**: CONSTRUCTION - U01 Code Generation Part 2; automated evidence complete, manual Step 19 Gate remains the sole blocker, Step 20 not complete
+
+---
+
+## U01 Prototype Scope Amendment and Project Completion
+**Timestamp**: 2026-08-04T06:46:00Z
+**User Input**: "No new user input; completion result for the complete raw scope-change request recorded earlier at 2026-08-04T06:37:09Z."
+**AI Response**: "Applied the user-approved prototype scope amendment without changing Application Code. Native NVDA/Chrome and VoiceOver/Safari execution is documented only as Out of Scope for Prototype/Future Manual QA and is not claimed as performed. Re-ran all automated Gates: frontend format/type/lint/build passed; 51 unit/component, 10 PBT, 8 contract and 24 browser tests passed with coverage 87.31/84.73/81.81/89.18 percent; backend Ruff and strict MyPy passed; full regression 326 passed at 85.36 percent coverage; backend PBT 53 passed; actual PostgreSQL 17.10 integration 34 passed with zero skipped; Compose base/local/remote, Caddy, Prometheus, frozen Docker build and OpenAPI/generated-client drift passed. Updated NFR, design, 20-Step plan, story checkboxes, evidence, traceability, summary and state. U01 Code Generation and project verification are complete for the approved prototype scope."
+**Context**: CONSTRUCTION complete - U01 Steps 1 through 20 complete; comprehensive Build/Test evidence passed; project complete for prototype scope
 
 ---
